@@ -3,8 +3,8 @@ import React from "react";
 
 export default function Page() {
   return (
-    <React.Fragment>
+    <div className="px-4">
       <OrderComponent />
-    </React.Fragment>
+    </div>
   );
 }

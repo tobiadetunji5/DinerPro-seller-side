@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Card({ food }) {
   return (
-    <div className="w-[181px] h-[200px] border border-[#CCCCCC] rounded-lg overflow-hidden">
+    <div className="w-[181px] h-[200px] border border-[#CCCCCC] rounded-[10px] overflow-hidden">
       <div className="relative w-[100%] h-[119px]">
         <Image
           style={{ objectFit: "cover" }}
