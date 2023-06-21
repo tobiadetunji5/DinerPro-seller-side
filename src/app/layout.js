@@ -1,5 +1,4 @@
-import Sidebar from "./components/navbar/sidebar";
-import Topbar from "./components/navbar/topbar";
+import MainLayout from "./components/main_layout/MainLayout";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -14,10 +13,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Topbar />
-        <main className="flex">
-          <Sidebar />
-          {children}
+        <main>
+          <MainLayout>{children}</MainLayout>
         </main>
       </body>
     </html>
