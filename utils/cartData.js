@@ -2,7 +2,7 @@ import breadEgg from "../public/images/cartTestItems/breadEgg.png";
 import riceEgg from "../public/images/cartTestItems/riceEgg.png";
 import coke from "../public/images/cartTestItems/coke.png";
 import burger from "../public/images/cartTestItems/burger.png";
-import fishPie from "../public/images/cartTestItems/fishPie.png";
+import fishpie from "../public/images/cartTestItems/fishpie.jpeg";
 import friedrice from "../public/images/cartTestItems/friedrice.png";
 import jollof from "../public/images/cartTestItems/jollof.png";
 import meatpie from "../public/images/cartTestItems/meatpie.png";
@@ -40,9 +40,9 @@ export const foodArrays = [
     orderUrl: "www.google.com",
   },
   {
-    imageUrl: fishPie,
-    foodName: "FishPie",
-    slug: "fishPie",
+    imageUrl: fishpie,
+    foodName: "fishpie",
+    slug: "fishpie",
     priceTag: "1200",
     orderUrl: "www.google.com",
   },
