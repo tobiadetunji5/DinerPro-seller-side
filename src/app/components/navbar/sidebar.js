@@ -8,8 +8,12 @@ import {
   AiOutlineSetting,
 } from "react-icons/ai";
 import { TfiWrite } from "react-icons/tfi";
-import { BsListColumnsReverse, BsChevronDown } from "react-icons/bs";
+import { BsListColumnsReverse, BsChevronDown, BsBag } from "react-icons/bs";
 import { FiPhone } from "react-icons/fi";
+import { MdOutlineCreate, MdOutlineInventory } from "react-icons/md";
+import { GiKnifeFork } from "react-icons/gi";
+import { TbCurrencyNaira } from "react-icons/tb";
+import { RiContactsLine } from "react-icons/ri";
 import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
@@ -63,16 +67,19 @@ const Sidebar = () => {
                 <Link
                   href="/order/create_new_order"
                   active={
-                    pathname === "/order/create_new_order" ? "true" : undefined
+                    pathname === "/order/create_new_order"
+                      ? "true"
+                      : undefined
                   }
                 >
                   <li
-                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 ${
+                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 flex ${
                       pathname === "/order/create_new_order"
                         ? "bg-white rounded-tl-[30px] rounded-br-[30px] w-[219px]"
                         : "hover:bg-white hover:rounded-tl-[30px] hover:rounded-br-[30px] hover:w-[219px] "
                     }`}
                   >
+                    <MdOutlineCreate />
                     <span>Create New Order</span>
                   </li>
                 </Link>
@@ -83,12 +90,13 @@ const Sidebar = () => {
                   }
                 >
                   <li
-                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 ${
+                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 flex ${
                       pathname === "/order/view_all_orders"
                         ? "bg-white rounded-tl-[30px] rounded-br-[30px] w-[219px]"
                         : "hover:bg-white hover:rounded-tl-[30px] hover:rounded-br-[30px] hover:w-[219px] "
                     }`}
                   >
+                    <GiKnifeFork />
                     <span>View all Orders</span>
                   </li>
                 </Link>
@@ -120,12 +128,13 @@ const Sidebar = () => {
                   }
                 >
                   <li
-                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 ${
+                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 flex ${
                       pathname === "/kitchen/inventory"
                         ? "bg-white rounded-tl-[30px] rounded-br-[30px] w-[219px]"
                         : "hover:bg-white hover:rounded-tl-[30px] hover:rounded-br-[30px] hover:w-[219px] "
                     }`}
                   >
+                    <MdOutlineInventory />
                     <span>Inventory</span>
                   </li>
                 </Link>
@@ -136,12 +145,13 @@ const Sidebar = () => {
                   }
                 >
                   <li
-                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 ${
+                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 flex ${
                       pathname === "/kitchen/procurement"
                         ? "bg-white rounded-tl-[30px] rounded-br-[30px] w-[219px]"
                         : "hover:bg-white hover:rounded-tl-[30px] hover:rounded-br-[30px] hover:w-[219px] "
                     }`}
                   >
+                    <BsBag />
                     <span>Procurement</span>
                   </li>
                 </Link>
@@ -150,12 +160,13 @@ const Sidebar = () => {
                   active={pathname === "/kitchen/payments" ? "true" : undefined}
                 >
                   <li
-                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 ${
+                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 flex ${
                       pathname === "/kitchen/payments"
                         ? "bg-white rounded-tl-[30px] rounded-br-[30px] w-[219px]"
                         : "hover:bg-white hover:rounded-tl-[30px] hover:rounded-br-[30px] hover:w-[219px] "
                     }`}
                   >
+                    <TbCurrencyNaira />
                     <span>Payments</span>
                   </li>
                 </Link>
@@ -164,12 +175,13 @@ const Sidebar = () => {
                   active={pathname === "/kitchen/client" ? "true" : undefined}
                 >
                   <li
-                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 ${
+                    className={`items-center gap-x-4 cursor-pointer p-2 px-5 mt-2 flex ${
                       pathname === "/kitchen/client"
                         ? "bg-white rounded-tl-[30px] rounded-br-[30px] w-[219px]"
                         : "hover:bg-white hover:rounded-tl-[30px] hover:rounded-br-[30px] hover:w-[219px] "
                     }`}
                   >
+                    <RiContactsLine />
                     <span>Client</span>
                   </li>
                 </Link>
