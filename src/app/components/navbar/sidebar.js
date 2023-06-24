@@ -30,7 +30,7 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className="bg-primary w-[333px] h-[92vh] rounded-tr-[30px] pl-10 pt-16">
+    <nav className="bg-primary w-[333px] rounded-tr-[30px] pl-10 pt-16">
       <ul>
         <Link
           href="/dashboard"
@@ -52,7 +52,7 @@ const Sidebar = () => {
           <div className="text-gray cursor-pointer mt-2 font-bold">
             <button
               onClick={toggleDropdownOne}
-              className="flex gap-x-4 items-center hover:bg-white hover:rounded-tl-[30px] p-5 w-[308px] hover:duration-300"
+              className="flex gap-x-4 items-center hover:bg-white hover:rounded-tl-[30px] p-5 w-full hover:duration-300"
             >
               <TfiWrite />
               <h1>Order</h1>
@@ -67,9 +67,7 @@ const Sidebar = () => {
                 <Link
                   href="/order/create_new_order"
                   active={
-                    pathname === "/order/create_new_order"
-                      ? "true"
-                      : undefined
+                    pathname === "/order/create_new_order" ? "true" : undefined
                   }
                 >
                   <li
@@ -108,7 +106,7 @@ const Sidebar = () => {
           <div className="text-gray cursor-pointer  mt-2  font-bold">
             <button
               onClick={toggleDropdownTwo}
-              className="flex gap-x-4 items-center hover:bg-white hover:rounded-tl-[30px] p-5 w-[308px] hover:duration-300"
+              className="flex gap-x-4 items-center hover:bg-white hover:rounded-tl-[30px] p-5 w-full hover:duration-300"
             >
               <BsListColumnsReverse />
               Kitchen
