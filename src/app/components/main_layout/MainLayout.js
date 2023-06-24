@@ -4,12 +4,12 @@ import Topbar from "../navbar/topbar";
 
 export default function MainLayout({ children }) {
   return (
-    <React.Fragment>
+    <div className="flex flex-col h-screen">
       <Topbar />
-      <div className="flex">
+      <div className="flex flex-1">
         <Sidebar />
-        {children}
+        <div className="flex-1">{children}</div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }

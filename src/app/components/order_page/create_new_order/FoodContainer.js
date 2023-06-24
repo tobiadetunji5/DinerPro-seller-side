@@ -11,7 +11,7 @@ export default function FoodContainer() {
   const [containerWidth, setContainerWidth] = useState(0);
   const [visibleItems, setVisibleItems] = useState(1000);
   const itemContainerRef = useRef(null);
-  const itemWidth = 200; // Width of each item in pixels
+  const itemWidth = 250; // Width of each item in pixels
   const scrollOffset = 50; // Offset for scroll calculations
 
   useEffect(() => {
