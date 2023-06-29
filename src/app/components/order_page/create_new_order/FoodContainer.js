@@ -4,12 +4,14 @@ import { foodArrays } from "../../../../../utils/cartData";
 import Card from "./Card";
 import { AiOutlineSetting } from "react-icons/ai";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
+import Link from "next/link";
 
 export default function FoodContainer() {
   const [scrollInd, setScrollInd] = useState("b");
   const [scrollWidth, setScrollWidth] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
-  const [visibleItems, setVisibleItems] = useState(1000);
+  const [visibleItems, setVisibleItems] = useState(9); // Display 9 items at a time
+  const [startIndex, setStartIndex] = useState(0); // Index of the first visible item
   const itemContainerRef = useRef(null);
   const itemWidth = 250; // Width of each item in pixels
   const scrollOffset = 50; // Offset for scroll calculations
@@ -17,7 +19,8 @@ export default function FoodContainer() {
   useEffect(() => {
     const handleScroll = () => {
       if (itemContainerRef.current) {
-        const { scrollLeft, offsetWidth } = itemContainerRef.current || {};
+        const { scrollLeft, offsetWidth, scrollWidth } =
+          itemContainerRef.current;
         const maxScrollLeft = scrollWidth - offsetWidth;
 
         if (scrollLeft <= 0) setScrollInd("b");
@@ -37,54 +40,63 @@ export default function FoodContainer() {
         itemContainerRef.current.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [scrollWidth]);
+  }, []);
 
-  console.log(itemContainerRef);
   const scrollNext = () => {
     if (itemContainerRef.current) {
       const { scrollLeft, offsetWidth } = itemContainerRef.current;
       const maxScrollLeft = scrollWidth - offsetWidth;
-      const nextScrollLeft = Math.min(scrollLeft + itemWidth, maxScrollLeft);
+      const nextScrollLeft = Math.min(
+        scrollLeft + itemWidth * 3,
+        maxScrollLeft
+      );
       itemContainerRef.current.scrollTo({
         left: nextScrollLeft,
         behavior: "smooth",
       });
       setScrollInd("m");
-      // console.log("Next button clicked. Scroll position:", nextScrollLeft);
+      const nextStartIndex = Math.min(startIndex + 9, foodArrays.length - 9);
+      setStartIndex(nextStartIndex);
     }
   };
 
   const scrollPrev = () => {
     if (itemContainerRef.current) {
       const { scrollLeft } = itemContainerRef.current;
-      const prevScrollLeft = Math.max(scrollLeft - itemWidth, 0);
+      const prevScrollLeft = Math.max(scrollLeft - itemWidth * 3, 0);
       itemContainerRef.current.scrollTo({
         left: prevScrollLeft,
         behavior: "smooth",
       });
       setScrollInd("m");
+      const prevStartIndex = Math.max(startIndex - 9, 0);
+      setStartIndex(prevStartIndex);
     }
   };
 
   return (
     <div className="overflow-x-auto">
-      <div className="relative pr-12 pl-12 flex flex-col w-[850px] h-[829px] overflow-hidden border border-[#CCCCCC] rounded-lg">
+      <div className="relative pr-12 pl-12 flex flex-col w-850px h-829px overflow-hidden border border-secondary rounded-lg">
         <div className="flex items-center justify-between p-8">
-          <div>my menu</div>
-          <div className="flex items-center gap-2">
-            <AiOutlineSetting size={22} />
-            <span>Menu Settings</span>
-          </div>
+          <div className="text-lg font-semibold">My Menu</div>
+          <Link href="/menu/menu_settings">
+            <div className="flex items-center gap-2">
+              <AiOutlineSetting size={22} />
+              <span className="text-sm">Menu Settings</span>
+            </div>
+          </Link>
         </div>
-        <div className="p-2 border border-[#ccc]">Search bar</div>
-        <div className="p-2 border border-[#ccc] my-1">categories</div>
+        <div className="p-2 border border-secondary">Search bar</div>
+        <div className="p-2 border border-secondary my-1">Categories</div>
         <div
-          className="grid grid-rows-3 grid-flow-col gap-5 overflow-x-hidden w-full"
+          className="grid grid-cols-3 gap-3 mb-1 overflow-x-hidden w-full"
           ref={itemContainerRef}
         >
-          {foodArrays.slice(0, visibleItems).map((food, i) => (
-            <Card key={i} food={food} />
-          ))}
+          {foodArrays
+            .slice(startIndex, startIndex + visibleItems)
+            .map((food, i) => (
+              <Card key={i} food={food} />
+            ))}
         </div>
         {scrollInd === "b" || scrollInd === "m" ? (
           <BiRightArrow

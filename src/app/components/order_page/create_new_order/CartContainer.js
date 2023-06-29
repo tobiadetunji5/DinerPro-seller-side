@@ -1,17 +1,136 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CurrencyFormatter from "../../../../../utils/formatCurrency";
+import Image from "next/image";
+import shoppingCart from "../../../../../public/images/shoppingCart.png";
+import {
+  deleteItem,
+  increaseQuantity,
+  decreaseQuantity,
+} from "@/redux/features/cart/cartSlice";
+import { MdDelete } from "react-icons/md";
+import Link from "next/link";
 
 export default function CartContainer() {
+  // const router = useRouter();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  // const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+  const dispatch = useDispatch();
+
+  const handleRemoveFromCart = (item) => {
+    dispatch(deleteItem({ slug: item.slug }));
+  };
+
+  const handleIncreaseQuantity = (item) => {
+    dispatch(increaseQuantity({ slug: item.slug }));
+  };
+
+  const handleDecreaseQuantity = (item) => {
+    dispatch(decreaseQuantity({ slug: item.slug }));
+  };
+
+  //confirm
+  // const handleConfirm = () => {
+  //   const cartItemsQuery = cartItems.map((item) => item.slug).join(",");
+  //   router.push(`/order/payments?cartItems=${cartItemsQuery}`);
+  // };
+
   return (
-    <div className="w-[500px] border border-[#FFA902] rounded-lg h-[829px] p-5 overflow-y-auto flex flex-col">
+    <div className="w-[500px] border border-primary rounded-lg h-[829px] p-5 overflow-y-auto flex flex-col">
       <h1 className="text-[1.3rem] font-bold py-2">My Orders</h1>
       <div>
-        <ul className="flex items-center justify-between space-x-4">
-          <li>Items</li>
-          <li>Qty</li>
-          <li>Amount</li>
+        <ul className="flex items-center justify-between space-x-4 bg-gray-200">
+          <li className="w-2/5">Items</li>
+          <li className="w-1/5 items-center">Qty</li>
+          <li className="w-2/5">Amount</li>
         </ul>
-        <hr className="border-[#ccc] mt-3" />
+        <hr className="border-silver mt-3" />
       </div>
+      {cartItems.length === 0 ? (
+        <div className="h-full flex flex-col items-center justify-center">
+          <div className="relative h-[54px]">
+            <Image
+              src={shoppingCart}
+              fill
+              style={{ objectFit: "cover" }}
+              alt="shopping-cart"
+              sizes="(max-width: 74px) 100vw"
+              placeholder="blur"
+            />
+          </div>
+          <p>You have not made any orders</p>
+        </div>
+      ) : (
+        <div>
+          {cartItems.map((item) => (
+            <div
+              key={item.slug}
+              className="flex items-center justify-between space-x-4 mb-2"
+            >
+              <div className="w-2/5">
+                <div className="relative w-[100px] h-[70px] mt-2">
+                  <Image
+                    src={item.imageUrl}
+                    fill
+                    style={{ objectFit: "contain" }}
+                    alt={item.foodName}
+                    className="rounded-lg"
+                    sizes="(max-width: 100px) 100vw"
+                  />
+                </div>
+                <p className="">{item.foodName}</p>
+              </div>
+              <div className="w-1/5">
+                <div className="flex items-center">
+                  <button
+                    className={`px-2 py-1 border ${
+                      item.quantity === 1 ? "border-red-700" : "border-red-700"
+                    } rounded-md`}
+                    onClick={() => handleDecreaseQuantity(item)}
+                  >
+                    -
+                  </button>
+                  <p className="p-1">{item.quantity}</p>
+                  <button
+                    className="px-2 py-1 border border-green-700 rounded-md"
+                    onClick={() => handleIncreaseQuantity(item)}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div className="w-1/5">
+                <p>
+                  <CurrencyFormatter value={item.totalPrice} />
+                </p>
+              </div>
+              <div className="w-1/5">
+                <button onClick={() => handleRemoveFromCart(item)}>
+                  <MdDelete />
+                </button>
+              </div>
+            </div>
+          ))}
+          <div>
+            <div className="p-5 bg-[#F3F3FE] rounded-lg flex flex-row mt-10 justify-between">
+              <p>Item total</p>
+              <p>Total amount here</p>
+            </div>
+            <div className="p-5 flex flex-row mt-5 justify-between">
+              <Link href="/order/payments">
+                <button className="border border-green-700 text-green-700 hover:bg-green-700 hover:text-white p-5 w-[200px] rounded-lg">
+                  Confirm
+                </button>
+              </Link>
+
+              <button className="border border-red-700 text-red-700 hover:bg-red-700 hover:text-white p-5 w-[200px] rounded-lg">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import breadEgg from "../public/images/cartTestItems/breadEgg.png";
 import riceEgg from "../public/images/cartTestItems/riceEgg.png";
 import coke from "../public/images/cartTestItems/coke.png";
 import burger from "../public/images/cartTestItems/burger.png";
-import fishpie from "../public/images/cartTestItems/fishpie.jpeg";
+import fishpie from "../public/images/cartTestItems/fishpie.jpg";
 import friedrice from "../public/images/cartTestItems/friedrice.png";
 import jollof from "../public/images/cartTestItems/jollof.png";
 import meatpie from "../public/images/cartTestItems/meatpie.png";
