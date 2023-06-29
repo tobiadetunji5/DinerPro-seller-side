@@ -74,6 +74,7 @@ export default function AddMenuModal({ handleCloseModal }) {
                 <option value="Category 3">Category 3</option>
                 <option value="Category 3">Category 4</option>
                 <option value="Category 3">Category 5</option>
+                <option value="Category 3">Category 6</option>
               </select>
             </div>
             <div className="mb-4">
