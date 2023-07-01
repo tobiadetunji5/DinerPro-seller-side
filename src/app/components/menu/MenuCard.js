@@ -27,7 +27,7 @@ export default function MenuCard({ food }) {
             </p>
           </div>
 
-          <MdDelete size={25} />
+          <MdDelete size={25} className="cursor-pointer" />
         </div>
 
         <button>

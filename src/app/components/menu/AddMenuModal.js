@@ -19,7 +19,12 @@ export default function AddMenuModal({ handleCloseModal }) {
   };
 
   const handlePriceChange = (e) => {
-    setPrice(e.target.value);
+    const newPrice = parseInt(e.target.value, 10);
+    if (!isNaN(newPrice) && newPrice >= 0) {
+      setPrice(newPrice);
+    } else {
+      setPrice("");
+    }
   };
 
   const handleToggleAvailability = () => {
@@ -39,7 +44,7 @@ export default function AddMenuModal({ handleCloseModal }) {
   return (
     <aside className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg w-[808px] h-[709px]">
-        <h2 className="text-xl font-semibold mb-4">Edit Menu</h2>
+        <h2 className="text-xl font-semibold mb-4">Add Menu</h2>
         <div>
           <div className="flex items-center p-3 gap-3">
             <div className="border-secondary border rounded-lg h-[178px] w-[228px]">
