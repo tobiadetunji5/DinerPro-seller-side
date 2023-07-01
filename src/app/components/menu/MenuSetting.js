@@ -74,7 +74,7 @@ export default function MenuSetting() {
         </button>
       </div>
       <div
-        className={`grid grid-cols-${gridCols} grid-rows-${gridRows} gap-3 mb-1 overflow-x-hidden w-full`}
+        className={`grid grid-cols-5 grid-rows-3 gap-3 mb-1 overflow-x-hidden w-full`}
       >
         {currentMenuItems.map((food, i) => (
           <MenuCard key={i} food={food} />
