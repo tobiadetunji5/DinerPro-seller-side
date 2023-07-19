@@ -13,30 +13,22 @@ import SuccessfulOrders from "@/app/components/order_page/create_new_order/view_
 
 
 export default function Page() {
-  
   const [ orderRender , setOrderRender ] = useState('all')
-
   return (
     <>
     {/* MAIN COMPONENT OF THE VIEW ALL ORDERS PAGE */}
     {/* COMPONENTS IN "COMPONENTS > ORDER_PAGE > VIEW ALL" */}
     <div className={pageMainStyles.mainComp}>
-
       {/* TOP BAR AND REFRESH ICON */}
-
       <div className={pageMainStyles.topBar}>
         <Image src={refreshIcon} alt="refresh icon" />
       </div>
-
       <div className={pageMainStyles.btnCont}>
-
         <button className={orderRender === "all" ? pageMainStyles.firstBtn : pageMainStyles.online } onClick={() => setOrderRender("all")}>All Orders</button>
-        
         <button className={orderRender === "online" ? pageMainStyles.secondtBtn : pageMainStyles.online} onClick={() => setOrderRender("online")}>Online Orders</button>
         <button className={orderRender === "offline" ? pageMainStyles.thirdBtn : pageMainStyles.online } onClick={() => setOrderRender("offline")}>Offline Orders</button>
         <button className={orderRender === "successful" ? pageMainStyles.fourthBtn : pageMainStyles.online} onClick={() => setOrderRender("successful")}>Successful Orders</button>
       </div>
-
       {
         orderRender === "all" ? <AllOrders /> 
         : orderRender === "online" ? <OnlineOrders />
@@ -44,7 +36,6 @@ export default function Page() {
         : orderRender === "successful" ? <SuccessfulOrders />
         : <h2>No Data</h2>
       }
-      
     </div>
     </>
   )
