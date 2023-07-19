@@ -1,105 +1,89 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import { foodArrays } from "../../../../../utils/cartData";
 import Card from "./Card";
 import { AiOutlineSetting } from "react-icons/ai";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
+import Link from "next/link";
+import { categories } from "../../../../../utils/categoriesData";
 
 export default function FoodContainer() {
-  const [scrollInd, setScrollInd] = useState("b");
-  const [scrollWidth, setScrollWidth] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [visibleItems, setVisibleItems] = useState(1000);
-  const itemContainerRef = useRef(null);
-  const itemWidth = 250; // Width of each item in pixels
-  const scrollOffset = 50; // Offset for scroll calculations
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (itemContainerRef.current) {
-        const { scrollLeft, offsetWidth } = itemContainerRef.current || {};
-        const maxScrollLeft = scrollWidth - offsetWidth;
-
-        if (scrollLeft <= 0) setScrollInd("b");
-        else if (scrollLeft >= maxScrollLeft - scrollOffset) setScrollInd("e");
-        else setScrollInd("m");
-      }
-    };
-
-    if (itemContainerRef.current) {
-      setScrollWidth(itemContainerRef.current.scrollWidth);
-      setContainerWidth(itemContainerRef.current.offsetWidth);
-      itemContainerRef.current.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (itemContainerRef.current) {
-        itemContainerRef.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, [scrollWidth]);
-
-  console.log(itemContainerRef);
-  const scrollNext = () => {
-    if (itemContainerRef.current) {
-      const { scrollLeft, offsetWidth } = itemContainerRef.current;
-      const maxScrollLeft = scrollWidth - offsetWidth;
-      const nextScrollLeft = Math.min(scrollLeft + itemWidth, maxScrollLeft);
-      itemContainerRef.current.scrollTo({
-        left: nextScrollLeft,
-        behavior: "smooth",
-      });
-      setScrollInd("m");
-      // console.log("Next button clicked. Scroll position:", nextScrollLeft);
-    }
+  const slideLeft = () => {
+    var slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
+  const slideRight = () => {
+    var slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft + 500;
   };
 
-  const scrollPrev = () => {
-    if (itemContainerRef.current) {
-      const { scrollLeft } = itemContainerRef.current;
-      const prevScrollLeft = Math.max(scrollLeft - itemWidth, 0);
-      itemContainerRef.current.scrollTo({
-        left: prevScrollLeft,
-        behavior: "smooth",
-      });
-      setScrollInd("m");
-    }
+  const catSlideLeft = () => {
+    var cat_slider = document.getElementById("cat_slider");
+    cat_slider.scrollLeft = cat_slider.scrollLeft - 500;
   };
-
+  const catSlideRight = () => {
+    var cat_slider = document.getElementById("cat_slider");
+    cat_slider.scrollLeft = cat_slider.scrollLeft + 500;
+  };
   return (
-    <div className="overflow-x-auto">
-      <div className="relative pr-12 pl-12 flex flex-col w-[850px] h-[829px] overflow-hidden border border-[#CCCCCC] rounded-lg">
-        <div className="flex items-center justify-between p-8">
-          <div>my menu</div>
+    <div className="relative pr-12 pl-12 flex flex-col  border border-secondary rounded-lg w-[900px] h-[829px]">
+      <div className="flex items-center justify-between p-8">
+        <h1 className="text-lg font-semibold">My Menu</h1>
+        <Link href="/menu/menu_settings">
           <div className="flex items-center gap-2">
             <AiOutlineSetting size={22} />
-            <span>Menu Settings</span>
+            <span className="text-sm">Menu Settings</span>
           </div>
-        </div>
-        <div className="p-2 border border-[#ccc]">Search bar</div>
-        <div className="p-2 border border-[#ccc] my-1">categories</div>
+        </Link>
+      </div>
+      <div>
+        <input
+          type="text"
+          placeholder="Search menu"
+          className="border border-secondary rounded-[40px] p-2 outline-none focus:ring-2 focus:ring-primary"
+        />
+      </div>
+      <div className="flex items-center p-2">
         <div
-          className="grid grid-rows-3 grid-flow-col gap-5 overflow-x-hidden w-full"
-          ref={itemContainerRef}
+          id="cat_slider"
+          className="my-1 flex overflow-x-auto relative scrollbar-hide scroll scroll-smooth"
         >
-          {foodArrays.slice(0, visibleItems).map((food, i) => (
-            <Card key={i} food={food} />
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              className="px-2 border border-primary rounded-lg mx-2 w-full whitespace-nowrap shadow-md text-primary cursor-pointer"
+            >
+              {category.name}
+            </div>
           ))}
         </div>
-        {scrollInd === "b" || scrollInd === "m" ? (
-          <BiRightArrow
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
-            onClick={scrollNext}
-            size={30}
-          />
-        ) : null}
-        {scrollInd === "e" || scrollInd === "m" ? (
-          <BiLeftArrow
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
-            onClick={scrollPrev}
-            size={30}
-          />
-        ) : null}
+        <BiRightArrow
+          onClick={catSlideRight}
+          className="absolute right-10 cursor-pointer"
+        />
+        <BiLeftArrow
+          onClick={catSlideLeft}
+          className="absolute left-10 cursor-pointer"
+        />
+      </div>
+
+      <div
+        id="slider"
+        className="grid grid-rows-3 gap-x-6 gap-y-4 grid-flow-col overflow-x-auto scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+      >
+        {foodArrays.map((food, i) => (
+          <Card key={i} food={food} />
+        ))}
+        <BiRightArrow
+          onClick={slideRight}
+          size={30}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
+        />
+        <BiLeftArrow
+          onClick={slideLeft}
+          size={30}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
+        />
       </div>
     </div>
   );

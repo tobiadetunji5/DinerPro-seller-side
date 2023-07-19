@@ -1,7 +1,8 @@
 import React from "react";
 import MainLayout from "./components/main_layout/MainLayout";
 import "./globals.css";
-// import { Inter } from "next/font/google";
+import { Inter } from "next/font/google";
+import { ReduxProvider } from "@/redux/provider";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
       <body className={"h-full"}>
         <main className="h-full">
           <div className="h-full">
-            <MainLayout>{children}</MainLayout>
+            <MainLayout>
+              <ReduxProvider>{children}</ReduxProvider>
+            </MainLayout>
           </div>
         </main>
       </body>
