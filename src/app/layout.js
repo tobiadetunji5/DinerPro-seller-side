@@ -1,7 +1,7 @@
 import React from "react";
 import MainLayout from "./components/main_layout/MainLayout";
 import "./globals.css";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import { ReduxProvider } from "@/redux/provider";
 
 // const inter = Inter({ subsets: ["latin"] });
