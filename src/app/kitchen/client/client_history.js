@@ -17,7 +17,7 @@ export default function Client_history() {
                     <p className={client_H_styles.H_oneM}>You have no previous Client updates</p>
                     
                     <p className={client_H_styles.H_oneS}>Create your first client</p>
-                    <p className={client_H_styles.H_oneSs}>Just click the ' ' to begin.</p>
+                    <p className={client_H_styles.H_oneSs}>Just click the ___ to begin</p>
                 </div>
                 <Image className={client_H_styles.H_img} src={client_HIcon} alt="image of article" />
             </div>
