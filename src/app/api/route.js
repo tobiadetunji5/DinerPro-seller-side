@@ -1,4 +1,4 @@
-import { connectToDB } from '../../../utils/database.js';
+import { connectToDB } from '@/../utils/database.js';
 
 export const GET = async () => {
   await connectToDB();

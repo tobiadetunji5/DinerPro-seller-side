@@ -1,17 +1,17 @@
 import { connectToDB } from '@/../utils/database.js';
 import Order from '@/../models/order.js';
 
+// NOTE: This functionality is needed on the buyer side
+
 export const POST = async (req, res) => {
-  const { userId, orderId, items, totalAmount, orderDate, status } =
-    await req.json();
+  const { userId, items, totalAmount, orderDate, status } = await req.json();
 
   try {
     await connectToDB();
 
-    console.log(req.json());
+    // TODO: Validate the request body against the inventory
     const newOrder = new Order({
       //   customer: userId,
-      orderId,
       items,
       totalAmount,
       orderDate,
