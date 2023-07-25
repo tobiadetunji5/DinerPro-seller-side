@@ -1,7 +1,29 @@
-export const POST = () => {
+import { connectToDB } from '@/../utils/database.js';
+import Order from '@/../models/order.js';
+
+export const POST = async (req, res) => {
+  const { userId, orderId, items, totalAmount, orderDate, status } =
+    await req.json();
+
   try {
-    return new Response('CREATE new order', { status: 200 });
+    await connectToDB();
+
+    console.log(req.json());
+    const newOrder = new Order({
+      //   customer: userId,
+      orderId,
+      items,
+      totalAmount,
+      orderDate,
+      status: 'pending',
+    });
+    await newOrder.save();
+
+    return new Response(JSON.stringify(newOrder), { status: 201 });
   } catch (error) {
-    return new Response(error.message || error.toString(), { status: 500 });
+    console.log(error.message || error.toString());
+    return new Response(JSON.stringify('Failed to create a new order'), {
+      status: 500,
+    });
   }
 };
