@@ -5,11 +5,6 @@ const OrderSchema = new Schema({
   //     type: Schema.Types.ObjectId,
   //     ref: 'Customer',
   //   },
-  orderId: {
-    type: String,
-    required: [true, 'Order ID is required'],
-    unique: true,
-  },
   items: [
     {
       itemName: {
