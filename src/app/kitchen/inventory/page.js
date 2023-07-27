@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Modalform from './modalform';
 import Link from 'next/link';
+// import {minusIcon} from '../../../../public/images/inventory/minusSymbol.svg';
 
 export default function Page() {
 const [isOpen, setIsOpen] = useState(false)
@@ -33,19 +34,33 @@ return (
 {
   isOpen ? (
     <div className='absolute top-[100%] border bg-white border-zinc-400 text-black p-3 w-[20%] flex flex-col text-sm space-y-2 items-center rounded-md'>
-    <button 
-    onClick={()=> setCreateInventory(true)}
-    className='flex space-x-2 justify-between '>
-   {/* <Image
-    src='/images/inventory/plus.png'
-    alt='plus icon'
-    width='5'
-    height='5'>
-  </Image> */}
-    Create Inventory</button>
+    
+    <div className='flex justify-between items-center gap-5'>
+    {/*------------icon for creating new inventory----------*/}
+    <Image
+     priority
+     src='/images/inventory/add_symbol.svg'
+     alt='create icon'
+     width='18'
+     height='18'/>
+     <button 
+     onClick={()=> setCreateInventory(true)}
+     className='flex space-x-2 justify-between '>
+     Create Inventory</button>
+    </div>
+
+    <div className='flex justify-between items-center gap-5 space-x-2'>
+    {/*----------- icon for viewing inventory-----------*/}
+    <Image
+     priority
+     src='/images/inventory/minus_symbol.svg'
+     alt='view icon'
+     width='18'
+     height='18'/>
     <Link href='/kitchen/inventory/table'>
     <div>View Inventory</div>
     </Link>
+    </div>
     </div>
   ): null
 }
@@ -77,7 +92,7 @@ return (
   
   </div>
 
-  <div className='flex justify-end'>
+  <div className='flex mb-5 justify-end'>
   <div className='border p-2 w-1/3 text-center  border-primary rounded-lg'>
   <p>View Custom report</p>
   </div>

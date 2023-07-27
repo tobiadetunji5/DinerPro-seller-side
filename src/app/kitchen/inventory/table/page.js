@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import jsonData from '../data.json';
+import Image from 'next/image';
 
 export default function Page() {
 
@@ -98,9 +99,18 @@ if (setRender === 'alerted'){
    </div>
     </ul>
   
-    <button className='border border-primary rounded-full py-1 px-7 text-primary'>
+    <div className='flex justify-between align-center gap-5
+    border border-primary rounded-full py-1 px-7 text-primary hover:bg-primary hover:text-white'>
+    <Image
+     priority
+     src='/images/inventory/filter.svg'
+     alt='filter icon'
+     width='24'
+     height='24'/>
+    <button >
     Filter
     </button>
+    </div>
   
     </div>
     <div>
