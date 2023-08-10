@@ -66,7 +66,7 @@ export default function MenuSetting() {
           </div>
         ))}
         <button
-          className="ml-[200px] flex items-center gap-2 bg-primary p-[15px] rounded-lg text-white"
+          className="ml-[200px] flex items-center gap-2 bg-primary p-[15px] rounded-lg border border-gray font-bold"
           onClick={handleOpenModal}
         >
           <span>+</span>
