@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
-// const cartFromCookies = Cookies.get("cart");
-// const initialCartState = cartFromCookies
-//   ? JSON.parse(cartFromCookies)
-//   : {
-//       cartItems: [],
-//       amount: 0,
-//       total: 0,
-//     };
-// const initialState = { ...initialCartState };
-const initialState = {
-  cart: Cookies.get("cart")
-    ? JSON.parse(Cookies.get("cart"))
-    : {
-        cartItems: [],
-        amount: 0,
-        total: 0,
-      },
-};
+const cartFromCookies = Cookies.get("cart");
+const initialCartState = cartFromCookies
+  ? JSON.parse(cartFromCookies)
+  : {
+      cartItems: [],
+      amount: 0,
+      total: 0,
+    };
+const initialState = { ...initialCartState };
+// const initialState = {
+//   cart: Cookies.get("cart")
+//     ? JSON.parse(Cookies.get("cart"))
+//     : {
+//         cartItems: [],
+//         amount: 0,
+//         total: 0,
+//       },
+// };
 
 const cartSlice = createSlice({
   name: "cart",
