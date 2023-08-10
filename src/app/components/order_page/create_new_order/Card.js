@@ -9,6 +9,8 @@ export default function Card({ food }) {
   // const cartItems = useSelector((state) => state.cart);
   // console.log(cartItems);
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.cart);
+
   const addToCart = () => {
     dispatch(addToCartAction({ ...food, imageUrl: food.imageUrl }));
   };
