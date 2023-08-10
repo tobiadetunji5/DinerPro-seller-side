@@ -30,7 +30,7 @@ export default function FoodContainer() {
       <div className="flex items-center justify-between p-8">
         <h1 className="text-lg font-semibold">My Menu</h1>
         <Link href="/menu/menu_settings">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2  border-gray p-1 border rounded-lg hover:bg-primary font-bold">
             <AiOutlineSetting size={22} />
             <span className="text-sm">Menu Settings</span>
           </div>
