@@ -27,9 +27,10 @@ export default function MenuCard({ food }) {
             style={{ objectFit: "cover" }}
             src={food.imageUrl}
             alt="food-image"
-            layout="fill" // Use layout="fill" instead of 'fill' and 'priority'
-            objectFit="cover"
             placeholder="blur"
+            fill
+            priority
+            sizes="(max-width: 235px) 100vw"
           />
         </div>
         <div className="flex flex-col items-start justify-between bg-white p-2 hover:bg-primary font-bold h-[81px]">
@@ -40,6 +41,7 @@ export default function MenuCard({ food }) {
                 <CurrencyFormatter value={food.priceTag} />
               </p>
             </div>
+
             <MdDelete size={25} className="cursor-pointer" />
           </div>
           <p className="text-[.6rem] cursor-pointer">Click to edit</p>
