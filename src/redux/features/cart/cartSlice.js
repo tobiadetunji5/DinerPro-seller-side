@@ -111,6 +111,12 @@ const cartSlice = createSlice({
       };
       Cookies.set("cart", JSON.stringify(updatedCart));
     },
+    clearCart(state) {
+      state.cartItems = [];
+      state.amount = 0;
+      state.total = 0;
+      Cookies.remove("cart");
+    },
 
     initializeCartFromCookies(state) {
       const cartDataFromCookies = Cookies.get("cart");
@@ -131,6 +137,7 @@ export const {
   deleteItem,
   increaseQuantity,
   decreaseQuantity,
+  clearCart,
   initializeCartFromCookies,
 } = cartSlice.actions;
 

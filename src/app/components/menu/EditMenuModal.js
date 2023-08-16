@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "@/redux/features/modal/modalSlice";
 
@@ -40,6 +40,21 @@ export default function EditMenuModal({ handleCloseModal }) {
     dispatch(closeModal());
     handleCloseModal();
   };
+
+  //event listener to close modal when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (event.target.classList.contains("bg-black")) {
+        handleClose();
+      }
+    };
+
+    window.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      window.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
   return (
     <aside className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg w-[808px] h-[709px]">

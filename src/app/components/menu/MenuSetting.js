@@ -8,10 +8,12 @@ import { openModal } from "@/redux/features/modal/modalSlice";
 import { useDispatch } from "react-redux";
 import AddMenuModal from "./AddMenuModal";
 import { categories } from "../../../../utils/categoriesData";
+import FilterModal from "./FilterModal";
 
 export default function MenuSetting() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(15);
   const gridRows = 3;
@@ -24,6 +26,16 @@ export default function MenuSetting() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  //modal filter handling
+  const handleOpenModalFilter = () => {
+    dispatch(openModal());
+    setIsFilterModalOpen(true);
+  };
+
+  const handleCloseModalFilter = () => {
+    setIsFilterModalOpen(false);
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -51,10 +63,12 @@ export default function MenuSetting() {
           placeholder="Search menu"
           className="border border-secondary rounded-[40px] w-[280px] h-[37px] p-2 outline-none focus:ring-2 focus:ring-primary"
         />
-        <div className="border border-secondary rounded-[40px] w-[130px] h-[37px] cursor-pointer flex items-center justify-center text-secondary">
-          <MdFilterList size={30} color="grey" />
-          <span>Filter</span>
-        </div>
+        <button onClick={handleOpenModalFilter}>
+          <div className="border border-secondary rounded-[40px] w-[130px] h-[37px] cursor-pointer flex items-center justify-center text-secondary">
+            <MdFilterList size={30} color="grey" />
+            <span>Filter</span>
+          </div>
+        </button>
       </div>
       <div className="p-2 flex items-center">
         {categories.map((category) => (
@@ -96,6 +110,9 @@ export default function MenuSetting() {
           paginate={paginate}
         />
       </div>
+      {isFilterModalOpen && (
+        <FilterModal handleCloseModalFilter={handleCloseModalFilter} />
+      )}
       {isModalOpen && <AddMenuModal handleCloseModal={handleCloseModal} />}
     </div>
   );

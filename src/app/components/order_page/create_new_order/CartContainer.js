@@ -8,6 +8,7 @@ import {
   deleteItem,
   increaseQuantity,
   decreaseQuantity,
+  clearCart,
   initializeCartFromCookies,
 } from "@/redux/features/cart/cartSlice";
 import { MdDelete } from "react-icons/md";
@@ -40,6 +41,15 @@ export default function CartContainer() {
   const handleDecreaseQuantity = (item) => {
     dispatch(decreaseQuantity({ slug: item.slug }));
   };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
+  const totalAmount = cartItems.reduce(
+    (acc, item) => acc + item.priceTag * item.quantity,
+    0
+  );
 
   return (
     <div className="w-[500px] border border-primary rounded-lg h-[829px] p-5 overflow-y-auto flex flex-col">
@@ -121,7 +131,9 @@ export default function CartContainer() {
           <div>
             <div className="p-5 bg-[#F3F3FE] rounded-lg flex flex-row mt-10 justify-between">
               <p>Item total</p>
-              <p>Total amount here</p>
+              <p>
+                <CurrencyFormatter value={totalAmount} />
+              </p>
             </div>
             <div className="p-5 flex flex-row mt-5 justify-between">
               <Link href="/order/payments">
@@ -130,7 +142,10 @@ export default function CartContainer() {
                 </button>
               </Link>
 
-              <button className="border border-red-700 text-red-700 hover:bg-red-700 hover:text-white p-5 w-[200px] rounded-lg">
+              <button
+                className="border border-red-700 text-red-700 hover:bg-red-700 hover:text-white p-5 w-[200px] rounded-lg"
+                onClick={handleClearCart}
+              >
                 Cancel
               </button>
             </div>
