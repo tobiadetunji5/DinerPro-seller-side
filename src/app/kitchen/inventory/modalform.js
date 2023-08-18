@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {ReactComponent as minusIcon} from '../../../../public/images/inventory/minus_symbol.svg';
+import Image from 'next/image';
 
 export default function Modalform({isVisible, onClose}) {
   if(!isVisible) return null;
@@ -52,44 +52,44 @@ export default function Modalform({isVisible, onClose}) {
 //     .then(error => console.log(error));
 //}
 
-const handleSubmit = async (event) => {
-  // Stop the form from submitting and refreshing the page.
-  event.preventDefault()
+// const handleSubmit = async (event) => {
+//   // Stop the form from submitting and refreshing the page.
+//   event.preventDefault()
 
-  // Get data from the form.
-  const data = {
-    first: event.target.itemName.value,
-    last: event.target.quantity.value,
-  }
+//   // Get data from the form.
+//   const data = {
+//     first: event.target.itemName.value,
+//     last: event.target.quantity.value,
+//   }
 
-  // Send the data to the server in JSON format.
-  const JSONdata = JSON.stringify(data)
+//   // Send the data to the server in JSON format.
+//   const JSONdata = JSON.stringify(data)
 
-  // API endpoint where we send form data.
-  const endpoint = '/api/inventory/new'
+//   // API endpoint where we send form data.
+//   const endpoint = '/api/inventory/new'
 
-  // Form the request for sending data to the server.
-  const options = {
-    // The method is POST because we are sending data.
-    method: 'POST',
-    // Tell the server we're sending JSON.
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    // Body of the request is the JSON data we created above.
-    body: JSONdata,
-  }
+//   // Form the request for sending data to the server.
+//   const options = {
+//     // The method is POST because we are sending data.
+//     method: 'POST',
+//     // Tell the server we're sending JSON.
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     // Body of the request is the JSON data we created above.
+//     body: JSONdata,
+//   }
 
-  // Send the form data to our forms API on Vercel and get a response.
-  const response = await fetch(endpoint, options)
-  console.log(`this is response: ${response}`)
+//   // Send the form data to our forms API on Vercel and get a response.
+//   const response = await fetch(endpoint, options)
+//   console.log(`this is response: ${response}`)
 
-  // Get the response data from server as JSON.
-  // If server returns the name submitted, that means the form works.
-  const result = await response.json()
-  console.log(`this is result: ${result}`)
-  console.log(`Is this your full name: ${result.data}`)
-}
+//   // Get the response data from server as JSON.
+//   // If server returns the name submitted, that means the form works.
+//   const result = await response.json()
+//   console.log(`this is result: ${result}`)
+//   console.log(`Is this your full name: ${result.data}`)
+// }
 
   return (
     <div className='absolute inset-0 bg-black bg-opacity-25'>
@@ -99,11 +99,16 @@ const handleSubmit = async (event) => {
     <div className=' flex items-center justify-between'>
     <p className='text-2xl font-semibold'> Add Inventory</p>
     <button onClick={onClose}>
-    X
+    <Image
+    priority
+    src='/images/inventory/close_icon.svg'
+    alt='view icon'
+    width='24'
+    height='24'/>
     </button>
     </div>
 
-    <form onSubmit={handleSubmit} className='space-y-4'>
+    <form  className='space-y-4'>
    
     <div className='flex space-x-1 p-2'>
    <label htmlFor='name' className='items-start justify-center p-2'>Item name:</label>
@@ -142,7 +147,7 @@ const handleSubmit = async (event) => {
    <label htmlFor='quantity' className='items-start justify-center p-2'>Quantity:</label>
    <input type='number' name='quantity' placeholder='input number'
    className='border items-end font-mono w-[20vw] p-2'/>
-   <select name="quantity" className='border font-mono w-[20vw] p-2 block'>
+   <select name="quantity" className='border font-mono w-[20vw] p-2 block' data-dropdown-toggle="dropdown">
    <option defaultValue='select unit'>select unit</option>
    <option value="litre">Litres(l)</option>
    <option value="grams">Gram(g)</option>

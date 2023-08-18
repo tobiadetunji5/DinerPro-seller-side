@@ -136,6 +136,7 @@ export default function ReactTable() {
     setDomLoaded(true)
   }, []);
 
+
   return (
     <div >
         {domLoaded && 
