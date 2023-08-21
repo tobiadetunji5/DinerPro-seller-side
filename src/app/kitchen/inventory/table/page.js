@@ -104,7 +104,7 @@ export default function Page() {
           //   fixedHeader={true}/>
           // }
           
-          const showAlerts = () => {
+    const showAlerts = () => {
     const newData = records.filter(row => {
       return (row.quantityalert.includes('alerted'));
     })
