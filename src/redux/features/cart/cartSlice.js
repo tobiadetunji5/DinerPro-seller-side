@@ -1,10 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
-const initialState = {
-  cartItems: [],
-  amount: 0,
-  total: 0,
-};
+const cartFromCookies = Cookies.get("cart");
+const initialCartState = cartFromCookies
+  ? JSON.parse(cartFromCookies)
+  : {
+      cartItems: [],
+      amount: 0,
+      total: 0,
+    };
+const initialState = { ...initialCartState };
+// const initialState = {
+//   cart: Cookies.get("cart")
+//     ? JSON.parse(Cookies.get("cart"))
+//     : {
+//         cartItems: [],
+//         amount: 0,
+//         total: 0,
+//       },
+// };
 
 const cartSlice = createSlice({
   name: "cart",
@@ -33,6 +47,13 @@ const cartSlice = createSlice({
         (total, item) => total + item.totalPrice,
         0
       );
+      // Update cookies
+      const updatedCart = {
+        cartItems: state.cartItems,
+        amount: state.amount,
+        total: state.total,
+      };
+      Cookies.set("cart", JSON.stringify(updatedCart));
     },
     increaseQuantity(state, action) {
       const { slug } = action.payload;
@@ -46,6 +67,13 @@ const cartSlice = createSlice({
           0
         );
       }
+      // Update cookies
+      const updatedCart = {
+        cartItems: state.cartItems,
+        amount: state.amount,
+        total: state.total,
+      };
+      Cookies.set("cart", JSON.stringify(updatedCart));
     },
     decreaseQuantity(state, action) {
       const { slug } = action.payload;
@@ -64,15 +92,53 @@ const cartSlice = createSlice({
           );
         }
       }
+      // Update cookies
+      const updatedCart = {
+        cartItems: state.cartItems,
+        amount: state.amount,
+        total: state.total,
+      };
+      Cookies.set("cart", JSON.stringify(updatedCart));
     },
     deleteItem(state, action) {
       const { slug } = action.payload;
       state.cartItems = state.cartItems.filter((item) => item.slug !== slug);
+      // Update cookies
+      const updatedCart = {
+        cartItems: state.cartItems,
+        amount: state.amount,
+        total: state.total,
+      };
+      Cookies.set("cart", JSON.stringify(updatedCart));
+    },
+    clearCart(state) {
+      state.cartItems = [];
+      state.amount = 0;
+      state.total = 0;
+      Cookies.remove("cart");
+    },
+
+    initializeCartFromCookies(state) {
+      const cartDataFromCookies = Cookies.get("cart");
+      if (cartDataFromCookies) {
+        try {
+          const parsedCartData = JSON.parse(cartDataFromCookies);
+          Object.assign(state, parsedCartData);
+        } catch (error) {
+          console.error("Error parsing cart data from cookies:", error);
+        }
+      }
     },
   },
 });
 
-export const { addToCart, deleteItem, increaseQuantity, decreaseQuantity } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  deleteItem,
+  increaseQuantity,
+  decreaseQuantity,
+  clearCart,
+  initializeCartFromCookies,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CurrencyFormatter from "../../../../../utils/formatCurrency";
 import Image from "next/image";
@@ -8,15 +8,27 @@ import {
   deleteItem,
   increaseQuantity,
   decreaseQuantity,
+  clearCart,
+  initializeCartFromCookies,
 } from "@/redux/features/cart/cartSlice";
 import { MdDelete } from "react-icons/md";
 import Link from "next/link";
 
 export default function CartContainer() {
-  // const router = useRouter();
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  // const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+  const [loading, setLoading] = useState(true);
+  const cartItems = useSelector((state) => state.cart.cartItems) || [];
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initializeCartFromCookies());
+    setLoading(false); // Set loading to false immediately after dispatching
+  }, [dispatch]);
+
+  if (loading) {
+    // loading state
+    return <p>Loading...</p>;
+  }
 
   const handleRemoveFromCart = (item) => {
     dispatch(deleteItem({ slug: item.slug }));
@@ -30,11 +42,14 @@ export default function CartContainer() {
     dispatch(decreaseQuantity({ slug: item.slug }));
   };
 
-  //confirm
-  // const handleConfirm = () => {
-  //   const cartItemsQuery = cartItems.map((item) => item.slug).join(",");
-  //   router.push(`/order/payments?cartItems=${cartItemsQuery}`);
-  // };
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
+  const totalAmount = cartItems.reduce(
+    (acc, item) => acc + item.priceTag * item.quantity,
+    0
+  );
 
   return (
     <div className="w-[500px] border border-primary rounded-lg h-[829px] p-5 overflow-y-auto flex flex-col">
@@ -62,7 +77,7 @@ export default function CartContainer() {
           <p>You have not made any orders</p>
         </div>
       ) : (
-        <div>
+        <>
           {cartItems.map((item) => (
             <div
               key={item.slug}
@@ -77,9 +92,10 @@ export default function CartContainer() {
                     alt={item.foodName}
                     className="rounded-lg"
                     sizes="(max-width: 100px) 100vw"
+                    priority
                   />
                 </div>
-                <p className="">{item.foodName}</p>
+                <p>{item.foodName}</p>
               </div>
               <div className="w-1/5">
                 <div className="flex items-center">
@@ -107,7 +123,7 @@ export default function CartContainer() {
               </div>
               <div className="w-1/5">
                 <button onClick={() => handleRemoveFromCart(item)}>
-                  <MdDelete />
+                  <MdDelete size={25} />
                 </button>
               </div>
             </div>
@@ -115,7 +131,9 @@ export default function CartContainer() {
           <div>
             <div className="p-5 bg-[#F3F3FE] rounded-lg flex flex-row mt-10 justify-between">
               <p>Item total</p>
-              <p>Total amount here</p>
+              <p>
+                <CurrencyFormatter value={totalAmount} />
+              </p>
             </div>
             <div className="p-5 flex flex-row mt-5 justify-between">
               <Link href="/order/payments">
@@ -124,12 +142,15 @@ export default function CartContainer() {
                 </button>
               </Link>
 
-              <button className="border border-red-700 text-red-700 hover:bg-red-700 hover:text-white p-5 w-[200px] rounded-lg">
+              <button
+                className="border border-red-700 text-red-700 hover:bg-red-700 hover:text-white p-5 w-[200px] rounded-lg"
+                onClick={handleClearCart}
+              >
                 Cancel
               </button>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "@/redux/features/modal/modalSlice";
 
-export default function AddMenuModal({ handleCloseModal }) {
+export default function EditMenuModal({ handleCloseModal }) {
   const dispatch = useDispatch();
 
   const [itemName, setItemName] = useState("");
@@ -55,7 +55,6 @@ export default function AddMenuModal({ handleCloseModal }) {
       window.removeEventListener("click", handleOutsideClick);
     };
   }, []);
-
   return (
     <aside className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg w-[808px] h-[709px]">
