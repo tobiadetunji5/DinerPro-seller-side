@@ -1,32 +1,12 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-// import DataTable from 'react-data-table-component';
 import jsonData from '../data.json';
 import Image from 'next/image';
 import Editform from '../editform';
 
 export default function Page() {
 
-  //
-  // <table>
-  // <thead>
-  // <tr>
-  // <th>First Name</th>
-  // <th>Last Name</th>
-  // </tr>
-  // </thead>
-
-  // <tbody>
-  // {tableData.map((data, index) => (
-  //   <tr key = {index}>
-  //   <td>{data.name}</td>
-  //   <td>{data.category}</td>
-  //   </tr>
-  // ))}
-  // </tbody>
-  // </table>  
-  // }
-  //usestate for the first modal(edit, delete)
+  // usestate for the first modal(edit, delete)
   // const [isEdit, setIsEdit] = useState(false) 
   // //usestate for the second modal(editform)
   // const [editInventory, setEditInventory] = useState(false)
@@ -71,10 +51,11 @@ export default function Page() {
       ><img width={24} height={24} src= '/images/inventory/ham_menu.svg'/></button>
     }
   ]
-
-  // const [domLoaded, setDomLoaded] = useState(false);
+  
   const [records, setRecords] = useState(jsonData);
   const [render, setRender] = useState('all');
+  const [isEdit, setIsEdit] = useState(false)
+  const [editInventory, setEditInventory] = useState(false)
   // const [tableData, setTableData] = useState([]);
   
   // useEffect(()=>{
@@ -117,18 +98,56 @@ export default function Page() {
     : null
   }
   
-  
   if (setRender === 'alerted') {
     setRecords(showAlerts)
   }
   
-  const [isEdit, setIsEdit] = useState(false)
-const [editInventory, setEditInventory] = useState(false)
+
 
 useEffect(()=>{
   setIsEdit(false);
 },[editInventory]);
 
+        // {
+            //     isEdit ? (
+            //       <div className='absolute bg-white shadow-2xl py-3 top-[50%] left-[85%] flex flex-col space-y-2 items-center rounded-md text-black w-[9%] text-sm'>
+            //       <div className='flex justify-between items-center gap-4'>
+            //       <Image
+            //       priority
+            //       src='/images/inventory/edit_icon.svg'
+            //       alt='edit icon'
+            //       width='20'
+            //       height='20'/>
+            //       <button 
+            //       onClick={()=> setEditInventory(true)}>
+            //       Edit Item</button>
+            //       </div>
+            
+            //       <div className='flex justify-between items-center gap-2'>
+            //       <Image
+            //       priority
+            //       src='/images/inventory/delete.svg'
+            //       alt='delete icon'
+            //       width='16'
+            //       height='18'/>
+            //       <button className='justify-end'>
+            //       Delete Item</button>
+            //       </div>
+            //       </div>
+            //     ) : null
+            //   }
+
+            
+            // <tr key = {data.id}>
+            // <td>{data.id}</td>
+            // <td>{data.name}</td>
+            // <td>{data.inventoryname}</td>
+            // <td>{data.category}</td>
+            // <td>{data.brand}</td>
+            // <td>{data.initialquantity}</td>
+            // <td>{data.currentquantity}</td>
+            // <td>{data.quantityalert}</td>
+            // </tr>
 
   return (
     <>
@@ -164,40 +183,26 @@ useEffect(()=>{
           </div>
 
           <div>
-           
-            
-            {
-                isEdit ? (
-                  <div className='absolute bg-white shadow-2xl py-3 top-[50%] left-[85%] flex flex-col space-y-2 items-center rounded-md text-black w-[9%] text-sm'>
-                  <div className='flex justify-between items-center gap-4'>
-                  <Image
-                  priority
-                  src='/images/inventory/edit_icon.svg'
-                  alt='edit icon'
-                  width='20'
-                  height='20'/>
-                  <button 
-                  onClick={()=> setEditInventory(true)}>
-                  Edit Item</button>
-                  </div>
-            
-                  <div className='flex justify-between items-center gap-2'>
-                  <Image
-                  priority
-                  src='/images/inventory/delete.svg'
-                  alt='delete icon'
-                  width='16'
-                  height='18'/>
-                  <button className='justify-end'>
-                  Delete Item</button>
-                  </div>
-                  </div>
-                ) : null
-              }
-
+          <table className='border w-full'>
+          <thead className='flex items-center justify-between'>
+          {column.map((column, index)=> (
+            <tr key={index}>
+            <th className='text-xl font-medium'>{column.name}</th>
+            </tr>
+          ))}
+          </thead>
+        
+          <tbody>
+          {jsonData.map((data, index) => (
+              <tr key = {index}>
+              <td>{data.name}</td>
+              </tr>
+            ))}
+          </tbody>
+          </table>  
+     
           </div>
         </section>
-
       </div>
 
      <Editform isVisible={editInventory} onClose={()=> setEditInventory(false)}/>
