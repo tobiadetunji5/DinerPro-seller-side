@@ -35,6 +35,10 @@ export default function Form() {
     { id: "cash", label: "Cash" },
   ];
 
+  // const handleChange = () => {
+
+  // }
+
   return (
     <form>
       <h1 className="mb-5 font-bold">Delivery Information</h1>
@@ -46,7 +50,10 @@ export default function Form() {
               type="text"
               className="border border-secondary w-[430px] p-1 rounded-lg"
               value={formData.name}
-              onChange={(e) => handleFieldChange("name", e.target.value)}
+              onChange={(e) => {
+                // console.log(e.target);
+                handleFieldChange("name", e.target.value);
+              }}
             />
           </div>
           <div>
