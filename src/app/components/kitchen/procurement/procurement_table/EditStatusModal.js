@@ -13,7 +13,7 @@ export default function EditStatusModal({
   const handleStatusChange = (e) => {
     console.log(`Selected status: ${e.target.value}`);
     setNewStatus(e.target.value);
-    setConfirmationMessage("New status selected!!");
+    setConfirmationMessage("New status selected!!!");
   };
   const handleConfirm = () => {
     console.log(`Updated status: ${newStatus}`);
