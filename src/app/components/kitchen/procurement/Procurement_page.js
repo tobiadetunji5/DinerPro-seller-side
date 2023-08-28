@@ -31,9 +31,9 @@ export default function Procurement_page() {
   ).length;
 
   return (
-    <div className="px-12 relative">
+    <div className="px-10 relative">
       <button
-        className="absolute top-0 right-[48px] p-3 bg-primary text-white rounded-lg w-[272px]"
+        className="absolute top-0 right-[48px] p-3 bg-primary text-white rounded-lg w-[25%]"
         onClick={handleOpenModal}
       >
         <h1 className="text-[20px]">Procurement Manager</h1>
@@ -41,21 +41,22 @@ export default function Procurement_page() {
       {isModalOpen && (
         <Procurement_manager_modal handleCloseModal={handleCloseModal} />
       )}
+
       <div className="pt-16">
-        <section className="flex justify-between">
-          <div className="border border-secondary w-[450px] h-[200px] rounded-lg px-10 py-5 bg-primary text-white">
+        <section className="flex justify-between space-x-2">
+          <div className="border border-secondary h-[200px] rounded-lg px-8 py-5 bg-primary text-white">
             <h1 className="font-medium">Total Procurement notices</h1>
             <h1 className="font-bold text-[36px] mt-5">{countAll}</h1>
             <p className="mt-5">+ increased by 20% since December 2022</p>
           </div>
-          <div className="border border-secondary w-[450px] h-[200px] rounded-lg px-10 py-5">
+          <div className="border border-secondary w-[400px] h-[200px] rounded-lg px-8 py-5">
             <h1 className="font-medium">Pending Procurement notices</h1>
             <h1 className="font-bold text-[36px] mt-5">{countPending}</h1>
             <p className="mt-5 text-green-600">
               + increased by 20% since December 2022
             </p>
           </div>
-          <div className="border border-secondary w-[450px] h-[200px] rounded-lg  px-10 py-5">
+          <div className="border border-secondary w-[400px] h-[200px] rounded-lg  px-8 py-5">
             <h1 className="font-medium">Delivered Procurement</h1>
             <h1 className="font-bold text-[36px] mt-5">{countDelivered}</h1>
             <p className="mt-5 text-red-600">
@@ -64,18 +65,20 @@ export default function Procurement_page() {
           </div>
         </section>
       </div>
+
       <button className="absolute top-[280px] right-[48px] p-3 border border-primary bg-white text-primary rounded-lg w-[272px]">
         <h1 className="text-[20px]">View Custom report</h1>
       </button>
-      <div className="border border-secondary w-[1440px] h-[473px] absolute top-[350px] rounded-lg">
+
+      <div className="border border-secondary w-[93%] h-[440px] absolute top-[350px] rounded-lg">
         <div className="flex justify-between p-6 text-[24px]">
           <h1>History</h1>
           <h1 className="underline underline-offset-4 text-primary">
             View all
           </h1>
         </div>
-        <hr className="w-[1440px] text-secondary" />
-        <section className="flex justify-around text-center items-center">
+        <hr className=" text-secondary" />
+        <section className="flex justify-evenly text-center items-center">
           <div>
             <h1 className="font-medium">
               You have no previous inventory changes
