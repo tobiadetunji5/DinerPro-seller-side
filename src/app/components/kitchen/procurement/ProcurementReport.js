@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
 //redux
-import { useSelector } from "react-redux/es/hooks/useSelector";
+
 import { openModal } from "@/redux/features/modal/modalSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //components
 import DefectReportModal from "./DefectReportModal";
 
@@ -27,12 +27,14 @@ export default function ProcurementReport() {
 
   return (
     <div className="px-12">
-      <div className="p-12 border w-[1440px] h-[829px] border-secondary rounded-lg">
+      <div className="p-12 border w-full h-[829px] border-secondary rounded-lg">
         <section>
           <div className="flex justify-between">
             <div>
-              <h1>
-                procurement id <span>time stamp</span>
+              <h1 className="font-medium">
+                <span>Procurement </span>
+                {selectedItem ? selectedItem.id : "N/A"}{" "}
+                <span className="font-medium text-secondary">time stamp</span>
               </h1>
             </div>
             <div>
