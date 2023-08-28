@@ -36,7 +36,7 @@ const row = [
     },
 ]
 
-const HistoryTable = () => {
+const PaymentsTable = () => {
 
     return (
         <>
@@ -101,4 +101,4 @@ const HistoryTable = () => {
     )
 }
 
-export default HistoryTable
+export default PaymentsTable

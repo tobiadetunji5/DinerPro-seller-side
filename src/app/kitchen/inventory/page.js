@@ -35,7 +35,8 @@ return (
 {/*-------------- modal starts here--------------*/}
 {
   isOpen ? (
-    <div className='absolute top-[50%] z-[999px] border bg-white border-zinc-400 text-black p-3 w-[20%] flex flex-col text-sm space-y-2 items-center rounded-md'>
+    <div className='absolute top-[15%] border bg-white border-zinc-400 text-black p-3 w-[15%] 
+    flex flex-col text-sm space-y-2 items-center rounded-md'>
     
     <div className='flex justify-between items-center gap-5 hover:bg-primary'>
     {/*------------icon for creating new inventory----------*/}
@@ -69,7 +70,7 @@ return (
 
  </div>
 {/*-------------- Data Cards--------------*/}
- <div className='flex z-[1px] space-x-2 justify-between items-center mb-3 '>
+ <div className='flex space-x-2 justify-between items-center mb-3 '>
 <DataCard
 bgColor={'#FFFFFF'}
 statColor={'#049561'}

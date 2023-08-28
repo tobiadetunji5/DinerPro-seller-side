@@ -5,9 +5,9 @@ function DataCard({head, number, desc, bgColor, txtColor,statColor}) {
   return (
     <>
     
-    <div className='relative space-y-2 border border-zinc-400 w-1/3 rounded-lg p-3
+    <div className='flex flex-col space-y-2 border bg-white border-zinc-400 w-1/3 rounded-lg p-3
     hover:text-white hover:bg-primary'>
-    <div className=' absolute right-[10%] bg-black fill-black'>
+    <div className='flex items-end justify-end text-red-400'>
     <Image
     priority
     src='/images/inventory/inventory_tabicon.svg'

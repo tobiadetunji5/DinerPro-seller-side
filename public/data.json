@@ -1,41 +1,41 @@
 [
   
     {
-      "id": 1,
+      "id":"#5987698",
       "inventoryname":"pepsi",
       "category":"drinks",
       "brand":"pepsico",
-      "initialquantity":"24(2packs)",
+      "initialquantity":"24 (2packs)",
       "currentquantity":"10 bottles",
       "quantityalert":"available"
     },
      
     {
-        "id": 2,
+        "id": "#548687",
         "inventoryname":"pepsi",
         "category":"drinks",
         "brand":"pepsico",
-        "initialquantity":"24(2packs)",
+        "initialquantity":"24 (2packs)",
         "currentquantity":"10 bottles",
         "quantityalert":"alerted"
       },
        
     {
-        "id": 3,
+        "id": "7987098",
         "inventoryname":"pepsi",
         "category":"drinks",
         "brand":"pepsico",
-        "initialquantity":"24(2packs)",
+        "initialquantity":"24 (2packs)",
         "currentquantity":"10 bottles",
         "quantityalert":"available"
       },
        
     {
-        "id": 4,
+        "id": "#6576697",
         "inventoryname":"pepsi",
         "category":"drinks",
         "brand":"pepsico",
-        "initialquantity":"24(2packs)",
+        "initialquantity":"24 (2packs)",
         "currentquantity":"10 bottles",
         "quantityalert":"alerted"
       },
@@ -45,7 +45,7 @@
         "inventoryname":"pepsi",
         "category":"drinks",
         "brand":"pepsico",
-        "initialquantity":"24(2packs)",
+        "initialquantity":"24 (2packs)",
         "currentquantity":"10 bottles",
         "quantityalert":"available"
       },
@@ -55,9 +55,28 @@
         "inventoryname":"pepsi",
         "category":"drinks",
         "brand":"pepsico",
-        "initialquantity":"24(2packs)",
+        "initialquantity":"24 (2packs)",
+        "currentquantity":"10 bottles",
+        "quantityalert":"alerted"
+      },
+      {
+        "id": 6,
+        "inventoryname":"pepsi",
+        "category":"drinks",
+        "brand":"pepsico",
+        "initialquantity":"24 (2packs)",
+        "currentquantity":"10 bottles",
+        "quantityalert":"alerted"
+      },
+      {
+        "id": 6,
+        "inventoryname":"pepsi",
+        "category":"drinks",
+        "brand":"pepsico",
+        "initialquantity":"24 (2packs)",
         "currentquantity":"10 bottles",
         "quantityalert":"alerted"
       }
+    ]
 
-]
+   

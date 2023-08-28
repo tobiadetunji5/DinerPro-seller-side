@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import jsonData from '../data.json';
+// import jsonData from '../data.json';
 import Image from 'next/image';
 import Editform from '../editform';
 
@@ -16,46 +16,12 @@ export default function Page() {
   //   setIsEdit(false);
   // },[editInventory]);
 
-  const column = [
-    {
-      name: 'ID',
-      selector: row => row.id
-    },
-    {
-      name: 'Inventory name',
-      selector: row => row.inventoryname
-    },
-    {
-      name: 'Category',
-      selector: row => row.category
-    },
-    {
-      name: 'Brand',
-      selector: row => row.brand
-    },
-    {
-      name: 'Initial quantity',
-      selector: row => row.initialquantity
-    },
-    {
-      name: 'Current quantity',
-      selector: row => row.currentquantity
-    },
-    {
-      name: 'Quantity alert',
-      selector: row => row.quantityalert
-    },
-    {
-      name:' ',
-      cell: row => <button onClick={() => setIsEdit(true)}
-      ><img width={24} height={24} src= '/images/inventory/ham_menu.svg'/></button>
-    }
-  ]
+
   
-  const [records, setRecords] = useState(jsonData);
+  // const [records, setRecords] = useState(jsonData);
   const [render, setRender] = useState('all');
   const [isEdit, setIsEdit] = useState(false)
-  const [editInventory, setEditInventory] = useState(false)
+  const [editInventory, setEditInventory] = useState(false);
   // const [tableData, setTableData] = useState([]);
   
   // useEffect(()=>{
@@ -93,23 +59,21 @@ export default function Page() {
     return filteredData
   }
 
-  {
-    render === 'all' ? records
-    : null
-  }
+  // {
+  //   render === 'all' ? records
+  //   : null
+  // }
   
   if (setRender === 'alerted') {
     setRecords(showAlerts)
   }
-  
-
 
 useEffect(()=>{
   setIsEdit(false);
 },[editInventory]);
 
-        // {
-            //     isEdit ? (
+// {
+  //     isEdit ? (
             //       <div className='absolute bg-white shadow-2xl py-3 top-[50%] left-[85%] flex flex-col space-y-2 items-center rounded-md text-black w-[9%] text-sm'>
             //       <div className='flex justify-between items-center gap-4'>
             //       <Image
@@ -136,23 +100,23 @@ useEffect(()=>{
             //       </div>
             //     ) : null
             //   }
-
             
-            // <tr key = {data.id}>
-            // <td>{data.id}</td>
-            // <td>{data.name}</td>
-            // <td>{data.inventoryname}</td>
-            // <td>{data.category}</td>
-            // <td>{data.brand}</td>
-            // <td>{data.initialquantity}</td>
-            // <td>{data.currentquantity}</td>
-            // <td>{data.quantityalert}</td>
-            // </tr>
+            
+            const [rows, setRows] =  useState([]);
+            
+            useEffect(()=>{
+              fetch('http://localhost:3000/data.json')
+              .then(response => response.json())
+              .then(data => {
+                setRows(data)
+              })
+            }, [])
+            
 
-  return (
+            return (
     <>
-      <div className='px-8 h-max'>
-        <section className='border-2 border-zinc-400 rounded-2xl mt-10 p-6'>
+      <div className='px-8'>
+        <section className='border-2 h-[80vh] border-zinc-400 rounded-2xl mt-10 p-6'>
           <div className='flex items-center justify-between p-3'>
             <ul className='border bg-primary bg-opacity-30 text-white p-2 rounded-full'>
               <div className='flex justify-between space-x-2'>
@@ -183,22 +147,33 @@ useEffect(()=>{
           </div>
 
           <div>
-          <table className='border w-full'>
-          <thead className='flex items-center justify-between'>
-          {column.map((column, index)=> (
-            <tr key={index}>
-            <th className='text-xl font-medium'>{column.name}</th>
+          <table className='w-full text-center'>
+          <thead className='border-b-2 border-b-zinc-300'>
+            <tr className='text-xl font-medium space-x-2'>
+            <th className='p-3'>ID</th>
+            <th>Inventory name</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Initial Quantity</th>
+            <th>Current Quantity</th>
+            <th>Quantity Alert</th>
+            <th>Action</th>
             </tr>
-          ))}
           </thead>
         
-          <tbody>
-          {jsonData.map((data, index) => (
-              <tr key = {index}>
-              <td>{data.name}</td>
+          <tbody className='font-medium text-lg bg-red-400 mt-6'>
+          {rows.map((row, index) => (
+              <tr key = {index} className='border-b-2'>
+              <td className='p-4'>{row.id}</td>
+              <td>{row.inventoryname}</td>
+              <td>{row.category}</td>
+              <td>{row.brand}</td>
+              <td>{row.initialquantity}</td>
+              <td>{row.currentquantity}</td>
+              <td>{row.quantityalert}</td>
               </tr>
-            ))}
-          </tbody>
+              ))}
+            </tbody>
           </table>  
      
           </div>
