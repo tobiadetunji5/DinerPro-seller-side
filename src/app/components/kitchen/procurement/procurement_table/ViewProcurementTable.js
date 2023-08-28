@@ -33,18 +33,18 @@ export default function ViewProcurementTable({ data }) {
     setNextStatus(["pending", "delivered"]);
   };
 
-  function getNextStatus(currentStatus) {
-    const statusProgression = ["pending", "delivered"];
+  // function getNextStatus(currentStatus) {
+  //   const statusProgression = ["pending", "delivered"];
 
-    // Find the index of the current status in the progression
-    const currentIndex = statusProgression.indexOf(currentStatus);
+  //   // Find the index of the current status in the progression
+  //   const currentIndex = statusProgression.indexOf(currentStatus);
 
-    // If the current status is not found or is the last status, return null
-    if (currentIndex === -1 || currentIndex === statusProgression.length - 1) {
-      return null;
-    }
-    return statusProgression[currentIndex + 1];
-  }
+  //   // If the current status is not found or is the last status, return null
+  //   if (currentIndex === -1 || currentIndex === statusProgression.length - 1) {
+  //     return null;
+  //   }
+  //   return statusProgression[currentIndex + 1];
+  // }
 
   const handleUpdateStatus = (newStatus) => {
     // Update the status for the selected row in your data
