@@ -21,31 +21,30 @@ export default function ViewProcurement() {
 
   return (
     <div className="px-12">
-      <div className="p-12 border w-[1440px] h-[829px] border-secondary rounded-lg">
+      <div className="p-12 border w-full h-[829px] border-secondary rounded-lg">
         <div className="flex justify-between">
           <div className="rounded-full bg-[#ffab0271] w-[670px] h-[72px] flex justify-center">
             <div className="flex justify-center text-center items-center">
               <button
                 onClick={() => handleButtonClick("All")}
                 className={`flex rounded-full py-[16px] px-[40px] mr-[40px] text-white ${
-                  activeButton === "All" ? "bg-primary" : ""
-                } transition-all duration-300 ease-linear`}
+                  activeButton === "All" ? "bg-primary" : "" } transition-all duration-300 ease-linear`}
               >
                 All
               </button>
+
               <button
                 onClick={() => handleButtonClick("Pending Procurement")}
                 className={`flex rounded-full py-[16px] px-[40px] text-white ${
-                  activeButton === "Pending Procurement" ? "bg-primary" : ""
-                } transition-all duration-300 ease-linear`}
+                  activeButton === "Pending Procurement" ? "bg-primary" : "" } transition-all duration-300 ease-linear`}
               >
                 Pending Procurement
               </button>
+              
               <button
                 onClick={() => handleButtonClick("Delivered Procurement")}
                 className={`flex rounded-full py-[16px] px-[40px] ml-[40px] text-white ${
-                  activeButton === "Delivered Procurement" ? "bg-primary" : ""
-                } transition-all duration-300 ease-linear`}
+                  activeButton === "Delivered Procurement" ? "bg-primary" : "" } transition-all duration-300 ease-linear`}
               >
                 Delivered Procurement
               </button>
