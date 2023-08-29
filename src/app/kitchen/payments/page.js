@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -7,13 +6,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import DataCard from "@/app/components/card/DataCard";
 import HistoryTable from "@/app/components/table/HistoryTable";
-
-import React from "react";
-import Image from "next/image";
-import { useState, useEffect } from "react";
-// import Modalform from './modalform';
-import Link from "next/link";
-import DataCard from "@/app/components/card/DataCard";
 import PaymentsTable from "@/app/components/table/PaymentsHistory";
 
 // <Modalform isVisible={createInventory} onClose={() => setCreateInventory(false)} />
