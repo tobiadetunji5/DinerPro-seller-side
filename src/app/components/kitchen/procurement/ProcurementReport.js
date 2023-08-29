@@ -6,13 +6,27 @@ import { openModal } from "@/redux/features/modal/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 //components
 import DefectReportModal from "./DefectReportModal";
+import SupplierReport from "./SupplierReport";
+import AddSupplierModal from "./AddSupplierModal";
 
 export default function ProcurementReport() {
   const dispatch = useDispatch();
   const [displayReport, setDisplayReport] = useState("defect");
   const [isDefectModalOpen, setIsDefectModalOpen] = useState(false);
+  const [isAddSupplierModalOpen, setIsAddSupplierModalOpen] = useState(false);
 
   const selectedItem = useSelector((state) => state.selectedItem);
+
+  const handleAddSupplierModalOpen = () => {
+    dispatch(openModal());
+    setIsAddSupplierModalOpen(true);
+  };
+
+  const handleCloseAddSupplierModal = () => {
+    // Add logic to close the modal here
+    // You might need to update the state to close the modal
+    setIsAddSupplierModalOpen(false);
+  };
 
   const handleDefectModalOpen = () => {
     dispatch(openModal());
@@ -139,12 +153,32 @@ export default function ProcurementReport() {
             </div>
           )}
           {displayReport === "supplier" && (
-            <div>{/* Render supplier report content here */}</div>
+            <div>
+              <div className="flex justify-between mb-5">
+                <h1 className="font-bold">
+                  {selectedItem ? selectedItem.brand : "N/A"}
+                </h1>
+                <div>
+                  <button
+                    className="bg-primary p-3 rounded-lg shadow-lg"
+                    onClick={handleAddSupplierModalOpen}
+                  >
+                    add supplier
+                  </button>
+                </div>
+              </div>
+              <SupplierReport />
+            </div>
           )}
         </section>
       </div>
       {isDefectModalOpen && (
         <DefectReportModal handleCloseDefectModal={handleCloseDefectModal} />
+      )}
+      {isAddSupplierModalOpen && (
+        <AddSupplierModal
+          handleCloseAddSupplierModal={handleCloseAddSupplierModal}
+        />
       )}
     </div>
   );
