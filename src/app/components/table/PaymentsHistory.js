@@ -5,34 +5,34 @@ let record = true;
     
 const row = [
     {
-        name: 'Addition to inventory - Coca cola',
+        name: 'New payment from Anna Patrick',
         date: 'Fri Jun 15,2022 GMT 13:00',
-        amount: '2 bottles (pet)',
+        amount: '3500',
     },
     {
-        name: 'Reduction from inventory - 5alive',
+        name: 'New payment from Anna Patrick',
         date: 'Fri Jun 15,2022 GMT 13:00',
-        amount: '2 bottles (pet)',
+        amount: '3500',
     },
     {
-        name: 'Addition to inventory - Nutri Milk',
+        name: 'New payment from Anna Patrick',
         date: 'Fri Jun 15,2022 GMT 13:00',
-        amount: '2 bottles (pet)',
+        amount: '3500',
+    },
+    {  
+         name: 'New payment from Anna Patrick',
+    date: 'Fri Jun 15,2022 GMT 13:00',
+    amount: '3500',
     },
     {
-        name: 'Addition to inventory - Pepsi',
+        name: 'New payment from Anna Patrick',
         date: 'Fri Jun 15,2022 GMT 13:00',
-        amount: '2 bottles (pet)',
+        amount: '3500',
     },
     {
-        name: 'Addition to inventory - Pepsi',
+        name: 'New payment from Anna Patrick',
         date: 'Fri Jun 15,2022 GMT 13:00',
-        amount: '2 bottles (pet)',
-    },
-    {
-        name: 'Addition to inventory - Pepsi',
-        date: 'Fri Jun 15,2022 GMT 13:00',
-        amount: '2 bottles (pet)',
+        amount: '3500',
     },
 ]
 
@@ -70,8 +70,21 @@ const PaymentsTable = () => {
                                         </div>
                                     </div>
 
-                                    <div className='mr-3'>
-                                        <p className='text-xl font-semibold'>{row.amount}</p>
+                                    <div className='flex items-center space-x-3 mr-3'>
+                                    <div>
+                                    <Image
+                                    priority
+                                    src='/images/inventory/Naira.svg'
+                                    alt='naira icon'
+                                    width={24}
+                                    height={24}
+                                    sizes='100vw'
+                                    style={{ width: '100%', height: 'auto' }}
+                                />
+                                    </div>
+                                    <div>
+                                    <p className='text-xl font-semibold'>{row.amount}</p>
+                                    </div>
                                     </div>
                                 </section>
                             ))}

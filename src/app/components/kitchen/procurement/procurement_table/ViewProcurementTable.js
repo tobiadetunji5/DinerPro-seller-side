@@ -146,6 +146,7 @@ export default function ViewProcurementTable({ data }) {
           ))}
         </tbody>
       </table>
+      
       {isEditStatusModalOpen && (
         <EditStatusModal
           handleCloseEditStatusModal={handleEditStatusModalClose}
