@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -78,7 +79,7 @@ export default function Page() {
             desc="- decreased by 20% since Dec 2022"
           />
         </div>
-        <div className="flex space-x-2 justify-between items-center mb-3">
+        {/* <div className="flex space-x-2 justify-between items-center mb-3">
           <DataCard
             bgColor="#FFFFFF"
             statColor="#049561"
@@ -100,7 +101,7 @@ export default function Page() {
             number="10"
             desc="- decreased by 20% since Dec 2022"
           />
-        </div>
+        </div> */}
         <div className="flex mb-10 justify-end">
           <div className="border p-2 w-[27%] text-center border-primary rounded-lg">
             <p>View Custom report</p>
