@@ -160,17 +160,19 @@ export default function CreateProcurementOrder({
                   value={recipientEmail}
                   onChange={(e) => setRecipientEmail(e.target.value)}
                 />
-                <button className="w-[174px] h-[43px] bg-primary border border-primary text-white">
-                  send order
-                </button>
-              </div>
-              <div className="mt-20 flex justify-center">
                 <Link href="/kitchen/procurement/procurement_view_inventory">
-                  <button className="text-white bg-[#049561] w-[272px] h-[43px]">
-                    order sent
+                  <button className="w-[174px] h-[43px] bg-primary border border-primary text-white">
+                    send order
                   </button>
                 </Link>
               </div>
+              {/* <div className="mt-20 flex justify-center">
+                
+                  <button className="text-white bg-[#049561] w-[272px] h-[43px]">
+                    order sent
+                  </button>
+                
+              </div> */}
             </div>
           )}
         </div>
