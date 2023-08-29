@@ -77,7 +77,8 @@ export default function Procurement_page() {
             View all
           </h1>
         </div>
-        <hr className=" text-secondary" />
+
+        <hr className="text-secondary" />
         <section className="flex justify-evenly text-center items-center">
           <div>
             <h1 className="font-medium">

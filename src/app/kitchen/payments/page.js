@@ -3,11 +3,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import Modalform from './modalform';
+// import Modalform from './modalform';
 import Link from 'next/link';
 import DataCard from '@/app/components/card/DataCard';
-import HistoryTable from '@/app/components/table/HistoryTable';
+import PaymentsTable from '@/app/components/table/PaymentsHistory';
 
+// <Modalform isVisible={createInventory} onClose={() => setCreateInventory(false)} /> 
   
 export default function Page() {
 const [isOpen, setIsOpen] = useState(false)
@@ -42,7 +43,7 @@ return (
     {/*------------icon for creating new inventory----------*/}
     <Image
      priority
-     src='/images/inventory/add_symbol.svg'
+     src='/images/inventory/paymenteye.svg'
      alt='create icon'
      width='18'
      height='18'/>
@@ -56,12 +57,25 @@ return (
     {/*----------- icon for viewing inventory-----------*/}
     <Image
      priority
-     src='/images/inventory/minus_symbol.svg'
+     src='/images/inventory/paymenteye.svg'
      alt='view icon'
      width='18'
      height='18'/>
     <Link href='/kitchen/inventory/table'>
     <div>By Sales Channel</div>
+    </Link>
+    </div>
+
+    <div className='flex justify-between items-center gap-5 space-x-2'>
+    {/*----------- icon for viewing inventory-----------*/}
+    <Image
+     priority
+     src='/images/inventory/paymenteye.svg'
+     alt='view icon'
+     width='18'
+     height='18'/>
+    <Link href='/kitchen/inventory/table'>
+    <div>By Payment Method</div>
     </Link>
     </div>
     </div>
@@ -101,12 +115,11 @@ desc='- decreased by 20% since Dec 2022'/>
   </div>
 
   {/*--------------Inventory History Table--------------*/}
-  <HistoryTable/>
+  <PaymentsTable/>
 
   </div>
   </section>
 
-  <Modalform isVisible={createInventory} onClose={() => setCreateInventory(false)} /> 
   </>
   )
 }
