@@ -47,7 +47,9 @@ export default function MenuCard({ food }) {
           <p className="text-[.6rem] cursor-pointer">Click to edit</p>
         </div>
       </button>
-      {isModalOpen && <EditMenuModal handleCloseModal={handleCloseModal} />}
+      {isModalOpen && (
+        <EditMenuModal food={food} handleCloseModal={handleCloseModal} />
+      )}
     </div>
   );
 }

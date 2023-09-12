@@ -10,6 +10,17 @@ export default function AddMenuModal({ handleCloseModal }) {
   const [price, setPrice] = useState("");
   const [isAvailable, setIsAvailable] = useState(true);
 
+  const categories = [
+    "Snacks",
+    "Soup",
+    "Staple Food",
+    "Confectionaries",
+    "Drinks",
+    "Beef and Fish",
+    "Diaries",
+    "Sea Food",
+  ];
+
   const handleItemNameChange = (e) => {
     setItemName(e.target.value);
   };
@@ -41,7 +52,7 @@ export default function AddMenuModal({ handleCloseModal }) {
     handleCloseModal();
   };
 
-  //event listener to close modal when clicking outside
+  // event listener to close modal when clicking outside
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (event.target.classList.contains("bg-black")) {
@@ -89,12 +100,11 @@ export default function AddMenuModal({ handleCloseModal }) {
                 className="border border-secondary rounded-lg p-2 w-full"
               >
                 <option value="">Select a category</option>
-                <option value="Category 1">Category 1</option>
-                <option value="Category 2">Category 2</option>
-                <option value="Category 3">Category 3</option>
-                <option value="Category 3">Category 4</option>
-                <option value="Category 3">Category 5</option>
-                <option value="Category 3">Category 6</option>
+                {categories.map((cat, index) => (
+                  <option key={index} value={cat}>
+                    {cat}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="mb-4">
@@ -137,7 +147,7 @@ export default function AddMenuModal({ handleCloseModal }) {
                 className="bg-primary text-white px-4 py-2 rounded-lg"
                 type="submit"
               >
-                save
+                Save
               </button>
             </div>
           </form>
