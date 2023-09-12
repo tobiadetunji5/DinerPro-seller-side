@@ -20,6 +20,30 @@ export default function AddSupplierModal({ handleCloseAddSupplierModal }) {
     });
   };
 
+  const handlePhoneChange = (value) => {
+    const phoneNumber = value.replace(/[^\d]/g, "");
+    const phoneNumberLength = phoneNumber.length;
+
+    if (phoneNumberLength === 0) return "";
+
+    let formattedPhoneNumber = "";
+
+    if (phoneNumberLength < 4) {
+      formattedPhoneNumber = `(${phoneNumber.slice(0, 3)}`;
+    } else if (phoneNumberLength < 7) {
+      formattedPhoneNumber = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+        3
+      )}`;
+    } else {
+      formattedPhoneNumber = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+        3,
+        6
+      )}-${phoneNumber.slice(6, 10)}`;
+    }
+
+    return formattedPhoneNumber;
+  };
+
   const handleSupplierSubmit = (e) => {
     e.preventDefault();
     console.log(supplierForm);
@@ -88,7 +112,7 @@ export default function AddSupplierModal({ handleCloseAddSupplierModal }) {
             <input
               type="tel"
               className="border border-secondary w-[300px] h-[43px]"
-              value={supplierForm.phone}
+              value={handlePhoneChange(supplierForm.phone)}
               onChange={handleAddSupplierFormChange}
               name="phone"
             />
