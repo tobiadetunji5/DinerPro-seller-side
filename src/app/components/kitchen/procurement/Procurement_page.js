@@ -6,6 +6,7 @@ import Procurement_manager_modal from "./Procurement_manager_modal";
 import Image from "next/image";
 import ProcurementImage from "../../../../../public/images/icons/Image_one.svg";
 import { procurementTable } from "../../../../../utils/procurementTable";
+import Link from "next/link";
 
 export default function Procurement_page() {
   const dispatch = useDispatch();
@@ -66,9 +67,12 @@ export default function Procurement_page() {
         </section>
       </div>
 
-      <button className="absolute top-[280px] right-[48px] p-3 border border-primary bg-white text-primary rounded-lg w-[272px]">
+      <Link
+        className="absolute top-[280px] right-[48px] p-3 border border-primary bg-white text-primary rounded-lg w-[272px] cursor-pointer text-center"
+        href="/kitchen/procurement/procurement_view_inventory"
+      >
         <h1 className="text-[20px]">View Custom report</h1>
-      </button>
+      </Link>
 
       <div className="border border-secondary w-[93%] h-[440px] absolute top-[350px] rounded-lg">
         <div className="flex justify-between p-6 text-[24px]">

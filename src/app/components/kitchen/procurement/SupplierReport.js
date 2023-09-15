@@ -41,7 +41,7 @@ export default function SupplierReport() {
         </div>
       ))}
       <div className="mt-5">
-        <div className="border border-secondary w-[722px] h-[181px] flex justify-center rounded-lg">
+        <div className="border border-secondary w-[722px] h-[150px] flex justify-center rounded-lg">
           <div className="flex items-center text-center gap-3">
             <textarea
               name="comments"

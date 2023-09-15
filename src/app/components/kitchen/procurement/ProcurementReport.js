@@ -1,21 +1,44 @@
 "use client";
 import React, { useState } from "react";
 //redux
-
 import { openModal } from "@/redux/features/modal/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 //components
 import DefectReportModal from "./DefectReportModal";
 import SupplierReport from "./SupplierReport";
 import AddSupplierModal from "./AddSupplierModal";
+import ShareReportModal from "./ShareReportModal";
+import ViewAllupdate from "./ViewAllupdate";
 
 export default function ProcurementReport() {
   const dispatch = useDispatch();
   const [displayReport, setDisplayReport] = useState("defect");
   const [isDefectModalOpen, setIsDefectModalOpen] = useState(false);
   const [isAddSupplierModalOpen, setIsAddSupplierModalOpen] = useState(false);
+  const [isShareReportModalOpen, setIsShareReportModalOpen] = useState(false);
+  const [isViewUpdateModalOpen, setIsViewUpdateModalOpen] = useState(false);
 
   const selectedItem = useSelector((state) => state.selectedItem);
+
+  // view update modal
+  const handleUpdateModalOpen = () => {
+    dispatch(openModal());
+    setIsViewUpdateModalOpen(true);
+  };
+
+  const handleCloseViewUpdateModal = () => {
+    setIsViewUpdateModalOpen(false);
+  };
+
+  // share report modal
+  const handleSharReportModalOpen = () => {
+    dispatch(openModal());
+    setIsShareReportModalOpen(true);
+  };
+
+  const handleCloseShareReportModal = () => {
+    setIsShareReportModalOpen(false);
+  };
 
   const handleAddSupplierModalOpen = () => {
     dispatch(openModal());
@@ -24,7 +47,7 @@ export default function ProcurementReport() {
 
   const handleCloseAddSupplierModal = () => {
     // Add logic to close the modal here
-    // You might need to update the state to close the modal
+
     setIsAddSupplierModalOpen(false);
   };
 
@@ -35,7 +58,7 @@ export default function ProcurementReport() {
 
   const handleCloseDefectModal = () => {
     // Add logic to close the modal here
-    // You might need to update the state to close the modal
+
     setIsDefectModalOpen(false);
   };
 
@@ -52,8 +75,13 @@ export default function ProcurementReport() {
               </h1>
             </div>
             <div>
-              <span>status</span>
-              <button>share report</button>
+              <span className="mr-2">status</span>
+              <button
+                className="bg-primary p-3 rounded-lg shadow-lg"
+                onClick={handleSharReportModalOpen}
+              >
+                share report
+              </button>
             </div>
           </div>
           <div className="mt-10 grid grid-cols-3 gap-10">
@@ -145,7 +173,10 @@ export default function ProcurementReport() {
                   <p>Enter description</p>
                 </aside>
                 <aside>
-                  <button className="bg-primary p-3 rounded-lg shadow-lg">
+                  <button
+                    className="bg-primary p-3 rounded-lg shadow-lg"
+                    onClick={handleUpdateModalOpen}
+                  >
                     view all updates
                   </button>
                 </aside>
@@ -178,6 +209,16 @@ export default function ProcurementReport() {
       {isAddSupplierModalOpen && (
         <AddSupplierModal
           handleCloseAddSupplierModal={handleCloseAddSupplierModal}
+        />
+      )}
+      {isShareReportModalOpen && (
+        <ShareReportModal
+          handleCloseShareReportModal={handleCloseShareReportModal}
+        />
+      )}
+      {isViewUpdateModalOpen && (
+        <ViewAllupdate
+          handleCloseViewUpdateModal={handleCloseViewUpdateModal}
         />
       )}
     </div>
