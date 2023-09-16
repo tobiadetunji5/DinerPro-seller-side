@@ -10,7 +10,7 @@ import {
 import { MdDelete } from "react-icons/md";
 import Link from "next/link";
 
-export default function Checkout() {
+export default function Checkout({title, path}) {
   const [loading, setLoading] = useState(true);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
@@ -40,8 +40,8 @@ export default function Checkout() {
   const total = subtotal - discount;
 
   return (
-    <div className="w-[500px] border border-primary rounded-lg h-[829px] p-5 overflow-y-auto flex flex-col">
-      <h1 className="text-[1.3rem] font-bold py-2">My Orders</h1>
+    <div className="w-[30%] border border-primary rounded-lg h-[92vh] p-5 overflow-y-auto flex flex-col">
+      <h1 className="text-[1.3rem] font-bold py-2">{title}</h1>
       <div>
         <ul className="flex items-center justify-between space-x-4 bg-gray-200">
           <li className="w-2/5">Items</li>
@@ -108,8 +108,9 @@ export default function Checkout() {
         </div>
       </div>
       <div className="flex justify-center">
-        <Link href="/order/order_success">
-          <button className="bg-primary p-5 w-[311px] rounded-lg">
+        <Link href={path}>
+          <button 
+          className="bg-primary p-5 w-[311px] rounded-lg">
             Print Invoice
           </button>
         </Link>

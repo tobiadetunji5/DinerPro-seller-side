@@ -5,15 +5,7 @@ import { inventoryData } from "../../../../../utils/Inventorydata";
 import ViewInventory from "@/app/components/table/ViewInventoryTable";
 
 export default function Page() {
-  // usestate for the first modal(edit, delete)
-
-  // useEffect(()=>{
-  //   setIsEdit(false);
-  // },[editInventory]);
-
   // const [records, setRecords] = useState(jsonData);
-
-  const [editInventory, setEditInventory] = useState(false);
   const [activeButton, setActiveButton] = useState("All");
 
   const handleButtonClick = (buttonName) => {
@@ -25,9 +17,6 @@ export default function Page() {
   );
   // console.log(pendingProcurements);
 
-  // useEffect(()=>{
-  //   setIsEdit(false);
-  // },[editInventory]);
 
   return (
     <>

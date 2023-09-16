@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image';
 
-function DataCard({head, number, desc, bgColor, txtColor,statColor}) {
+function DataCard({head, number, desc, statColor}) {
   return (
     <>
     

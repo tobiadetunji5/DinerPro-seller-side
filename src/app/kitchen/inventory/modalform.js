@@ -21,9 +21,11 @@ export default function Modalform({ isVisible, onClose }) {
     }));
   };
 
-  const handleSubmit = (e) => {
-    console.log(details);
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log(details)
+}
+
 
   return (
     <div className="absolute inset-0 bg-black bg-opacity-25">
@@ -114,38 +116,27 @@ export default function Modalform({ isVisible, onClose }) {
               className="border items-end font-mono w-[20vw] p-2"
             />
 
-            <select
-              name="unit"
-              onChange={handleChange}
-              className="border font-mono w-[20vw] p-2 block"
-              data-dropdown-toggle="dropdown"
-            >
-              <option defaultValue="select unit">select unit</option>
-              <option value="litre">Litres(l)</option>
-              <option value="grams">Gram(g)</option>
-              <option value="kilo">Kilograms(kg)</option>
-              <option value="sachet">Sachets</option>
-              <option value="pound">Pound(9libs)</option>
-              <option value="tuber">Tubers</option>
-              <option value="ounz">Ounze(oz)</option>
-              <option value="tonne">Tonne</option>
-              <option value="cups">Cup</option>
-              <option value="basket">Basket</option>
-            </select>
-          </div>
+   <select name="unit" onChange={handleChange}
+   className='border font-mono w-[20vw] p-2 block' data-dropdown-toggle="dropdown">
+   <option defaultValue='select unit'>select unit</option>
+   <option value="litre">Litres(l)</option>
+   <option value="grams">Gram(g)</option>
+   <option value="kilo">Kilograms(kg)</option>
+   <option value="sachet">Sachets</option>
+   <option value="pound">Pound(9libs)</option>
+   <option value='tuber'>Tubers</option>
+   <option value="ounz">Ounze(oz)</option>
+   <option value="tonne">Tonne</option>
+   <option value="cups">Cup</option>
+   <option value="basket">Basket</option>
+   </select>
+   </div>
 
-          <div className="flex space-x-11 p-2">
-            <label htmlFor="price" className="items-start justify-center p-2">
-              Price:
-            </label>
-            <input
-              type="text"
-              name="price"
-              placeholder="input amount"
-              onChange={handleChange}
-              className="border place-items-center font-mono w-[20vw] p-2 "
-            />
-          </div>
+   <div className='flex space-x-11 p-2'>
+   <label htmlFor='price' className='items-start justify-center p-2'>Price:</label>
+   <input type='number' name='price' placeholder='input amount' onChange={handleChange}
+   className='border place-items-center font-mono w-[20vw] p-2 '/>
+   </div>
 
           <div className="space-x-2">
             <input type="checkbox" name="checkbox" className="p-1" />

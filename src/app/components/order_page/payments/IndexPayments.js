@@ -4,9 +4,11 @@ import Checkout from "./Checkout";
 
 export default function IndexPayments() {
   return (
-    <div className="flex gap-5 justify-between px-12">
+    <div className="flex items-center justify-between space-x-5 w-[97%]">
       <Form />
-      <Checkout />
+      <Checkout
+       title='My Orders'
+       path="/order/order_success"/>
     </div>
   );
 }

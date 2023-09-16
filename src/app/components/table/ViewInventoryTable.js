@@ -52,51 +52,21 @@ export default function ViewInventory({ data }) {
         <table className="w-full lg:overflow-hidden">
           <thead className="border-b-2 border-b-zinc-300">
             <tr>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                ID
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Inventory name
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Category
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Brand
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Initial Quantity
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Current Quantity
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Quantity Alert
-              </th>
-              <th>
-                <span className="sr-only">Edit</span>
-              </th>
+            <th scope='col'
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            ID</th>
+            <th  scope='col'
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inventory name</th>
+            <th  scope='col'
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+            <th  scope='col'
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Brand</th>
+            <th  scope='col'
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Initial Quantity</th>
+            <th  scope='col'
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Quantity</th>
+            <th  scope='col'
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity Alert</th>
             </tr>
           </thead>
 

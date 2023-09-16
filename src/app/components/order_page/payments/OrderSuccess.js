@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { clearCart } from "@/redux/features/cart/cartSlice";
 
-export default function OrderSuccess() {
+export default function OrderSuccess({title,path}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,9 +26,9 @@ export default function OrderSuccess() {
         <h1 className="font-[400px] text-[36px] mt-4">Order Confirmed</h1>
         <p className="text-lg">your Payment ID: 1234</p>
         <div className="mt-6 flex justify-center">
-          <Link href="/order/create_new_order">
+          <Link href={path}>
             <button className="mt-10 bg-primary border border-[#4F4F4F] w-[311px] p-[15px] rounded-lg">
-              Back to orders
+             {title}
             </button>
           </Link>
         </div>
