@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { inventoryData } from '../../../../../utils/Inventorydata';
-import ViewInventory from '@/app/components/table/ViewInventoryTable';
+import ViewPayments from '@/app/components/table/ViewPaymentsTable';
+import { paymentData } from '../../../../../utils/Paymentdata';
 
 export default function Page() {
   // const [records, setRecords] = useState(jsonData);
@@ -35,11 +36,32 @@ export default function Page() {
               </button>
 
               <button
-              onClick={() => handleButtonClick("Limit Alerts")}
-              className={`${ activeButton === "Limit Alerts" ? "bg-primary rounded-full px-10 py-3" : "px-10 py-3" }
+              onClick={() => handleButtonClick("POS")}
+              className={`${ activeButton === "POS" ? "bg-primary rounded-full px-10 py-3" : "px-10 py-3" }
                 transition-all duration-300 ease-linear`} >
-              Limit Alerts
+              POS
             </button>
+
+            <button
+            onClick={() => handleButtonClick("Cash")}
+            className={`${ activeButton === "Cash" ? "bg-primary rounded-full px-10 py-3" : "px-10 py-3" }
+              transition-all duration-300 ease-linear`} >
+            Cash
+          </button>
+
+          <button
+          onClick={() => handleButtonClick("Bank Transfer")}
+          className={`${ activeButton === "Bank Transfer" ? "bg-primary rounded-full px-10 py-3" : "px-10 py-3" }
+            transition-all duration-300 ease-linear`} >
+          Bank Transfer
+        </button>
+
+        <button
+        onClick={() => handleButtonClick("Online Transfer")}
+        className={`${ activeButton === "Online Transfer" ? "bg-primary rounded-full px-10 py-3" : "px-10 py-3" }
+          transition-all duration-300 ease-linear`} >
+        Online Transfer
+      </button>
 
               </div>
             </ul>
@@ -61,12 +83,12 @@ export default function Page() {
           <div>
           {activeButton === "All" && (
             <div>
-           { /* <ViewInventory data={inventoryData}/> */}
+           <ViewPayments data={paymentData} />
             </div>
           )}
-          {activeButton === "Limit Alerts" && (
+          {activeButton === "Cash" && (
             <div>
-           <ViewInventory data={limitAlerts}/>
+            <ViewPayments data={paymentData} />
             </div>
           )}
           </div>

@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { inventoryData } from '../../../../../utils/Inventorydata';
-import ViewInventory from '@/app/components/table/ViewInventoryTable';
+import ViewPayments from '@/app/components/table/ViewPaymentsTable';
+import { paymentData } from '../../../../../utils/Paymentdata';
 
 export default function Page() {
   // const [records, setRecords] = useState(jsonData);
@@ -35,12 +36,18 @@ export default function Page() {
               </button>
 
               <button
-              onClick={() => handleButtonClick("Limit Alerts")}
-              className={`${ activeButton === "Limit Alerts" ? "bg-primary rounded-full px-10 py-3" : "px-10 py-3" }
+              onClick={() => handleButtonClick("Online")}
+              className={`${ activeButton === "Online" ? "bg-primary rounded-full px-10 py-3" : "px-10 py-3" }
                 transition-all duration-300 ease-linear`} >
-              Limit Alerts
+              Online
             </button>
 
+            <button
+            onClick={() => handleButtonClick("In-person")}
+            className={`${ activeButton === "In-person" ? "bg-primary rounded-full px-10 py-3" : "px-10 py-3" }
+              transition-all duration-300 ease-linear`} >
+            In-person
+          </button>
               </div>
             </ul>
 
@@ -61,12 +68,12 @@ export default function Page() {
           <div>
           {activeButton === "All" && (
             <div>
-           { /* <ViewInventory data={inventoryData}/> */}
+           <ViewPayments data={paymentData} />
             </div>
           )}
-          {activeButton === "Limit Alerts" && (
+          {activeButton === "Online" && (
             <div>
-           <ViewInventory data={limitAlerts}/>
+            <ViewPayments data={paymentData} />
             </div>
           )}
           </div>

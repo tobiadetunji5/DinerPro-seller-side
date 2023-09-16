@@ -5,7 +5,7 @@ import Editform from '@/app/kitchen/inventory/editform';
 import { useDispatch } from "react-redux";
 import Image from 'next/image';
 
-export default function ViewInventory({data}) {
+export default function ViewPayments({data}) {
     // const [tableData, setTableData] = useState(data);
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [isEdit, setIsEdit] = useState(false);
@@ -54,19 +54,15 @@ export default function ViewInventory({data}) {
             <tr>
             <th scope='col'
             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            ID</th>
+            OrderID</th>
             <th  scope='col'
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inventory name</th>
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
             <th  scope='col'
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment ID</th>
             <th  scope='col'
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Brand</th>
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
             <th  scope='col'
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Initial Quantity</th>
-            <th  scope='col'
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Current Quantity</th>
-            <th  scope='col'
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity Alert</th>
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
             </tr>
           </thead>
         
@@ -74,20 +70,28 @@ export default function ViewInventory({data}) {
           {data.map((row, index) => (
               <tr key = {index} className='border-b-2'>
               <td className="px-6 py-4 whitespace-nowrap">{row.id}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{row.inventoryname}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{row.category}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{row.brand}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{row.initialquantity}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{row.currentquantity}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{row.date}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{row.payId}</td>
+              <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2">
+              <div>
+              <Image
+              priority
+              src='/images/inventory/Naira.svg'
+              alt='naira icon'
+              width={12}
+              height={12}
+              style={{width: '100%', height: 'auto'}}/>
+              </div>
+              {row.amount}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <span
                   className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-lg ${
-                    row.quantityalert === "available"
+                    row.status === "receiving"
                       ? "bg-[#a5d4c3] text-[#049561] border border-[#049561] py-1 px-3"
-                      : "bg-[#e9a996] text-[#BA2D02] border border-[ #BA2D02] py-1 px-5"
+                      : "bg-[#f3ca78] text-[#FFA902] border border-[#FFA902] py-1 px-5"
                   }`}
                 >
-                  {row.quantityalert}
+                  {row.status}
                 </span>
               </td>
 

@@ -67,8 +67,8 @@ export default function Editform({isVisible, onClose}) {
      className='border place-items-center font-mono w-[20vw] p-2 '/>
      </div>
   
-     <div className='space-x-2'>
-     <input type='checkbox' name='checkbox' className='p-1'/>
+     <div className='space-x-2 flex justify-start items-center'>
+     <input type='checkbox' name='checkbox' className='p-3 w-[24px] h-[24px] focus:ring-green-400'/>
      <label htmlFor='checkbox' className='text-lg font-bold'>Set minimum inventory alert notification
      </label>
      </div>

@@ -14,7 +14,7 @@ import {
 import { MdDelete } from "react-icons/md";
 import Link from "next/link";
 
-export default function CartContainer() {
+export default function CartContainer({title, path, onClick}) {
   const [loading, setLoading] = useState(true);
   const cartItems = useSelector((state) => state.cart.cartItems) || [];
 
@@ -53,7 +53,7 @@ export default function CartContainer() {
 
   return (
     <div className="w-[500px] border border-primary rounded-lg h-[829px] p-5 overflow-y-auto flex flex-col">
-      <h1 className="text-[1.3rem] font-bold py-2">My Orders</h1>
+      <h1 className="text-[1.3rem] font-bold py-2">{title}</h1>
       <div>
         <ul className="flex items-center justify-between space-x-4 bg-gray-200">
           <li className="w-2/5">Items</li>
@@ -136,8 +136,8 @@ export default function CartContainer() {
               </p>
             </div>
             <div className="p-5 flex flex-row mt-5 justify-between">
-              <Link href="/order/payments">
-                <button className="border border-green-700 text-green-700 hover:bg-green-700 hover:text-white p-5 w-[200px] rounded-lg">
+              <Link href={path}>
+                <button onClick={onClick} className="border border-green-700 text-green-700 hover:bg-green-700 hover:text-white p-5 w-[200px] rounded-lg">
                   Confirm
                 </button>
               </Link>

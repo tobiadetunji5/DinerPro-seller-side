@@ -40,15 +40,16 @@ export default function Form() {
   // }
 
   return (
-    <form>
+    <form className="overflow-y-auto h-[92vh] w-[60vw] ml-4">
       <h1 className="mb-5 font-bold">Delivery Information</h1>
-      <div className="border border-secondary w-[900px] h-[307px] rounded-lg">
+
+      <div className="border border-secondary w-full h-[307px] rounded-lg">
         <div className="flex flex-wrap p-3 gap-3">
           <div>
             <h1>Name</h1>
             <input
               type="text"
-              className="border border-secondary w-[430px] p-1 rounded-lg"
+              className="border border-secondary w-[370px] p-1 rounded-lg"
               value={formData.name}
               onChange={(e) => {
                 // console.log(e.target);
@@ -60,7 +61,7 @@ export default function Form() {
             <h1>Number</h1>
             <input
               type="number"
-              className="border border-secondary w-[430px] p-1 rounded-lg"
+              className="border border-secondary w-[370px] p-1 rounded-lg"
               value={formData.number}
               onChange={(e) => handleFieldChange("number", e.target.value)}
             />
@@ -69,7 +70,7 @@ export default function Form() {
             <h1>Email</h1>
             <input
               type="email"
-              className="border border-secondary w-[430px] p-1 rounded-lg"
+              className="border border-secondary w-[370px] p-1 rounded-lg"
               value={formData.email}
               onChange={(e) => handleFieldChange("email", e.target.value)}
             />
@@ -78,7 +79,7 @@ export default function Form() {
             <h1>City</h1>
             <input
               type="text"
-              className="border border-secondary w-[430px] p-1 rounded-lg"
+              className="border border-secondary w-[370px] p-1 rounded-lg"
               value={formData.city}
               onChange={(e) => handleFieldChange("city", e.target.value)}
             />
@@ -87,7 +88,7 @@ export default function Form() {
             <h1>State</h1>
             <input
               type="text"
-              className="border border-secondary w-[430px] p-1 rounded-lg"
+              className="border border-secondary w-[370px] p-1 rounded-lg"
               value={formData.state}
               onChange={(e) => handleFieldChange("state", e.target.value)}
             />
@@ -96,7 +97,7 @@ export default function Form() {
             <h1>Zip</h1>
             <input
               type="text"
-              className="border border-secondary w-[115px] p-1 rounded-lg"
+              className="border border-secondary w-[98px] p-1 rounded-lg"
               value={formData.zip}
               onChange={(e) => handleFieldChange("zip", e.target.value)}
             />
@@ -105,7 +106,7 @@ export default function Form() {
             <h1>Local Govt</h1>
             <input
               type="text"
-              className="border border-secondary w-[305px] p-1 rounded-lg"
+              className="border border-secondary w-[255px] p-1 rounded-lg"
               value={formData.localGovt}
               onChange={(e) => handleFieldChange("localGovt", e.target.value)}
             />
@@ -114,7 +115,7 @@ export default function Form() {
             <h1>Address</h1>
             <input
               type="text"
-              className="border border-secondary w-[870px] p-1 rounded-lg"
+              className="border border-secondary w-[750px] p-1 rounded-lg"
               value={formData.address}
               onChange={(e) => handleFieldChange("address", e.target.value)}
             />
@@ -145,23 +146,23 @@ export default function Form() {
         </div>
       </div>
 
-      <div className="border border-secondary w-[900px] h-[160px] rounded-lg p-3 flex flex-wrap">
+      <div className="border border-secondary w-full h-[160px] rounded-lg p-3 flex flex-wrap">
         <div>
           <h1>Date</h1>
           <input
             type="date"
-            className="border border-secondary w-[870px] p-1 rounded-lg"
+            className="border border-secondary w-[750px] p-1 rounded-lg"
           />
         </div>
         <div>
           <h1>Note</h1>
-          <textarea className="border border-secondary w-[870px] p-1 rounded-lg"></textarea>
+          <textarea className="border border-secondary w-[750px] p-1 rounded-lg"></textarea>
         </div>
       </div>
 
       <div className="mt-5">
         <h1 className="font-bold">Payment Method</h1>
-        <div className="border border-secondary w-[900px] h-[66px] rounded-lg px-20 flex gap-5 justify-between items-center">
+        <div className="border border-secondary w-full h-[66px] rounded-lg px-20 flex gap-5 justify-between items-center">
           {paymentMethods.map((method) => (
             <div key={method.id} className="flex gap-1">
               <input
@@ -177,9 +178,10 @@ export default function Form() {
           ))}
         </div>
       </div>
+      
       <div className="mt-5">
         <h1 className="font-bold">Discount</h1>
-        <div className="border border-secondary w-[900px] h-[100px] rounded-lg px-20 flex flex-wrap gap-1 justify-between items-center focus:ring-2 focus:ring-primary">
+        <div className="border border-secondary w-full h-[100px] rounded-lg px-20 flex flex-wrap gap-1 justify-between items-center focus:ring-2 focus:ring-primary">
           <select className="border border-secondary w-[870px] p-1 rounded-lg focus:ring-2 focus:ring-primary">
             <option value="">Select discount type</option>
             <option value="percentage">Percentage value discount</option>
