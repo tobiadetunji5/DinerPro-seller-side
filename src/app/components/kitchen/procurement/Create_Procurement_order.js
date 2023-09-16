@@ -81,8 +81,10 @@ export default function CreateProcurementOrder({
           {currentContent === "A" && (
             <div className="flex flex-col mt-5">
               {/* Content A */}
-              <div className="flex">
-                <label className="text-[20px] font-bold">Inventory:</label>
+              <div className="flex items-start">
+                <label className="text-[20px] font-bold w-[150px]">
+                  Inventory:
+                </label>
                 <select
                   className="border border-secondary w-[300px] h-[43px] ml-5"
                   value={selectedCategory}
@@ -93,8 +95,10 @@ export default function CreateProcurementOrder({
                 </select>
               </div>
 
-              <div className="flex mt-5">
-                <label className="text-[20px] font-bold">Enter Quantity:</label>
+              <div className="flex items-start mt-5">
+                <label className="text-[20px] font-bold w-[150px]">
+                  Enter Quantity:
+                </label>
                 <input
                   className="border border-secondary w-[300px] h-[43px] ml-5"
                   type="number"
@@ -109,8 +113,10 @@ export default function CreateProcurementOrder({
           {currentContent === "B" && (
             <div className="flex flex-col mt-5">
               {/* Content B */}
-              <div className="flex">
-                <label className="text-[20px] font-bold">Enter Name:</label>
+              <div className="flex items-start">
+                <label className="text-[20px] font-bold w-[200px]">
+                  Enter Name:
+                </label>
                 <input
                   className="border border-secondary w-[300px] h-[43px] ml-5"
                   type="text"
@@ -120,8 +126,8 @@ export default function CreateProcurementOrder({
                 />
               </div>
 
-              <div className="flex mt-5">
-                <label className="text-[20px] font-bold">
+              <div className="flex items-start mt-5">
+                <label className="text-[20px] font-bold w-[200px]">
                   Enter Brand Name:
                 </label>
                 <input
@@ -134,9 +140,11 @@ export default function CreateProcurementOrder({
               </div>
 
               <div className="flex mt-5">
-                <label className="text-[20px] font-bold">Enter Quantity:</label>
+                <label className="text-[20px] font-bold w-[200px]">
+                  Enter Quantity:
+                </label>
                 <input
-                  className="border border-secondary w-[300px] h-[43px] ml-5"
+                  className="border border-secondary w-[300px] h-[43px] ml-5 items-start"
                   type="number"
                   value={formB.quantity}
                   onChange={handleFormBChange}
@@ -160,17 +168,19 @@ export default function CreateProcurementOrder({
                   value={recipientEmail}
                   onChange={(e) => setRecipientEmail(e.target.value)}
                 />
-                <button className="w-[174px] h-[43px] bg-primary border border-primary text-white">
-                  send order
-                </button>
-              </div>
-              <div className="mt-20 flex justify-center">
                 <Link href="/kitchen/procurement/procurement_view_inventory">
-                  <button className="text-white bg-[#049561] w-[272px] h-[43px]">
-                    order sent
+                  <button className="w-[174px] h-[43px] bg-primary border border-primary text-white">
+                    send order
                   </button>
                 </Link>
               </div>
+              {/* <div className="mt-20 flex justify-center">
+                
+                  <button className="text-white bg-[#049561] w-[272px] h-[43px]">
+                    order sent
+                  </button>
+                
+              </div> */}
             </div>
           )}
         </div>

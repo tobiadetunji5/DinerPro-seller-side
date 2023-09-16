@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "@/redux/features/modal/modalSlice";
+import Image from "next/image";
 
-export default function EditMenuModal({ handleCloseModal }) {
+export default function EditMenuModal({ food, handleCloseModal }) {
   const dispatch = useDispatch();
 
-  const [itemName, setItemName] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [isAvailable, setIsAvailable] = useState(true);
+  const [itemName, setItemName] = useState(food.foodName);
+  const [category, setCategory] = useState(food.category);
+  const [price, setPrice] = useState(food.priceTag);
+  const [image, setImage] = useState(food.imageUrl);
+  const [isAvailable, setIsAvailable] = useState(food.isAvailable);
 
   const handleItemNameChange = (e) => {
     setItemName(e.target.value);
@@ -16,6 +18,10 @@ export default function EditMenuModal({ handleCloseModal }) {
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
+  };
+
+  const handleImageChange = (e) => {
+    setImage(e.targe.value);
   };
 
   const handlePriceChange = (e) => {
@@ -62,7 +68,15 @@ export default function EditMenuModal({ handleCloseModal }) {
         <div>
           <div className="flex items-center p-3 gap-3">
             <div className="border-secondary border rounded-lg h-[178px] w-[228px]">
-              picture
+              <Image
+                // style={{ objectFit: "cover" }}
+                src={food.imageUrl}
+                alt="food-image"
+                placeholder="blur"
+                priority
+                width={500}
+                // height={500}
+              />
             </div>
             <div className="border-secondary border rounded-lg h-[178px] w-[228px]">
               add picture
@@ -87,13 +101,7 @@ export default function EditMenuModal({ handleCloseModal }) {
                 onChange={handleCategoryChange}
                 className="border border-secondary rounded-lg p-2 w-full"
               >
-                <option value="">Select a category</option>
-                <option value="Category 1">Category 1</option>
-                <option value="Category 2">Category 2</option>
-                <option value="Category 3">Category 3</option>
-                <option value="Category 3">Category 4</option>
-                <option value="Category 3">Category 5</option>
-                <option value="Category 3">Category 6</option>
+                <option value="">Category</option>
               </select>
             </div>
             <div className="mb-4">

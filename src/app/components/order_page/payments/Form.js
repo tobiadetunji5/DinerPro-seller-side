@@ -22,6 +22,30 @@ export default function Form() {
     }));
   };
 
+  const handlePhoneChange = (value) => {
+    const phoneNumber = value.replace(/[^\d]/g, "");
+    const phoneNumberLength = phoneNumber.length;
+
+    if (phoneNumberLength === 0) return "";
+
+    let formattedPhoneNumber = "";
+
+    if (phoneNumberLength < 4) {
+      formattedPhoneNumber = `(${phoneNumber.slice(0, 3)}`;
+    } else if (phoneNumberLength < 7) {
+      formattedPhoneNumber = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+        3
+      )}`;
+    } else {
+      formattedPhoneNumber = `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+        3,
+        6
+      )}-${phoneNumber.slice(6, 10)}`;
+    }
+
+    return formattedPhoneNumber;
+  };
+
   const toggle = (field) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -34,10 +58,6 @@ export default function Form() {
     { id: "pos", label: "Point of Sale (POS)" },
     { id: "cash", label: "Cash" },
   ];
-
-  // const handleChange = () => {
-
-  // }
 
   return (
     <form className="overflow-y-auto h-[92vh] w-[60vw] ml-4">
