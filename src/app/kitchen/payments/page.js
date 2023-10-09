@@ -1,13 +1,9 @@
 'use client'; 
-
 import React from 'react';
 import { useState, useEffect } from 'react';
-// import Modalform from './modalform';
 import DataCard from '@/app/components/card/DataCard';
-import PaymentsTable from '@/app/components/table/PaymentsHistory';
+import PaymentsTable from '@/app/components/inventory/PaymentsHistory';
 import PayManagerModal from '@/app/components/payments/PayManagerModal';
-
-// <Modalform isVisible={createInventory} onClose={() => setCreateInventory(false)} />
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,12 +26,9 @@ export default function Page() {
             </button>
 
 
-
 {/*-------------- modal starts here--------------*/}
 {
-  isOpen ? (
-   <PayManagerModal/>
-  ): null
+  isOpen ? (<PayManagerModal/> ): null
 }
 
  </div>

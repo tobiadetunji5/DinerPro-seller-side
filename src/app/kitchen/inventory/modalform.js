@@ -26,7 +26,6 @@ const handleSubmit = (e) => {
   console.log(details)
 }
 
-
   return (
     <div className="absolute inset-0 bg-black bg-opacity-25">
       <div className="absolute bg-white left-[23%] top-[18%] flex flex-col rounded-lg space-y-7 px-5 py-6">
