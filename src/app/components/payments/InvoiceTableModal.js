@@ -1,17 +1,38 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Image from 'next/image';
+import CurrencyFormatter from '../../../../utils/formatCurrency';
 
-const InvoiceTableModal = ({info}) => {
+const InvoiceTableModal = ({info, setInfo}) => {
     const [isEdit, setIsEdit] = useState(false);
+    const modalRef = useRef(null);
 
     const openModalForRow = () => {
         setIsEdit(true);
     }
+    useEffect(() => {
+        const handleOutsideClick = (e) => {
+          if (modalRef.current && !modalRef.current.contains(e.target)) {
+            closeModal();
+          }
+        };
+        if (isEdit) {
+          document.addEventListener("mousedown", handleOutsideClick);
+        }
+        return () => {
+          document.removeEventListener("mousedown", handleOutsideClick);
+        };
+      }, [isEdit]);
 
-    // const modalRef = useRef(null);
-    // const dataArray = [info]
-    // console.log('i am row:', dataArray.name)
+      const closeModal = () => {
+        setIsEdit(false);
+      };
+    
+  const handleDelete =(id) => {
+ const newList = info.filter((_, index) => index !== id)
+ setInfo(newList)
+  }
+
     return (
         <>
             <div>
@@ -26,24 +47,23 @@ const InvoiceTableModal = ({info}) => {
                         </tr>
                     </thead>
                     <tbody className='border border-zinc-400'>
-                        {/* {info.map((row)=>{ */}
-                        <tr>
+                        {info.map((row,ind)=>(
+                        <tr key={ind}>
                         <td className="pl-8 py-4 whitespace-nowrap"> 
                             <input type='checkbox' name='tickbox' className='w-[18px] h-[18px]'/>
                         </td>
-                        <td className="px-2 py-4 whitespace-nowrap">#1</td>
-                        <td className="px-2 py-4 whitespace-nowrap">her</td>
-                        <td className="px-6 py-4 whitespace-nowrap">6</td>
-                        <td className="px-2 py-4 whitespace-nowrap">90</td>
+                        <td className="px-2 py-4 whitespace-nowrap">#{ind + 1}</td>
+                        <td className="px-2 py-4 whitespace-nowrap">{row.name}</td>
+                        <td className="px-6 py-4 whitespace-nowrap">{row.quantity}</td>
+                        <td className="px-2 py-4 whitespace-nowrap"> <CurrencyFormatter value={row.amount} /> </td>
                         <td className="px-2 py-4 whitespace-nowrap text-left text-sm font-medium ">
-                            <button onClick={() => openModalForRow()}>
+                            <button onClick={() => openModalForRow(ind + 1)}>
                                 <BsThreeDotsVertical />
                             </button>
 
-                            {/* {isEdit && (
-                                <div className='absolute bg-white shadow-xl left-[80%] top-[72%] p-2 flex flex-col 
-                                space-y-2 items-center rounded-md text-black text-sm'
-                                    // ref={modalRef}
+                            {isEdit && (
+                                <div className='absolute bg-white shadow-xl left-[80%] top-[82%] p-2 flex flex-col space-y-2 items-center rounded-md text-black text-sm'
+                                    ref={modalRef}
                                     >
                                     <div className='flex justify-between items-center gap-4'>
                                         <Image
@@ -64,15 +84,15 @@ const InvoiceTableModal = ({info}) => {
                                             alt='delete icon'
                                             width='16'
                                             height='18' />
-                                        <button className='justify-end'>
-                                            Delete Item</button>
+                                        <button className='justify-end' onClick={()=> handleDelete(ind)}>
+                                            Delete</button>
                                     </div>
 
                                 </div>
-                            )} */}
+                            )}
                         </td>
                         </tr>
-                        {/* // })} */}
+                       ))}
                     </tbody>
                 </table>
             </div>

@@ -10,6 +10,7 @@ export default function ViewInventory({ data }) {
   const [selectedRowId, setSelectedRowId] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [editInventory, setEditInventory] = useState(false);
+  const [dataDetail, setDataDetail] =  useState(data)
 
   const dispatch = useDispatch();
   const modalRef = useRef(null);
@@ -22,6 +23,12 @@ export default function ViewInventory({ data }) {
     dispatch(setSelectedItem(selectedItem));
     setIsEdit(true);
   };
+
+  const handleDelete =(rowId) => {
+    const newList = data.filter((row) => row.id !== rowId)
+     setDataDetail(newList);
+     console.log('i am working')
+     }
 
   useEffect(() => {
     setIsEdit(false);
@@ -49,7 +56,7 @@ export default function ViewInventory({ data }) {
   return (
     <React.Fragment>
       <div>
-        <table className="w-full lg:overflow-hidden">
+        <table className="w-full">
           <thead className="border-b-2 border-b-zinc-300">
             <tr>
             <th scope='col'
@@ -71,7 +78,7 @@ export default function ViewInventory({ data }) {
           </thead>
 
           <tbody className="bg-white divide-y divide-gray-200 overflow-auto">
-            {data.map((row, index) => (
+            {dataDetail.map((row, index) => (
               <tr key={index} className="border-b-2">
                 <td className="px-6 py-4 whitespace-nowrap">{row.id}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -128,7 +135,8 @@ export default function ViewInventory({ data }) {
                           width="16"
                           height="18"
                         />
-                        <button className="justify-end">Delete Item</button>
+                        <button className="justify-end" onClick={() => handleDelete(row.id)}>
+                          Delete Item</button>
                       </div>
                     </div>
                   )}
