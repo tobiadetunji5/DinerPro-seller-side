@@ -1190,6 +1190,9 @@
   "version" "13.4.6"
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
+  "integrity" "sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ=="
+  "resolved" "https://registry.npmjs.org/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.3.tgz"
+  "version" "2.1.8-no-fsevents.3"
 
 "@nicolo-ribaudo/semver-v6@^6.3.3":
   "version" "6.3.3"
