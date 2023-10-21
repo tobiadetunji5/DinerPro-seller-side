@@ -1,0 +1,9 @@
+# Build image
+docker build -t diner-pro-seller .
+
+
+# List docker images
+docker image ls
+
+# Run flask app
+docker run -p 3000:3000 diner-pro-seller
