@@ -51,6 +51,9 @@ export default function CreateProcurementOrder({
     });
   };
 
+  console.log(formB);
+  console.log(selectedCategory);
+
   return (
     <aside className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="absolute bg-white p-6 rounded-lg w-[808px] h-[458px] border-secondary">

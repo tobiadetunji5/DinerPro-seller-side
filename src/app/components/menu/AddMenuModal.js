@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "@/redux/features/modal/modalSlice";
+import { addItem } from "@/redux/features/addItem/addItemSlice";
 
-export default function AddMenuModal({ handleCloseModal }) {
+export default function AddMenuModal({ handleCloseModal, handleAddItem }) {
   const dispatch = useDispatch();
+  const menuItems = useSelector((state) => state.menu.items);
 
   const [itemName, setItemName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [isAvailable, setIsAvailable] = useState(true);
+  const [selectedPicture, setSelectedPicture] = useState(null);
 
   const categories = [
     "Snacks",
@@ -42,9 +45,53 @@ export default function AddMenuModal({ handleCloseModal }) {
     setIsAvailable(!isAvailable);
   };
 
+  // const handlePictureChange = (e) => {
+  //   const file = e.target.files[0];
+
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setSelectedPicture(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+  const handlePictureChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedPicture(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const newItem = {
+  //     itemName,
+  //     categories,
+  //     price,
+  //     isAvailable,
+  //     picture: selectedPicture,
+  //   };
+  //   dispatch(addItem(newItem));
+  //   console.log("Updated Menu Items:", menuItems);
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    //action submit
+    const newItem = {
+      itemName,
+      category,
+      price,
+      isAvailable,
+      picture: selectedPicture,
+    };
+    handleAddItem(newItem);
+    dispatch(addItem(newItem));
+    console.log("Updated Menu Items:", menuItems);
   };
 
   const handleClose = () => {
@@ -74,10 +121,27 @@ export default function AddMenuModal({ handleCloseModal }) {
         <div>
           <div className="flex items-center p-3 gap-3">
             <div className="border-secondary border rounded-lg h-[178px] w-[228px]">
-              picture
+              {selectedPicture ? (
+                <img
+                  src={selectedPicture}
+                  alt="Selected"
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              ) : (
+                "No picture selected"
+              )}
             </div>
-            <div className="border-secondary border rounded-lg h-[178px] w-[228px]">
-              add picture
+            <div className="border-secondary border rounded-lg h-[178px] w-[228px] text-center">
+              <label htmlFor="pictureInput" className="cursor-pointer">
+                {selectedPicture ? "Change Picture" : "Add Picture"}
+              </label>
+              <input
+                type="file"
+                id="pictureInput"
+                accept="image/*"
+                onChange={handlePictureChange}
+                className="hidden"
+              />
             </div>
           </div>
         </div>
@@ -136,6 +200,21 @@ export default function AddMenuModal({ handleCloseModal }) {
                 ></div>
               </div>
             </div>
+            <div className="flex items-center">
+              <label>Source batch: </label>
+              <div className="gap-3 flex">
+                <input
+                  type="text"
+                  placeholder="Enter Source batch ID"
+                  className="border border-secondary rounded-lg p-2"
+                />
+                <input
+                  type="text"
+                  placeholder="Enter Procurement ID"
+                  className="border border-secondary rounded-lg p-2"
+                />
+              </div>
+            </div>
             <div className="flex justify-end">
               <button
                 className="bg-primary text-white px-4 py-2 rounded-lg mr-2"
@@ -147,7 +226,7 @@ export default function AddMenuModal({ handleCloseModal }) {
                 className="bg-primary text-white px-4 py-2 rounded-lg"
                 type="submit"
               >
-                Save
+                add item
               </button>
             </div>
           </form>
