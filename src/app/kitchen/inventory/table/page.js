@@ -2,18 +2,10 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { inventoryData } from "../../../../../utils/Inventorydata";
-import ViewInventory from "@/app/components/table/ViewInventoryTable";
+import ViewInventory from "@/app/components/inventory/ViewInventoryTable";
 
 export default function Page() {
-  // usestate for the first modal(edit, delete)
-
-  // useEffect(()=>{
-  //   setIsEdit(false);
-  // },[editInventory]);
-
   // const [records, setRecords] = useState(jsonData);
-
-  const [editInventory, setEditInventory] = useState(false);
   const [activeButton, setActiveButton] = useState("All");
 
   const handleButtonClick = (buttonName) => {
@@ -25,14 +17,11 @@ export default function Page() {
   );
   // console.log(pendingProcurements);
 
-  // useEffect(()=>{
-  //   setIsEdit(false);
-  // },[editInventory]);
 
   return (
     <>
       <div className="px-8">
-        <section className="border-2 w-[80vw] h-[80vh] border-zinc-400 rounded-2xl mt-10 p-6">
+        <section className="border-2 w-[80vw] h-[80vh] border-zinc-400 rounded-2xl mt-10 p-6 overflow:hidden">
           <div className="flex items-center justify-between p-3">
             <ul className="border bg-primary bg-opacity-30 text-white p-2 rounded-full">
               <div className="flex justify-between space-x-2">
@@ -79,7 +68,7 @@ export default function Page() {
 
           <div>
             {activeButton === "All" && (
-              <div>{/* <ViewInventory data={inventoryData}/> */}</div>
+              <div> <ViewInventory data={inventoryData}/> </div>
             )}
             {activeButton === "Limit Alerts" && (
               <div>

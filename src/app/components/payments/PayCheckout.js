@@ -1,22 +1,23 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CurrencyFormatter from "../../../../../utils/formatCurrency";
+import CurrencyFormatter from "../../../../utils/formatCurrency";
 import Image from "next/image";
-import {
-  initializeCartFromCookies,
-  deleteItem,
-} from "@/redux/features/cart/cartSlice";
+// import {
+//   initializeCartFromCookies,
+//   deleteItem,
+// } from "@/redux/features/cart/cartSlice";
 import { MdDelete } from "react-icons/md";
 import Link from "next/link";
+import { useData } from "@/StepContex";
 
-export default function Checkout({title, path}) {
+export default function PayCheckout({title, path}) {
+    const {formData, setFormData} = useData();
   const [loading, setLoading] = useState(true);
-  const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(initializeCartFromCookies()); // Dispatch the action when component mounts
+    // dispatch(initializeCartFromCookies()); // Dispatch the action when component mounts
     setLoading(false);
   }, [dispatch]);
 
@@ -25,13 +26,14 @@ export default function Checkout({title, path}) {
     return <p>Loading...</p>;
   }
 
-  const handleRemoveFromCart = (item) => {
-    dispatch(deleteItem({ slug: item.slug }));
+  const handleRemoveFromCart = (id) => {
+     const newList = formData.filter((_, index) => index !== id)
+     setFormData(newList)
   };
 
   //calculate the subtotal
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.priceTag * item.quantity,
+  const subtotal = formData.reduce(
+    (acc, item) => acc + item.amount * item.quantity,
     0
   );
   //discount value
@@ -51,25 +53,25 @@ export default function Checkout({title, path}) {
         <hr className="border-silver mt-3" />
       </div>
 
-      {cartItems ? (
-        cartItems.map((item) => (
+      {formData ? (
+        formData.map((item, ind) => (
           <div
-            key={item.slug}
+            key={ind}
             className="flex items-center justify-between space-x-4 mb-2"
           >
             <div className="w-2/5">
               <div className="relative w-[100px] h-[70px] mt-2">
                 <Image
-                  src={item.imageUrl}
+                  src='/images/cartTestItems/jollof.png'
                   fill
                   style={{ objectFit: "contain" }}
-                  alt={item.foodName}
+                  alt={item.name}
                   className="rounded-lg"
                   sizes="(max-width: 100px) 100vw"
                   priority
                 />
               </div>
-              <p>{item.foodName}</p>
+              <p>{item.name}</p>
             </div>
             <div className="w-1/5">
               <div className="flex items-center">
@@ -78,11 +80,13 @@ export default function Checkout({title, path}) {
             </div>
             <div className="w-1/5">
               <p>
-                <CurrencyFormatter value={item.totalPrice} />
+                <CurrencyFormatter value={item.amount} />
               </p>
             </div>
             <div className="w-1/5">
-              <button onClick={() => handleRemoveFromCart(item)}>
+              <button 
+              onClick={() => handleRemoveFromCart(ind)}
+            >
                 <MdDelete size={25} />
               </button>
             </div>

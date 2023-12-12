@@ -13,7 +13,7 @@ export const inventoryData = [
       id:"#598456",
       inventoryname:"pepsi",
       category:"drinks",
-      brand:"pepsico",
+      brand:"coke",
       initialquantity:"24 (2packs)",
       currentquantity:"10 bottles",
       quantityalert:"alerted"
@@ -23,7 +23,7 @@ export const inventoryData = [
       id:"#59878608",
       inventoryname:"pepsi",
       category:"drinks",
-      brand:"pepsico",
+      brand:"fanta",
       initialquantity:"24 (2packs)",
       currentquantity:"10 bottles",
       quantityalert:"available"
@@ -33,7 +33,7 @@ export const inventoryData = [
       id:"#5987dijk",
       inventoryname:"pepsi",
       category:"drinks",
-      brand:"pepsico",
+      brand:"schwepps",
       initialquantity:"24 (2packs)",
       currentquantity:"10 bottles",
       quantityalert:"alerted"

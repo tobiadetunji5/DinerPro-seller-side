@@ -6,7 +6,9 @@ export default function OrderComponent() {
   return (
     <div className="flex gap-5 justify-between px-12">
       <FoodContainer />
-      <CartContainer />
+      <CartContainer 
+      title='My orders'
+      path="/order/payments"/>
     </div>
   );
 }
