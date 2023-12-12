@@ -5,19 +5,23 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { MdFilterList } from "react-icons/md";
 import MenuCard from "./MenuCard";
 import { openModal } from "@/redux/features/modal/modalSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddMenuModal from "./AddMenuModal";
 import { categories } from "../../../../utils/categoriesData";
 import FilterModal from "./FilterModal";
+import { addItem } from "@/redux/features/addItem/addItemSlice";
 
 export default function MenuSetting() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [addedItems, setAddedItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(15);
   const gridRows = 3;
   const gridCols = 5;
+
+  // const menuItems = useSelector((state) => state.menu.items);
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -26,6 +30,11 @@ export default function MenuSetting() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleAddItem = (newItem) => {
+    setAddedItems((prevItems) => [...prevItems, newItem]);
+    console.log(addedItems);
   };
 
   //modal filter handling
@@ -40,7 +49,7 @@ export default function MenuSetting() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentMenuItems = foodArrays.slice(indexOfFirstItem, indexOfLastItem);
+  const currentMenuItems = addedItems.slice(indexOfFirstItem, indexOfLastItem);
 
   const emptySlots = gridCols * gridRows - currentMenuItems.length;
 
@@ -49,7 +58,7 @@ export default function MenuSetting() {
     setCurrentPage(pageNumber);
   };
 
-  const pageCount = Math.ceil(foodArrays.length / itemsPerPage);
+  const pageCount = Math.ceil(addedItems.length / itemsPerPage);
   const currentPageCount = Math.min(currentPage, pageCount);
 
   return (
@@ -90,8 +99,12 @@ export default function MenuSetting() {
       <div
         className={`grid grid-cols-5 grid-rows-3 gap-3 mb-1 overflow-x-hidden w-full`}
       >
-        {currentMenuItems.map((food, i) => (
+        {/* {currentMenuItems.map((food, i) => (
           <MenuCard key={i} food={food} />
+        ))} */}
+        {/* add menu here */}
+        {addedItems.map((addedItem, index) => (
+          <MenuCard key={index} menuItem={addedItem} />
         ))}
         {emptySlots > 0 &&
           Array.from({ length: emptySlots }).map((_, index) => (
@@ -104,7 +117,7 @@ export default function MenuSetting() {
         </div>
         <Pagination
           itemsPerPage={itemsPerPage}
-          totalItems={foodArrays.length}
+          totalItems={addedItems.length}
           currentPage={currentPageCount}
           pageCount={pageCount}
           paginate={paginate}
@@ -113,7 +126,12 @@ export default function MenuSetting() {
       {isFilterModalOpen && (
         <FilterModal handleCloseModalFilter={handleCloseModalFilter} />
       )}
-      {isModalOpen && <AddMenuModal handleCloseModal={handleCloseModal} />}
+      {isModalOpen && (
+        <AddMenuModal
+          handleCloseModal={handleCloseModal}
+          handleAddItem={handleAddItem}
+        />
+      )}
     </div>
   );
 }
