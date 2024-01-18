@@ -10,28 +10,29 @@ import {
 import { MdDelete } from "react-icons/md";
 import Link from "next/link";
 
-export default function Checkout({title, path}) {
+export default function Checkout({ title, path }) {
   const [loading, setLoading] = useState(true);
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((store) => store.cart.cartItems) || [];
+  console.log(cartItems);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(initializeCartFromCookies()); // Dispatch the action when component mounts
+    // dispatch(initializeCartFromCookies());
     setLoading(false);
   }, [dispatch]);
 
   if (loading) {
-    // loading state
     return <p>Loading...</p>;
   }
 
   const handleRemoveFromCart = (item) => {
-    dispatch(deleteItem({ slug: item.slug }));
+    dispatch(deleteItem({ id: item.id }));
   };
 
   //calculate the subtotal
   const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.priceTag * item.quantity,
+    (acc, item) => acc + item.price * item.quantity,
     0
   );
   //discount value
@@ -52,42 +53,44 @@ export default function Checkout({title, path}) {
       </div>
 
       {cartItems ? (
-        cartItems.map((item) => (
-          <div
-            key={item.slug}
-            className="flex items-center justify-between space-x-4 mb-2"
-          >
-            <div className="w-2/5">
-              <div className="relative w-[100px] h-[70px] mt-2">
-                <Image
-                  src={item.imageUrl}
-                  fill
-                  style={{ objectFit: "contain" }}
-                  alt={item.foodName}
-                  className="rounded-lg"
-                  sizes="(max-width: 100px) 100vw"
-                  priority
-                />
+        cartItems.map((item) => {
+          return (
+            <div
+              key={item.id}
+              className="flex items-center justify-between space-x-4 mb-2"
+            >
+              <div className="w-2/5">
+                <div className="relative w-[100px] h-[70px] mt-2">
+                  <Image
+                    src={item.selectedPicture}
+                    fill
+                    style={{ objectFit: "contain" }}
+                    alt={item.itemName}
+                    className="rounded-lg"
+                    sizes="(max-width: 100px) 100vw"
+                    priority
+                  />
+                </div>
+                <p>{item.itemName}</p>
               </div>
-              <p>{item.foodName}</p>
-            </div>
-            <div className="w-1/5">
-              <div className="flex items-center">
-                <p className="p-1">{item.quantity}</p>
+              <div className="w-1/5">
+                <div className="flex items-center">
+                  <p className="p-1">{item.quantity}</p>
+                </div>
+              </div>
+              <div className="w-1/5">
+                <p>
+                  <CurrencyFormatter value={item.totalPrice} />
+                </p>
+              </div>
+              <div className="w-1/5">
+                <button onClick={() => handleRemoveFromCart(item)}>
+                  <MdDelete size={25} />
+                </button>
               </div>
             </div>
-            <div className="w-1/5">
-              <p>
-                <CurrencyFormatter value={item.totalPrice} />
-              </p>
-            </div>
-            <div className="w-1/5">
-              <button onClick={() => handleRemoveFromCart(item)}>
-                <MdDelete size={25} />
-              </button>
-            </div>
-          </div>
-        ))
+          );
+        })
       ) : (
         <p>cart items loading...</p>
       )}
@@ -109,8 +112,7 @@ export default function Checkout({title, path}) {
       </div>
       <div className="flex justify-center">
         <Link href={path}>
-          <button 
-          className="bg-primary p-5 w-[311px] rounded-lg">
+          <button className="bg-primary p-5 w-[311px] rounded-lg">
             Print Invoice
           </button>
         </Link>

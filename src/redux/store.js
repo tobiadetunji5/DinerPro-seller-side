@@ -4,19 +4,24 @@ import cartReducer, {
 } from "./features/cart/cartSlice";
 import modalReducer from "./features/modal/modalSlice";
 import selectedItemReducer from "./features/selected_item/selectedItemSlice";
-import addItemReducer from "./features/addItem/addItemSlice";
-import editItemReducer from "./features/editItem/editItemSlice";
+import addMenuReducer, {
+  initializeMenuFromCookies,
+} from "./features/addMenu/addMenuSlice";
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
     modal: modalReducer,
     selectedItem: selectedItemReducer,
-    menu: addItemReducer,
-    editItem: editItemReducer,
+    addMenu: addMenuReducer,
   },
 });
 
 (async () => {
-  await store.dispatch(initializeCartFromCookies());
+  try {
+    await store.dispatch(initializeCartFromCookies());
+    await store.dispatch(initializeMenuFromCookies());
+  } catch (error) {
+    console.error("Error initializing cart from cookies:", error);
+  }
 })();

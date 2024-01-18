@@ -27,19 +27,19 @@ const cartSlice = createSlice({
     addToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.cartItems.find(
-        (item) => item.slug === newItem.slug
+        (item) => item.id === newItem.id
       );
       if (existingItem) {
         existingItem.quantity++;
-        existingItem.totalPrice = existingItem.priceTag * existingItem.quantity;
+        existingItem.totalPrice = existingItem.price * existingItem.quantity;
       } else {
         state.cartItems.push({
-          slug: newItem.slug,
-          priceTag: newItem.priceTag,
+          id: newItem.id,
+          price: newItem.price,
           quantity: 1,
-          totalPrice: newItem.priceTag,
-          foodName: newItem.foodName,
-          imageUrl: newItem.imageUrl,
+          totalPrice: newItem.price,
+          itemName: newItem.itemName,
+          selectedPicture: newItem.selectedPicture,
         });
       }
       state.amount++;
@@ -56,11 +56,11 @@ const cartSlice = createSlice({
       Cookies.set("cart", JSON.stringify(updatedCart));
     },
     increaseQuantity(state, action) {
-      const { slug } = action.payload;
-      const item = state.cartItems.find((item) => item.slug === slug);
+      const { id } = action.payload;
+      const item = state.cartItems.find((item) => item.id === id);
       if (item) {
         item.quantity++;
-        item.totalPrice = item.priceTag * item.quantity;
+        item.totalPrice = item.price * item.quantity;
         state.amount++;
         state.total = state.cartItems.reduce(
           (total, item) => total + item.totalPrice,
@@ -76,20 +76,18 @@ const cartSlice = createSlice({
       Cookies.set("cart", JSON.stringify(updatedCart));
     },
     decreaseQuantity(state, action) {
-      const { slug } = action.payload;
-      const item = state.cartItems.find((item) => item.slug === slug);
+      const { id } = action.payload;
+      const item = state.cartItems.find((item) => item.id === id);
       if (item) {
         item.quantity--;
-        item.totalPrice = item.priceTag * item.quantity;
+        item.totalPrice = item.price * item.quantity;
         state.amount--;
         state.total = state.cartItems.reduce(
           (total, item) => total + item.totalPrice,
           0
         );
         if (item.quantity === 0) {
-          state.cartItems = state.cartItems.filter(
-            (item) => item.slug !== slug
-          );
+          state.cartItems = state.cartItems.filter((item) => item.id !== id);
         }
       }
       // Update cookies
@@ -101,8 +99,8 @@ const cartSlice = createSlice({
       Cookies.set("cart", JSON.stringify(updatedCart));
     },
     deleteItem(state, action) {
-      const { slug } = action.payload;
-      state.cartItems = state.cartItems.filter((item) => item.slug !== slug);
+      const { id } = action.payload;
+      state.cartItems = state.cartItems.filter((item) => item.id !== id);
       // Update cookies
       const updatedCart = {
         cartItems: state.cartItems,
