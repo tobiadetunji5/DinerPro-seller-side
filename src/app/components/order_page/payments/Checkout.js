@@ -13,7 +13,7 @@ import Link from "next/link";
 export default function Checkout({ title, path }) {
   const [loading, setLoading] = useState(true);
   const cartItems = useSelector((store) => store.cart.cartItems) || [];
-  console.log(cartItems);
+  // console.log(cartItems);
 
   const dispatch = useDispatch();
 

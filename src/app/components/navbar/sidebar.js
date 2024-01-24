@@ -108,7 +108,7 @@ const Sidebar = () => {
               className="flex gap-x-4 items-center hover:bg-white hover:rounded-tl-[30px] p-5 w-full hover:duration-300"
             >
               <BsListColumnsReverse />
-              Kitchen
+              Product Center
               <BsChevronDown
                 className={
                   isDropdownTwo ? "rotate-180 duration-300" : "duration-300"
