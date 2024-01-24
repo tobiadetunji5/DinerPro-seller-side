@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { foodArrays } from "../../../../utils/cartData";
-import { AiOutlineSetting } from "react-icons/ai";
 import { MdFilterList } from "react-icons/md";
 import MenuCard from "./MenuCard";
 import { openModal } from "@/redux/features/modal/modalSlice";
@@ -9,10 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import AddMenuModal from "./AddMenuModal";
 import { categories } from "../../../../utils/categoriesData";
 import FilterModal from "./FilterModal";
-import { addItem } from "@/redux/features/addItem/addItemSlice";
+import { addMenu } from "@/redux/features/addMenu/addMenuSlice";
 
 export default function MenuSetting() {
   const dispatch = useDispatch();
+  const addMenuItems = useSelector((store) => store.addMenu);
+  // console.log(addMenuItems);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [addedItems, setAddedItems] = useState([]);
@@ -21,7 +22,15 @@ export default function MenuSetting() {
   const gridRows = 3;
   const gridCols = 5;
 
-  // const menuItems = useSelector((state) => state.menu.items);
+  const generateMenuCards = () => {
+    return addMenuItems.map((addedItems, i) => (
+      <MenuCard key={i} menuItem={addedItems} />
+    ));
+  };
+  const menuList = generateMenuCards();
+  // const renderCard = () =>
+  //   menuList.length ? menuList : <p>No menu available</p>;
+  // const renderCard = () => menuList;
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -33,8 +42,12 @@ export default function MenuSetting() {
   };
 
   const handleAddItem = (newItem) => {
-    setAddedItems((prevItems) => [...prevItems, newItem]);
-    console.log(addedItems);
+    setAddedItems((prevItems) => {
+      const updatedItems = [...prevItems, newItem];
+      // console.log(updatedItems);
+      return updatedItems;
+    });
+    dispatch(addMenu(newItem));
   };
 
   //modal filter handling
@@ -99,17 +112,11 @@ export default function MenuSetting() {
       <div
         className={`grid grid-cols-5 grid-rows-3 gap-3 mb-1 overflow-x-hidden w-full`}
       >
-        {/* {currentMenuItems.map((food, i) => (
-          <MenuCard key={i} food={food} />
-        ))} */}
-        {/* add menu here */}
-        {addedItems.map((addedItem, index) => (
-          <MenuCard key={index} menuItem={addedItem} />
-        ))}
-        {emptySlots > 0 &&
+        {/* {emptySlots > 0 &&
           Array.from({ length: emptySlots }).map((_, index) => (
             <div key={currentMenuItems.length + index} />
-          ))}
+          ))} */}
+        {menuList}
       </div>
       <div className="flex justify-between px-2 mt-4">
         <div>

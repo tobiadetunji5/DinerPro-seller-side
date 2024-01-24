@@ -14,7 +14,7 @@ import {
 import { MdDelete } from "react-icons/md";
 import Link from "next/link";
 
-export default function CartContainer({title, path, onClick}) {
+export default function CartContainer({ title, path, onClick }) {
   const [loading, setLoading] = useState(true);
   const cartItems = useSelector((state) => state.cart.cartItems) || [];
 
@@ -31,15 +31,15 @@ export default function CartContainer({title, path, onClick}) {
   }
 
   const handleRemoveFromCart = (item) => {
-    dispatch(deleteItem({ slug: item.slug }));
+    dispatch(deleteItem({ id: item.id }));
   };
 
   const handleIncreaseQuantity = (item) => {
-    dispatch(increaseQuantity({ slug: item.slug }));
+    dispatch(increaseQuantity({ id: item.id }));
   };
 
   const handleDecreaseQuantity = (item) => {
-    dispatch(decreaseQuantity({ slug: item.slug }));
+    dispatch(decreaseQuantity({ id: item.id }));
   };
 
   const handleClearCart = () => {
@@ -47,7 +47,7 @@ export default function CartContainer({title, path, onClick}) {
   };
 
   const totalAmount = cartItems.reduce(
-    (acc, item) => acc + item.priceTag * item.quantity,
+    (acc, item) => acc + item.price * item.quantity,
     0
   );
 
@@ -78,56 +78,61 @@ export default function CartContainer({title, path, onClick}) {
         </div>
       ) : (
         <>
-          {cartItems.map((item) => (
-            <div
-              key={item.slug}
-              className="flex items-center justify-between space-x-4 mb-2"
-            >
-              <div className="w-2/5">
-                <div className="relative w-[100px] h-[70px] mt-2">
-                  <Image
-                    src={item.imageUrl}
-                    fill
-                    style={{ objectFit: "contain" }}
-                    alt={item.foodName}
-                    className="rounded-lg"
-                    sizes="(max-width: 100px) 100vw"
-                    priority
-                  />
+          {cartItems.map((item, i) => {
+            // console.log(item);
+            return (
+              <div
+                key={i}
+                className="flex items-center justify-between space-x-4 mb-2"
+              >
+                <div className="w-2/5">
+                  <div className="relative w-[100px] h-[70px] mt-2">
+                    <Image
+                      src={item.selectedPicture}
+                      fill
+                      style={{ objectFit: "contain" }}
+                      alt={item.itemName}
+                      className="rounded-lg"
+                      sizes="(max-width: 100px) 100vw"
+                      priority
+                    />
+                  </div>
+                  <p>{item.itemName}</p>
                 </div>
-                <p>{item.foodName}</p>
-              </div>
-              <div className="w-1/5">
-                <div className="flex items-center">
-                  <button
-                    className={`px-2 py-1 border ${
-                      item.quantity === 1 ? "border-red-700" : "border-red-700"
-                    } rounded-md`}
-                    onClick={() => handleDecreaseQuantity(item)}
-                  >
-                    -
-                  </button>
-                  <p className="p-1">{item.quantity}</p>
-                  <button
-                    className="px-2 py-1 border border-green-700 rounded-md"
-                    onClick={() => handleIncreaseQuantity(item)}
-                  >
-                    +
+                <div className="w-1/5">
+                  <div className="flex items-center">
+                    <button
+                      className={`px-2 py-1 border ${
+                        item.quantity === 1
+                          ? "border-red-700"
+                          : "border-red-700"
+                      } rounded-md`}
+                      onClick={() => handleDecreaseQuantity(item)}
+                    >
+                      -
+                    </button>
+                    <p className="p-1">{item.quantity}</p>
+                    <button
+                      className="px-2 py-1 border border-green-700 rounded-md"
+                      onClick={() => handleIncreaseQuantity(item)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div className="w-1/5">
+                  <p>
+                    <CurrencyFormatter value={item.totalPrice} />
+                  </p>
+                </div>
+                <div className="w-1/5">
+                  <button onClick={() => handleRemoveFromCart(item)}>
+                    <MdDelete size={25} />
                   </button>
                 </div>
               </div>
-              <div className="w-1/5">
-                <p>
-                  <CurrencyFormatter value={item.totalPrice} />
-                </p>
-              </div>
-              <div className="w-1/5">
-                <button onClick={() => handleRemoveFromCart(item)}>
-                  <MdDelete size={25} />
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
           <div>
             <div className="p-5 bg-[#F3F3FE] rounded-lg flex flex-row mt-10 justify-between">
               <p>Item total</p>
@@ -137,7 +142,10 @@ export default function CartContainer({title, path, onClick}) {
             </div>
             <div className="p-5 flex flex-row mt-5 justify-between">
               <Link href={path}>
-                <button onClick={onClick} className="border border-green-700 text-green-700 hover:bg-green-700 hover:text-white p-5 w-[200px] rounded-lg">
+                <button
+                  onClick={onClick}
+                  className="border border-green-700 text-green-700 hover:bg-green-700 hover:text-white p-5 w-[200px] rounded-lg"
+                >
                   Confirm
                 </button>
               </Link>

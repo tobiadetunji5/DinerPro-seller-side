@@ -6,8 +6,12 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import Link from "next/link";
 import { categories } from "../../../../../utils/categoriesData";
+import { useSelector } from "react-redux";
+import { store } from "@/redux/store";
 
 export default function FoodContainer() {
+  const addMenuItems = useSelector((store) => store.addMenu);
+
   const slideLeft = () => {
     var slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft - 500;
@@ -71,8 +75,11 @@ export default function FoodContainer() {
         id="slider"
         className="grid grid-rows-3 gap-x-6 gap-y-4 grid-flow-col overflow-x-auto scroll whitespace-nowrap scroll-smooth scrollbar-hide"
       >
-        {foodArrays.map((food, i) => (
+        {/* {foodArrays.map((food, i) => (
           <Card key={i} food={food} />
+        ))} */}
+        {addMenuItems.map((menuItem, i) => (
+          <Card key={i} food={menuItem} />
         ))}
         <BiRightArrow
           onClick={slideRight}

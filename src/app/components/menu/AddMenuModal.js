@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "@/redux/features/modal/modalSlice";
-import { addItem } from "@/redux/features/addItem/addItemSlice";
+import { addMenu } from "@/redux/features/addMenu/addMenuSlice";
+import { v4 as uuidv4 } from "uuid";
 
-export default function AddMenuModal({ handleCloseModal, handleAddItem }) {
+export default function AddMenuModal({ handleCloseModal }) {
   const dispatch = useDispatch();
-  const menuItems = useSelector((state) => state.menu.items);
 
-  const [itemName, setItemName] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [isAvailable, setIsAvailable] = useState(true);
-  const [selectedPicture, setSelectedPicture] = useState(null);
+  const [values, setValues] = useState({
+    itemName: "",
+    category: "",
+    price: "",
+    available: true,
+    selectedPicture: "",
+    batchid: "",
+    procurementid: "",
+  });
 
   const categories = [
     "Snacks",
@@ -25,73 +29,71 @@ export default function AddMenuModal({ handleCloseModal, handleAddItem }) {
   ];
 
   const handleItemNameChange = (e) => {
-    setItemName(e.target.value);
+    setValues({ ...values, itemName: e.target.value });
   };
 
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value);
+    setValues({ ...values, category: e.target.value });
+  };
+  const handleBatchIDChange = (e) => {
+    setValues({ ...values, batchid: e.target.value });
+  };
+  const handleProcurementIDChange = (e) => {
+    setValues({ ...values, procurementid: e.target.value });
   };
 
   const handlePriceChange = (e) => {
     const newPrice = parseInt(e.target.value, 10);
     if (!isNaN(newPrice) && newPrice >= 0) {
-      setPrice(newPrice);
+      setValues({ ...values, price: newPrice });
     } else {
-      setPrice("");
+      setValues({ ...values, price: "" });
     }
   };
 
   const handleToggleAvailability = () => {
-    setIsAvailable(!isAvailable);
+    setValues({ ...values, available: !values.available });
   };
 
-  // const handlePictureChange = (e) => {
-  //   const file = e.target.files[0];
-
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setSelectedPicture(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
   const handlePictureChange = (e) => {
     const file = e.target.files[0];
 
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setSelectedPicture(reader.result);
+        setValues({
+          ...values,
+          selectedPicture: reader.result,
+        });
       };
       reader.readAsDataURL(file);
+    } else {
+      setValues({
+        ...values,
+        selectedPicture: null,
+      });
     }
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const newItem = {
-  //     itemName,
-  //     categories,
-  //     price,
-  //     isAvailable,
-  //     picture: selectedPicture,
-  //   };
-  //   dispatch(addItem(newItem));
-  //   console.log("Updated Menu Items:", menuItems);
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newItem = {
-      itemName,
-      category,
-      price,
-      isAvailable,
-      picture: selectedPicture,
-    };
-    handleAddItem(newItem);
-    dispatch(addItem(newItem));
-    console.log("Updated Menu Items:", menuItems);
+    // console.log("Form values:", values);
+    // dispatch(addMenu(values));
+    dispatch(
+      addMenu({
+        id: uuidv4(),
+        itemName: values.itemName,
+        category: values.category,
+        price: values.price,
+        available: true,
+        selectedPicture: values.selectedPicture,
+        batchid: values.batchid,
+        procurementid: values.procurementid,
+      })
+    );
+
+    handleCloseModal();
+    dispatch(closeModal());
   };
 
   const handleClose = () => {
@@ -118,40 +120,41 @@ export default function AddMenuModal({ handleCloseModal, handleAddItem }) {
     <aside className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg w-[808px] h-[709px]">
         <h2 className="text-xl font-semibold mb-4">Add Menu</h2>
-        <div>
-          <div className="flex items-center p-3 gap-3">
-            <div className="border-secondary border rounded-lg h-[178px] w-[228px]">
-              {selectedPicture ? (
-                <img
-                  src={selectedPicture}
-                  alt="Selected"
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              ) : (
-                "No picture selected"
-              )}
-            </div>
-            <div className="border-secondary border rounded-lg h-[178px] w-[228px] text-center">
-              <label htmlFor="pictureInput" className="cursor-pointer">
-                {selectedPicture ? "Change Picture" : "Add Picture"}
-              </label>
-              <input
-                type="file"
-                id="pictureInput"
-                accept="image/*"
-                onChange={handlePictureChange}
-                className="hidden"
-              />
-            </div>
-          </div>
-        </div>
+
         <div>
           <form onSubmit={handleSubmit}>
+            <div>
+              <div className="flex items-center p-3 gap-3">
+                <div className="border-secondary border rounded-lg h-[178px] w-[228px]">
+                  {values.selectedPicture ? (
+                    <img
+                      src={values.selectedPicture}
+                      alt="Selected"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  ) : (
+                    "No picture selected"
+                  )}
+                </div>
+                <div className="border-secondary border rounded-lg h-[178px] w-[228px] text-center">
+                  <label htmlFor="pictureInput" className="cursor-pointer">
+                    {values.selectedPicture ? "Change Picture" : "Add Picture"}
+                  </label>
+                  <input
+                    type="file"
+                    id="pictureInput"
+                    accept="image/*"
+                    onChange={handlePictureChange}
+                    className="hidden"
+                  />
+                </div>
+              </div>
+            </div>
             <div className="mb-4">
               <label className="block mb-2">Item Name:</label>
               <input
                 type="text"
-                value={itemName}
+                value={values.itemName}
                 onChange={handleItemNameChange}
                 className="border border-secondary rounded-lg p-2 w-full"
               />
@@ -159,7 +162,7 @@ export default function AddMenuModal({ handleCloseModal, handleAddItem }) {
             <div className="mb-4">
               <label className="block mb-2">Category:</label>
               <select
-                value={category}
+                value={values.category}
                 onChange={handleCategoryChange}
                 className="border border-secondary rounded-lg p-2 w-full"
               >
@@ -175,7 +178,7 @@ export default function AddMenuModal({ handleCloseModal, handleAddItem }) {
               <label className="block mb-2">Price (in Naira):</label>
               <input
                 type="number"
-                value={price}
+                value={values.price}
                 onChange={handlePriceChange}
                 className="border border-secondary rounded-lg p-2 w-full"
               />
@@ -184,18 +187,18 @@ export default function AddMenuModal({ handleCloseModal, handleAddItem }) {
               <label className="block mb-2 mr-2">Availability:</label>
               <div
                 className={`relative w-10 h-6 rounded-full cursor-pointer ${
-                  isAvailable ? "bg-primary" : "bg-gray"
+                  values.available ? "bg-gray" : "bg-primary"
                 }`}
                 onClick={handleToggleAvailability}
               >
                 <div
                   className={`absolute w-4 h-4 rounded-full m-1 transition-transform duration-300 ${
-                    isAvailable ? "bg-white" : "bg-white"
+                    values.available ? "bg-white" : "bg-white"
                   }`}
                   style={{
-                    transform: isAvailable
-                      ? "translateX(100%)"
-                      : "translateX(0)",
+                    transform: values.available
+                      ? "translateX(0)"
+                      : "translateX(100%)",
                   }}
                 ></div>
               </div>
@@ -207,11 +210,15 @@ export default function AddMenuModal({ handleCloseModal, handleAddItem }) {
                   type="text"
                   placeholder="Enter Source batch ID"
                   className="border border-secondary rounded-lg p-2"
+                  value={values.batchid}
+                  onChange={handleBatchIDChange}
                 />
                 <input
                   type="text"
                   placeholder="Enter Procurement ID"
                   className="border border-secondary rounded-lg p-2"
+                  value={values.procurementid}
+                  onChange={handleProcurementIDChange}
                 />
               </div>
             </div>
