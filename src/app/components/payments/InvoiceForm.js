@@ -46,12 +46,12 @@ const InvoiceForm = () => {
     const totalItems = detailsArr.length
 
     const formFilled = Object.values(details).every((items) => {
-    if (typeof items === 'string') {
-        return items.trim() !== '';
-      }
-      // If val is not a string, consider it as filled
-      return true
-     } )
+        if (typeof items === 'string') {
+            return items.trim() !== '';
+        }
+        // If value is not a string, consider it as filled
+        return true
+    })
 
     return (
         <div className='relative py-5 space-y-4 border border-zinc-400 rounded-lg flex flex-col justify-center overflow-auto w-[70%] m-auto'>

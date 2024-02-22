@@ -21,12 +21,11 @@ export default function Page() {
         <div className="flex justify-end ">
           <button
             onClick={() => setIsOpen(true)}
-            className="relative p-2 mb-3 text-center place-items-end bg-primary text-white font-semibold rounded-md w-[27%]"
-          >
+            className="relative p-2 mb-3 text-center place-items-end bg-primary text-white font-semibold rounded-md w-[27%]" >
             Inventory Manager
           </button>
-
-          {isOpen && (<InventoryManagerModal/> )}
+          {isOpen && (<InventoryManagerModal
+          setCreateInventory={setCreateInventory}/> )}
         </div>
 
         {/* ================data cards=============== */}
@@ -62,6 +61,7 @@ export default function Page() {
         </div>
         <HistoryTable />
       </div>
+      
       <Modalform
         isVisible={createInventory}
         onClose={() => setCreateInventory(false)}

@@ -35,7 +35,7 @@ const [openInvoice, setOpenInvoice] = useState(false);
      width='18'
      height='18'
      className=''/>
-    <Link href='/kitchen/payments/saleschannel'>
+    <Link href='../kitchen/payments/Saleschannel'>
     <div className=''>By Sales Channel</div>
     </Link>
     </div>
@@ -49,7 +49,7 @@ const [openInvoice, setOpenInvoice] = useState(false);
      width='18'
      height='18'
      className=''/>
-    <Link href='/kitchen/payments/Table'>
+    <Link href='../kitchen/payments/Table'>
     <div className=''>By Payment Method</div>
     </Link>
     </div>

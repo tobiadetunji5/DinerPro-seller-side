@@ -95,6 +95,7 @@ export default function PayCheckout({title, path}) {
       ) : (
         <p>cart items loading...</p>
       )}
+      
       <div className="p-5">
         <hr className="border-[#ccc] mt-5" />
         <div className="flex justify-between mt-5">

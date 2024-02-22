@@ -4,8 +4,10 @@
     margin: auto;
 }
 .cm_button_container {
+    position:relative;
     display: block;
     text-align: end;
+    z-index: 3;
 }
 .cm_button {
     width: 13rem;

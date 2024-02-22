@@ -7,7 +7,7 @@ const StepIndicator = ({ step, page, complete }) => {
     {/* ===========step indicator============= */}
     <div className='flex justify-between mx-8 px-5'>
     {step?.map ((steps, ind)=>(
-   <div key={ind} 
+    <div key={ind} 
    className={ ind !== step.length - 1 ? 'flex items-center justify-center w-full' : 'flex justify-center items-center'} >
       <div>
         {/* =============to display circle and tickbox/number============ */}
