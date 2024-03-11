@@ -66,7 +66,7 @@ export const inventoryData = [
       brand:"pepsico",
       initialquantity:"24 (2packs)",
       currentquantity:"10 bottles",
-      quantityalert:"available"
+      quantityalert:"pending"
     },
 
     {
@@ -74,6 +74,46 @@ export const inventoryData = [
       inventoryname:"pepsi",
       category:"drinks",
       brand:"pepsico",
+      initialquantity:"24 (2packs)",
+      currentquantity:"10 bottles",
+      quantityalert:"alerted"
+    },
+
+    {
+      id:"#59879038",
+      inventoryname:"pepsi",
+      category:"drinks",
+      brand:"pepsicoo",
+      initialquantity:"24 (2packs)",
+      currentquantity:"10 bottles",
+      quantityalert:"pending"
+    },
+
+    {
+      id:"#59879038",
+      inventoryname:"pepsi",
+      category:"drinks",
+      brand:"pepsicoo",
+      initialquantity:"24 (2packs)",
+      currentquantity:"10 bottles",
+      quantityalert:"alerted"
+    },
+
+    {
+      id:"#59879038",
+      inventoryname:"pepsi",
+      category:"drinks",
+      brand:"pepsicoo",
+      initialquantity:"24 (2packs)",
+      currentquantity:"10 bottles",
+      quantityalert:"pending"
+    },
+
+    {
+      id:"#59879038",
+      inventoryname:"pepsi",
+      category:"drinks",
+      brand:"pepsicoo",
       initialquantity:"24 (2packs)",
       currentquantity:"10 bottles",
       quantityalert:"alerted"

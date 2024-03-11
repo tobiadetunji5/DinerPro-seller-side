@@ -1,15 +1,23 @@
+"use client"
+
 // IMPORT MODULE.CSS
+import ClientMngModal from "@/app/components/client/ClientMngModal";
 import client_styles from "../../components/styles/client.module.css"
+import { useState } from "react";
 
 
 export default function Client_detail() {
 
+  const [isOpen, setIsOpen] = useState(false);
 
     return (
       <main className={client_styles.main}>
       {/* First Btn */}
       <div className={client_styles.cm_button_container}>
-        <button className={client_styles.cm_button}>Client manager</button>
+        <button  onClick={() => setIsOpen(true)}
+         className={client_styles.cm_button}>Client manager</button>
+
+        {isOpen && (<ClientMngModal/> )}
       </div>
 
       <div className={client_styles.card_container}>
