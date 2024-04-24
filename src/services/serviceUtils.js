@@ -1,6 +1,7 @@
 "use client";
 const axios = require("axios");
 require("dotenv").config();
+import AuthService from "./AuthService";
 
 let token;
 
@@ -19,6 +20,18 @@ const apiUrls = {
 
 const proccessReq = async (targetUrl, method, body) => {
   const fullUrl = apiUrls.baseUrl + targetUrl;
+
+  if (!token) {
+    const login = await AuthService.login();
+
+    if (login.success) {
+      const newT = login.success;
+      console.log("nEWt", newT);
+      window.localStorage.setItem("auth_token", newT);
+      token = newT;
+    }
+    console.log("login", login);
+  }
   const headers = {
     headers: {
       "Content-Type": "application/json",
