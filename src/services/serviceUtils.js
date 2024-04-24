@@ -2,13 +2,14 @@
 const axios = require("axios");
 require("dotenv").config();
 
+let token;
+
 if (typeof window !== "undefined") {
+  token = window.localStorage.getItem("auth_token");
   console.log("we are running on the client");
 } else {
   console.log("we are running on the server");
 }
-
-const token = window.localStorage.getItem("auth_token");
 
 const apiUrls = {
   baseUrl: "https://dinerpro-backend.onrender.com",
