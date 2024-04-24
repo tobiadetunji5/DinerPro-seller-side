@@ -84,7 +84,7 @@ export default function ViewAllupdate({
               </div>
             ))
           ) : (
-            <div className="flex justify-between mb-2"></div>
+            <div className="flex justify-between mb-3"></div>
           )}
         </div>
       </div>
