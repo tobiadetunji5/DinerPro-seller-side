@@ -9,9 +9,15 @@ import SupplierReport from "./SupplierReport";
 import AddSupplierModal from "./AddSupplierModal";
 import ShareReportModal from "./ShareReportModal";
 import ViewAllupdate from "./ViewAllupdate";
+import DefectList from "./procurement_table/DefectList";
+import {
+  supplierComments,
+  defectComments,
+} from "../../../../../utils/commentsData";
 
-export default function ProcurementReport() {
+export default function ProcurementReport(props) {
   const dispatch = useDispatch();
+  const procumentId = props.id ? props.id : null;
   const [displayReport, setDisplayReport] = useState("defect");
   const [isDefectModalOpen, setIsDefectModalOpen] = useState(false);
   const [isAddSupplierModalOpen, setIsAddSupplierModalOpen] = useState(false);
@@ -20,6 +26,10 @@ export default function ProcurementReport() {
 
   const selectedItem = useSelector((state) => state.selectedItem);
 
+  let pDate = selectedItem ? new Date(selectedItem.createdAt) : "";
+  pDate = selectedItem.createdAt;
+  console.log("P date", pDate);
+  console.log("Selected item", selectedItem);
   // view update modal
   const handleUpdateModalOpen = () => {
     dispatch(openModal());
@@ -69,13 +79,26 @@ export default function ProcurementReport() {
           <div className="flex justify-between">
             <div>
               <h1 className="font-medium">
-                <span>Procurement </span>
-                {selectedItem ? selectedItem.id : "N/A"}{" "}
-                <span className="font-medium text-secondary">time stamp</span>
+                <span>Procurement </span>#
+                {selectedItem ? selectedItem._id : "N/A"}{" "}
+                <span className="font-medium text-secondary">
+                  {selectedItem ? pDate : "N/A"}
+                </span>
               </h1>
             </div>
             <div>
-              <span className="mr-2">status</span>
+              <span
+                className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                  selectedItem.status === "successful"
+                    ? "bg-green-100 p-3 rounded-lg shadow-lg mr-2 text-green-800 border border-green-800 p-1"
+                    : "bg-[#FFA902] p-3 rounded-lg shadow-lg mr-2 text-[#5e4a22] border border-[#5e4a22] p-1"
+                }`}
+              >
+                {selectedItem ? selectedItem.status : "N/A"}
+              </span>
+              {/* <span className="mr-2">
+                {selectedItem ? selectedItem.status : "N/A"}
+              </span> */}
               <button
                 className="bg-primary p-3 rounded-lg shadow-lg"
                 onClick={handleSharReportModalOpen}
@@ -101,19 +124,22 @@ export default function ProcurementReport() {
               <h1 className="text-secondary font-medium">
                 Stock turnover circle
               </h1>
-              <h1 className="font-bold">the item name</h1>
+              <h1 className="font-bold">
+                {selectedItem ? selectedItem.quantityNumber : "N/A"}
+              </h1>
             </div>
             <div>
               <h1 className="text-secondary font-medium">Quantity</h1>
               <h1 className="font-bold">
-                {selectedItem ? selectedItem.quantity : "N/A"}
+                {selectedItem ? selectedItem.quantityNumber : "N/A"}{" "}
+                {selectedItem ? selectedItem.quantityUnit : "N/A"}
               </h1>
             </div>
 
             <div>
               <h1 className="text-secondary font-medium">Recipient email</h1>
               <h1 className="font-bold">
-                {selectedItem ? selectedItem.email : "N/A"}
+                {selectedItem ? selectedItem.recipient_email : "N/A"}
               </h1>
             </div>
           </div>
@@ -150,7 +176,11 @@ export default function ProcurementReport() {
         <section className="mt-10 p-10">
           {displayReport === "defect" && (
             <div>
-              <div className="flex justify-between">
+              <DefectList
+                handleDefectModalOpen={handleDefectModalOpen}
+                brand={selectedItem.brand}
+              />
+              {/* <div className="flex justify-between">
                 <aside>
                   <h1>Defect 1 </h1>
                   <p>Title of defect : Enter defect title</p>
@@ -166,7 +196,8 @@ export default function ProcurementReport() {
                     add defect
                   </button>
                 </aside>
-              </div>
+              </div> */}
+
               <div className="flex justify-between border rounded p-10 h-[119px] mt-20">
                 <aside>
                   <h1>last defect update</h1>
@@ -209,6 +240,7 @@ export default function ProcurementReport() {
       {isAddSupplierModalOpen && (
         <AddSupplierModal
           handleCloseAddSupplierModal={handleCloseAddSupplierModal}
+          currentProcurement={selectedItem}
         />
       )}
       {isShareReportModalOpen && (
@@ -219,6 +251,7 @@ export default function ProcurementReport() {
       {isViewUpdateModalOpen && (
         <ViewAllupdate
           handleCloseViewUpdateModal={handleCloseViewUpdateModal}
+          commentsData={defectComments}
         />
       )}
     </div>

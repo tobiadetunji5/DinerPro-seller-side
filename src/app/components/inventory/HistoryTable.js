@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-let record = true;
+let record = false;
 
 const row = [
   {

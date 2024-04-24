@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { closeModal } from "@/redux/features/modal/modalSlice";
 import { useDispatch } from "react-redux";
+import { defectReportData } from "../../../../../utils/defectReportData";
 
 export default function DefectReportModal({ handleCloseDefectModal }) {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ export default function DefectReportModal({ handleCloseDefectModal }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     //send the form
+    if (defectForm.title) {
+      defectReportData.push(defectForm);
+    }
     console.log(defectForm);
     handleClose();
   };

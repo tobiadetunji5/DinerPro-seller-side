@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { closeModal } from "@/redux/features/modal/modalSlice";
 import { useDispatch } from "react-redux";
+import { supplierReport } from "../../../../../utils/supplierReportData";
 
-export default function AddSupplierModal({ handleCloseAddSupplierModal }) {
+export default function AddSupplierModal({
+  handleCloseAddSupplierModal,
+  currentProcurement,
+}) {
   const dispatch = useDispatch();
   const [supplierForm, setSupplierForm] = useState({
     name: "",
     address: "",
     email: "",
     phone: "",
+    companyEmail: currentProcurement.recipient_email || "",
+    companyPhone: "",
   });
 
   const handleAddSupplierFormChange = (e) => {
@@ -47,6 +53,7 @@ export default function AddSupplierModal({ handleCloseAddSupplierModal }) {
   const handleSupplierSubmit = (e) => {
     e.preventDefault();
     console.log(supplierForm);
+    supplierReport.push(supplierForm);
     handleSupplierClose();
   };
 

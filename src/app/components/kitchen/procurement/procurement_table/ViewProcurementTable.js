@@ -49,7 +49,7 @@ export default function ViewProcurementTable({ data }) {
   const handleUpdateStatus = (newStatus) => {
     // Update the status for the selected row in your data
     const updatedData = tableData.map((item) =>
-      item.id === selectedRowId ? { ...item, status: newStatus } : item
+      item._id === selectedRowId ? { ...item, status: newStatus } : item
     );
 
     // Update the state with the new data
@@ -63,7 +63,7 @@ export default function ViewProcurementTable({ data }) {
 
   const openModalForRow = (rowId) => {
     setSelectedRowId(rowId);
-    const selectedItem = data.find((item) => item.id === rowId);
+    const selectedItem = data.find((item) => item._id === rowId);
     dispatch(setSelectedItem(selectedItem));
     setIsModalOpen(true);
   };
@@ -92,18 +92,22 @@ export default function ViewProcurementTable({ data }) {
       <table className="min-w-full divide-y divide-gray-200">
         <ProcurementTableHead />
         <tbody className="bg-white divide-y divide-gray-200">
-          {data.map((item) => (
-            <tr key={item.id}>
-              <td className="px-6 py-4 whitespace-nowrap">{item.id}</td>
+          {data.map((item, index) => (
+            <tr key={item._id}>
+              <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
               <td className="px-6 py-4 whitespace-nowrap">{item.itemName}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
+              {/* <td className="px-6 py-4 whitespace-nowrap">{item.category}</td> */}
               <td className="px-6 py-4 whitespace-nowrap">{item.brand}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{item.quantity}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{item.email}</td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {item.quantityNumber}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {item.recipient_email}
+              </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <span
                   className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    item.status === "delivered"
+                    item.status === "successful"
                       ? "bg-green-100 text-green-800 border border-green-800 p-1"
                       : "bg-[#FFA902] text-[#5e4a22] border border-[#5e4a22] p-1"
                   }`}
@@ -112,11 +116,11 @@ export default function ViewProcurementTable({ data }) {
                 </span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button onClick={() => openModalForRow(item.id)}>
+                <button onClick={() => openModalForRow(item._id)}>
                   <BsThreeDotsVertical />
                 </button>
 
-                {selectedRowId === item.id && isModalOpen && (
+                {selectedRowId === item._id && isModalOpen && (
                   <div
                     className="absolute rounded-lg shadow-xl border border-secondary bg-white p-3 flex flex-col gap-2"
                     ref={modalRef}
@@ -133,7 +137,7 @@ export default function ViewProcurementTable({ data }) {
                     </button>
 
                     <Link
-                      href={`/kitchen/procurement/procurement_report/${item.id}`}
+                      href={`/kitchen/procurement/procurement_report/${item._id}`}
                     >
                       <button className="flex items-center gap-2">
                         <CiCircleMore /> <span>view details</span>

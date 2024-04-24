@@ -1,21 +1,33 @@
 import Link from "next/link";
 import React, { useState } from "react";
+import { procurementTable } from "../../../../../utils/procurementTable";
 // import { closeModal } from "@/redux/features/modal/modalSlice";
 // import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import ProcurementService from "@/services/ProcurementService";
 
 export default function CreateProcurementOrder({
   handleCloseProcurementModal,
 }) {
+  const router = useRouter();
   // const dispatch = useDispatch();
   const [showContentA, setShowContentA] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [formB, setFormB] = useState({
-    name: "",
-    brandName: "",
-    quantity: "",
+    itemName: "",
+    brand: "",
+    quantityNumber: "",
+    quantityUnit: "",
   });
   const [currentContent, setCurrentContent] = useState("A");
   const [recipientEmail, setRecipientEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(
+    JSON.stringify({
+      error: false,
+      message: "",
+    })
+  );
 
   // const handleClose = () => {
   //   dispatch(closeModal());
@@ -54,15 +66,49 @@ export default function CreateProcurementOrder({
   console.log(formB);
   console.log(selectedCategory);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("About to submit");
+    setErrorMessage(
+      JSON.stringify({
+        error: false,
+        message: "",
+      })
+    );
+    setLoading(true);
+    console.log("Fb", formB);
+
+    const newProcurement = await ProcurementService.createProcurement(formB);
+
+    if (newProcurement.success) {
+      setLoading(false);
+      console.log(newProcurement);
+      router.push(
+        "/kitchen/procurement/procurement_view_inventory?newProcurement=success"
+      );
+    } else if (newProcurement.error) {
+      setLoading(false);
+      console.log("Error", newProcurement.error);
+      setErrorMessage(
+        JSON.stringify({
+          error: true,
+          message: newProcurement.error.message,
+        })
+      );
+    }
+  };
+
   return (
     <aside className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="absolute bg-white p-6 rounded-lg w-[808px] h-[458px] border-secondary">
-        <h1 className="text-[20px] font-bold">Create Procurement Order</h1>
+        <h1 className="text-[20px] font-medium mb-5">
+          Create Procurement Order
+        </h1>
         {currentContent !== "C" && (
           <div className="rounded-full bg-[#ffab0271] w-[441px] h-[57px] flex justify-center">
             <div className="flex justify-center text-center items-center">
               <button
-                className={`rounded-full p-3 mr-3 text-white ${
+                className={`rounded-full p-3 mr-3 text-white w-[239px] font-medium h-[57px] text-[13px] ${
                   showContentA ? " bg-primary" : ""
                 } transition-all duration-300 ease-linear`}
                 onClick={toggleContentA}
@@ -70,7 +116,7 @@ export default function CreateProcurementOrder({
                 Select from existing Category
               </button>
               <button
-                className={`rounded-full p-3 ml-3 text-white ${
+                className={`rounded-full p-3 ml-3 text-white w-[188px] font-medium h-[57px] text-[13px] ${
                   !showContentA ? " bg-primary" : " "
                 } transition-all duration-300 ease-linear`}
                 onClick={toggleContentB}
@@ -123,9 +169,9 @@ export default function CreateProcurementOrder({
                 <input
                   className="border border-secondary w-[300px] h-[43px] ml-5"
                   type="text"
-                  value={formB.name}
+                  value={formB.itemName}
                   onChange={handleFormBChange}
-                  name="name"
+                  name="itemName"
                 />
               </div>
 
@@ -136,30 +182,68 @@ export default function CreateProcurementOrder({
                 <input
                   className="border border-secondary w-[300px] h-[43px] ml-5 "
                   type="text"
-                  value={formB.brandName}
+                  value={formB.brand}
                   onChange={handleFormBChange}
-                  name="brandName"
+                  name="brand"
                 />
               </div>
 
-              <div className="flex mt-5">
+              <div className="flex space-x-5 p-2 mt-5">
                 <label className="text-[20px] font-bold w-[200px]">
                   Enter Quantity:
                 </label>
                 <input
                   className="border border-secondary w-[300px] h-[43px] ml-5 items-start"
                   type="number"
-                  value={formB.quantity}
+                  value={formB.quantityNumber}
                   onChange={handleFormBChange}
-                  name="quantity"
+                  name="quantityNumber"
                 />
+
+                <select
+                  name="quantityUnit"
+                  onChange={handleFormBChange}
+                  className="border font-mono w-[10vw] p-2 block"
+                  data-dropdown-toggle="dropdown"
+                >
+                  <option defaultValue="select unit">select unit</option>
+                  <option value="bag">Bag</option>
+                  <option value="litre">Litres(l)</option>
+                  <option value="grams">Gram(g)</option>
+                  <option value="kilo">Kilograms(kg)</option>
+                  <option value="sachet">Sachets</option>
+                  <option value="pound">Pound(9libs)</option>
+                  <option value="tuber">Tubers</option>
+                  <option value="ounz">Ounze(oz)</option>
+                  <option value="tonne">Tonne</option>
+                  <option value="cups">Cup</option>
+                  <option value="basket">Basket</option>
+                </select>
               </div>
             </div>
           )}
 
           {currentContent === "C" && (
             <div className="mt-5">
-              <h1>Recipient's email</h1>
+              {JSON.parse(errorMessage).error && (
+                <div role="alert" className="alert alert-error mb-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="stroke-current shrink-0 h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span>Error! {JSON.parse(errorMessage).message}</span>
+                </div>
+              )}
+              {/* <h1>Recipient's email</h1> */}
               <div className="mt-5 flex">
                 <label className="text-[20px] font-bold">
                   Recipient's email:
@@ -171,11 +255,14 @@ export default function CreateProcurementOrder({
                   value={recipientEmail}
                   onChange={(e) => setRecipientEmail(e.target.value)}
                 />
-                <Link href="/kitchen/procurement/procurement_view_inventory">
-                  <button className="w-[174px] h-[43px] bg-primary border border-primary text-white">
-                    send order
-                  </button>
-                </Link>
+                {/* <Link href="/kitchen/procurement/procurement_view_inventory"> */}
+                <button
+                  className="w-[174px] h-[43px] bg-primary border border-primary text-white"
+                  onClick={handleSubmit}
+                >
+                  send order
+                </button>
+                {/* </Link> */}
               </div>
               {/* <div className="mt-20 flex justify-center">
                 
@@ -188,7 +275,7 @@ export default function CreateProcurementOrder({
           )}
         </div>
         {currentContent !== "C" && (
-          <div className="flex justify-center mt-20">
+          <div className="flex justify-center mt-10">
             <button
               className="bg-primary w-[272px] p-[15px] text-white"
               onClick={handleProceed}

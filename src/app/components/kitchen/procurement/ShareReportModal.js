@@ -10,6 +10,8 @@ export default function ShareReportModal({ handleCloseShareReportModal }) {
   const [showContentA, setShowContentA] = useState(true);
   const [isEmailActive, setEmailActive] = useState(false);
   const [isPhoneActive, setPhoneActive] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const toggleContentA = () => {
     setCurrentContent("A");
@@ -36,12 +38,29 @@ export default function ShareReportModal({ handleCloseShareReportModal }) {
     handleCloseShareReportModal();
   };
 
+  const handleCopy = () => {
+    var copyText = document.getElementById("copyLink");
+
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
+
+    setCopied(true);
+    // Alert the copied text
+    // alert("Copied the text: " + copyText.value);
+  };
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (event.target.classList.contains("bg-black")) {
         handleClose();
       }
     };
+
+    setCurrentUrl(window.location.href);
 
     window.addEventListener("click", handleOutsideClick);
 
@@ -77,10 +96,16 @@ export default function ShareReportModal({ handleCloseShareReportModal }) {
             <BsLink className="border border-gray rounded-full" size={40} />
             <input
               type="text"
+              id="copyLink"
+              value={currentUrl}
               className="w-[354px] h-[41px] p-1 rounded-lg border border-gray"
+              placeholder={currentUrl}
             />
-            <button className="ml-3 bg-primary text-white rounded-lg p-2">
-              copy Link
+            <button
+              className="ml-3 bg-primary text-white rounded-lg p-2"
+              onClick={handleCopy}
+            >
+              {copied ? "Copied" : "Copy Link"}
             </button>
           </div>
         )}

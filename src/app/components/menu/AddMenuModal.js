@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "@/redux/features/modal/modalSlice";
 import { addMenu } from "@/redux/features/addMenu/addMenuSlice";
@@ -101,6 +101,15 @@ export default function AddMenuModal({ handleCloseModal }) {
     handleCloseModal();
   };
 
+  const addBatchIdField = () => {
+    const para = window.document.createElement("p");
+    para.innerHTML = ` "<b>This <i>element</i> is created by" +
+      " the <b>parseHTML()</b> " +
+      "method in <i>jQuery</i></b>"`;
+
+    // window.document.getElementById("batchIdDiv").appendChild(para);
+  };
+
   // event listener to close modal when clicking outside
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -117,12 +126,12 @@ export default function AddMenuModal({ handleCloseModal }) {
   }, []);
 
   return (
-    <aside className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg w-[808px] h-[709px]">
+    <aside className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 overflow-scroll">
+      <div className="bg-white p-6 rounded-lg w-[808px] h-[709px] overflow-scroll">
         <h2 className="text-xl font-semibold mb-4">Add Menu</h2>
 
         <div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} id="menuForm">
             <div>
               <div className="flex items-center p-3 gap-3">
                 <div className="border-secondary border rounded-lg h-[178px] w-[228px]">
@@ -220,8 +229,15 @@ export default function AddMenuModal({ handleCloseModal }) {
                   value={values.procurementid}
                   onChange={handleProcurementIDChange}
                 />
+
+                <button type="button" onClick={addBatchIdField}>
+                  +
+                </button>
               </div>
             </div>
+
+            <div className="gap-3 flex" id="batchIdDiv"></div>
+
             <div className="flex justify-end">
               <button
                 className="bg-primary text-white px-4 py-2 rounded-lg mr-2"

@@ -16,16 +16,17 @@ export default function Page() {
   return (
     <section className="p-4 m-2">
       <div className="flex flex-col justify-between">
-
         {/* ===============inventory manager button============= */}
         <div className="flex justify-end ">
           <button
             onClick={() => setIsOpen(true)}
-            className="relative p-2 mb-3 text-center place-items-end bg-primary text-white font-semibold rounded-md w-[27%]" >
+            className="relative p-2 mb-3 text-center place-items-end bg-primary text-white font-semibold rounded-md w-[27%]"
+          >
             Inventory Manager
           </button>
-          {isOpen && (<InventoryManagerModal
-          setCreateInventory={setCreateInventory}/> )}
+          {isOpen && (
+            <InventoryManagerModal setCreateInventory={setCreateInventory} />
+          )}
         </div>
 
         {/* ================data cards=============== */}
@@ -53,7 +54,7 @@ export default function Page() {
           />
         </div>
 
-{/* ===================view custom report=============== */}
+        {/* ===================view custom report=============== */}
         <div className="flex mb-10 justify-end">
           <div className="border p-2 w-[27%] text-center border-primary rounded-lg">
             <p>View Custom report</p>
@@ -61,7 +62,7 @@ export default function Page() {
         </div>
         <HistoryTable />
       </div>
-      
+
       <Modalform
         isVisible={createInventory}
         onClose={() => setCreateInventory(false)}
