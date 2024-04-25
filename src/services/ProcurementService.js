@@ -17,7 +17,7 @@ ProcurementService.singleProcurement = async (id) => {
 };
 
 ProcurementService.createProcurement = async (body) => {
-  const createProcurement = await proccessReq(allProcurement, "POST", body);
+  const createProcurement = await proccessReq(procurement, "POST", body);
   return createProcurement;
 };
 

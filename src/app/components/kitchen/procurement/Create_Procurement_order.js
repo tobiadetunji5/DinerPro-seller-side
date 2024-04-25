@@ -77,6 +77,7 @@ export default function CreateProcurementOrder({
     );
     setLoading(true);
     console.log("Fb", formB);
+    formB.recipient_email = recipientEmail;
 
     const newProcurement = await ProcurementService.createProcurement(formB);
 

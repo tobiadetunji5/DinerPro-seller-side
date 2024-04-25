@@ -62,7 +62,8 @@ export default function Modalform({ isVisible, onClose }) {
       categories: [details.category],
       brand: details.brand,
       price: details.price,
-      quantity: `${parseInt(details.quantity)}`,
+      quantityNumber: `${parseInt(details.quantityNumber)}`,
+      quantityUnit: `${parseInt(details.quantityNumber)}`,
       minimumAlert: minimumInventory,
     };
 
@@ -213,14 +214,14 @@ export default function Modalform({ isVisible, onClose }) {
               </label>
               <input
                 type="number"
-                name="quantity"
+                name="quantityNumber"
                 placeholder="input number"
                 onChange={handleChange}
                 className="border items-end font-mono w-[20vw] p-2"
               />
 
               <select
-                name="unit"
+                name="quantityUnit"
                 onChange={handleChange}
                 className="border font-mono w-[20vw] p-2 block"
                 data-dropdown-toggle="dropdown"
@@ -286,10 +287,10 @@ export default function Modalform({ isVisible, onClose }) {
                   className="border font-mono w-[20vw] p-2 block"
                   data-dropdown-toggle="dropdown"
                   disabled
-                  defaultValue={details.unit ? "here" : "f"}
+                  defaultValue={details.quantityUnit ? "here" : "f"}
                 >
-                  <option defaultValue={details.unit ? "here" : "f"}>
-                    {details.unit ? details.unit : ""}
+                  <option defaultValue={details.quantityUnit ? "here" : "f"}>
+                    {details.quantityUnit ? details.quantityUnit : ""}
                   </option>
                 </select>
               </div>
