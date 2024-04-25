@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function AddMenuModal({ handleCloseModal }) {
   const dispatch = useDispatch();
+  const [batchClick, setBatchClick] = useState(0);
 
   const [values, setValues] = useState({
     itemName: "",
@@ -102,12 +103,7 @@ export default function AddMenuModal({ handleCloseModal }) {
   };
 
   const addBatchIdField = () => {
-    const para = window.document.createElement("p");
-    para.innerHTML = ` "<b>This <i>element</i> is created by" +
-      " the <b>parseHTML()</b> " +
-      "method in <i>jQuery</i></b>"`;
-
-    // window.document.getElementById("batchIdDiv").appendChild(para);
+    setBatchClick(batchClick + 1);
   };
 
   // event listener to close modal when clicking outside
@@ -212,8 +208,8 @@ export default function AddMenuModal({ handleCloseModal }) {
                 ></div>
               </div>
             </div>
-            <div className="flex items-center">
-              <label>Source batch: </label>
+            <div className="flex items-center mb-5">
+              <label>Source batch 1: </label>
               <div className="gap-3 flex">
                 <input
                   type="text"
@@ -230,13 +226,69 @@ export default function AddMenuModal({ handleCloseModal }) {
                   onChange={handleProcurementIDChange}
                 />
 
-                <button type="button" onClick={addBatchIdField}>
+                <button
+                  type="button"
+                  onClick={addBatchIdField}
+                  className="p-3 bg-primary rounded-full"
+                >
                   +
                 </button>
               </div>
             </div>
 
-            <div className="gap-3 flex" id="batchIdDiv"></div>
+            {batchClick >= 1 && (
+              <div className="flex items-center mb-5">
+                <label>Source batch 2: </label>
+                <div className="gap-3 flex">
+                  <input
+                    type="text"
+                    placeholder="Enter Source batch ID"
+                    className="border border-secondary rounded-lg p-2"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter Procurement ID"
+                    className="border border-secondary rounded-lg p-2"
+                  />
+                </div>
+              </div>
+            )}
+
+            {batchClick >= 2 && (
+              <div className="flex items-center mb-5">
+                <label>Source batch 3: </label>
+                <div className="gap-3 flex">
+                  <input
+                    type="text"
+                    placeholder="Enter Source batch ID"
+                    className="border border-secondary rounded-lg p-2"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter Procurement ID"
+                    className="border border-secondary rounded-lg p-2"
+                  />
+                </div>
+              </div>
+            )}
+
+            {batchClick >= 3 && (
+              <div className="flex items-center mb-5">
+                <label>Source batch 4: </label>
+                <div className="gap-3 flex">
+                  <input
+                    type="text"
+                    placeholder="Enter Source batch ID"
+                    className="border border-secondary rounded-lg p-2"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter Procurement ID"
+                    className="border border-secondary rounded-lg p-2"
+                  />
+                </div>
+              </div>
+            )}
 
             <div className="flex justify-end">
               <button
