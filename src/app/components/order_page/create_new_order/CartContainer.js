@@ -52,13 +52,13 @@ export default function CartContainer({ title, path, onClick }) {
   );
 
   return (
-    <div className="w-[500px] border border-primary rounded-lg h-[829px] p-5 overflow-y-auto flex flex-col">
+    <div className="w-[400px] border border-primary rounded-lg h-[829px] p-5 overflow-y-auto flex flex-col">
       <h1 className="text-[1.3rem] font-bold py-2">{title}</h1>
-      <div>
-        <ul className="flex items-center justify-between space-x-4 bg-gray-200">
-          <li className="w-2/5">Items</li>
-          <li className="w-1/5 items-center">Qty</li>
-          <li className="w-2/5">Amount</li>
+      <div className="w-[340px]">
+        <ul className="flex items-center justify-between bg-gray-200">
+          <li className="">Items</li>
+          <li className="w-[90px] text-right items-center">Qty</li>
+          <li className="w-[100px] items-center">Amount</li>
         </ul>
         <hr className="border-silver mt-3" />
       </div>
@@ -83,7 +83,7 @@ export default function CartContainer({ title, path, onClick }) {
             return (
               <div
                 key={i}
-                className="flex items-center justify-between space-x-4 mb-2"
+                className="flex items-center justify-between space-x-4 mb-2 w-[380px]"
               >
                 <div className="w-2/5">
                   <div className="relative w-[100px] h-[70px] mt-2">
@@ -120,12 +120,12 @@ export default function CartContainer({ title, path, onClick }) {
                     </button>
                   </div>
                 </div>
-                <div className="w-1/5">
+                <div className="w-1/5 pl-2">
                   <p>
                     <CurrencyFormatter value={item.totalPrice} />
                   </p>
                 </div>
-                <div className="w-1/5">
+                <div className="w-1/5 pl-2">
                   <button onClick={() => handleRemoveFromCart(item)}>
                     <MdDelete size={25} />
                   </button>
@@ -144,7 +144,7 @@ export default function CartContainer({ title, path, onClick }) {
               <Link href={path}>
                 <button
                   onClick={onClick}
-                  className="border border-green-700 text-green-700 hover:bg-green-700 hover:text-white p-5 w-[200px] rounded-lg"
+                  className="border border-green-700 text-green-700 hover:bg-green-700 hover:text-white mr-2 p-5 w-[150px] rounded-lg"
                 >
                   Confirm
                 </button>

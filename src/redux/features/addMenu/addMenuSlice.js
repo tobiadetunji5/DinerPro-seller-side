@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { setCookie, getCookie, removeCookie } from "../../../../cookieService";
+import MenuService from "@/services/MenuService";
 // import { cookies } from "next/dist/client/components/headers";
 
-const initialMenuData = getCookie("menu");
-const initialMenuState = initialMenuData ? JSON.parse(initialMenuData) : [];
+const initialMenuData = [];
+const initialMenuState = initialMenuData
+  ? // ? JSON.parse(JSON.stringify(initialMenuData))
+    []
+  : [];
 
 const initialState = [...initialMenuState];
 
@@ -59,6 +63,10 @@ const addMenuSlice = createSlice({
       return updatedState;
     },
 
+    resetState: (state) => {
+      state = initialMenuState;
+    },
+
     initializeMenuFromCookies(state) {
       const menuDataFromCookies = getCookie("menu");
       if (menuDataFromCookies) {
@@ -73,6 +81,11 @@ const addMenuSlice = createSlice({
   },
 });
 
-export const { addMenu, editMenu, deleteMenu, initializeMenuFromCookies } =
-  addMenuSlice.actions;
+export const {
+  addMenu,
+  editMenu,
+  deleteMenu,
+  resetState,
+  initializeMenuFromCookies,
+} = addMenuSlice.actions;
 export default addMenuSlice.reducer;

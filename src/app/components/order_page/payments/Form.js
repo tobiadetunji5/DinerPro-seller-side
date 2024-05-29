@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setValue, resetValue } from "@/redux/features/discountSlice";
 
 export default function Form() {
   const [formData, setFormData] = useState({
@@ -14,12 +16,27 @@ export default function Form() {
     isSelected: false,
     isSelectedPayment: false,
   });
+  const [scheduleDelivery, setScheduleDelivery] = useState(false);
+  const [discountType, setDiscountType] = useState(null);
+  const dispatch = useDispatch();
+
+  const [discount, setDiscount] = useState(0);
 
   const handleFieldChange = (field, value) => {
     setFormData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
+  };
+
+  const handleDiscountChange = (e) => {
+    console.log("N", e.target.value);
+    dispatch(
+      setValue({
+        discountType,
+        discountValue: e.target.value,
+      })
+    );
   };
 
   const handlePhoneChange = (value) => {
@@ -47,6 +64,12 @@ export default function Form() {
   };
 
   const toggle = (field) => {
+    if (scheduleDelivery === false) {
+      setScheduleDelivery(true);
+    } else {
+      setScheduleDelivery(false);
+    }
+
     setFormData((prevData) => ({
       ...prevData,
       [field]: !prevData[field],
@@ -60,7 +83,7 @@ export default function Form() {
   ];
 
   return (
-    <form className="overflow-y-auto h-[92vh] w-[60vw] ml-4">
+    <form className="overflow-y-scroll h-[92vh] w-[50vw] ml-4">
       <h1 className="mb-5 font-bold">Delivery Information</h1>
 
       <div className="border border-secondary w-full h-[307px] rounded-lg">
@@ -69,7 +92,7 @@ export default function Form() {
             <h1>Name</h1>
             <input
               type="text"
-              className="border border-secondary w-[370px] p-1 rounded-lg"
+              className="border border-secondary w-[300px] p-1 rounded-lg"
               value={formData.name}
               onChange={(e) => {
                 // console.log(e.target);
@@ -81,7 +104,7 @@ export default function Form() {
             <h1>Number</h1>
             <input
               type="number"
-              className="border border-secondary w-[370px] p-1 rounded-lg"
+              className="border border-secondary w-[300px] p-1 rounded-lg"
               value={formData.number}
               onChange={(e) => handleFieldChange("number", e.target.value)}
             />
@@ -90,7 +113,7 @@ export default function Form() {
             <h1>Email</h1>
             <input
               type="email"
-              className="border border-secondary w-[370px] p-1 rounded-lg"
+              className="border border-secondary w-[300px] p-1 rounded-lg"
               value={formData.email}
               onChange={(e) => handleFieldChange("email", e.target.value)}
             />
@@ -99,7 +122,7 @@ export default function Form() {
             <h1>City</h1>
             <input
               type="text"
-              className="border border-secondary w-[370px] p-1 rounded-lg"
+              className="border border-secondary w-[300px] p-1 rounded-lg"
               value={formData.city}
               onChange={(e) => handleFieldChange("city", e.target.value)}
             />
@@ -108,7 +131,7 @@ export default function Form() {
             <h1>State</h1>
             <input
               type="text"
-              className="border border-secondary w-[370px] p-1 rounded-lg"
+              className="border border-secondary w-[300px] p-1 rounded-lg"
               value={formData.state}
               onChange={(e) => handleFieldChange("state", e.target.value)}
             />
@@ -135,7 +158,7 @@ export default function Form() {
             <h1>Address</h1>
             <input
               type="text"
-              className="border border-secondary w-[750px] p-1 rounded-lg"
+              className="border border-secondary w-[680px] p-1 rounded-lg"
               value={formData.address}
               onChange={(e) => handleFieldChange("address", e.target.value)}
             />
@@ -166,21 +189,23 @@ export default function Form() {
         </div>
       </div>
 
-      <div className="border border-secondary w-full h-[160px] rounded-lg p-3 flex flex-wrap">
-        <div>
-          <h1>Date</h1>
-          <input
-            type="date"
-            className="border border-secondary w-[750px] p-1 rounded-lg"
-          />
+      {scheduleDelivery && (
+        <div className="border border-secondary w-full h-[160px] rounded-lg p-3 flex flex-wrap">
+          <div>
+            <h1>Date</h1>
+            <input
+              type="date"
+              className="border border-secondary w-[680px] p-1 rounded-lg"
+            />
+          </div>
+          <div>
+            <h1>Note</h1>
+            <textarea className="border border-secondary w-[680px] p-1 rounded-lg"></textarea>
+          </div>
         </div>
-        <div>
-          <h1>Note</h1>
-          <textarea className="border border-secondary w-[750px] p-1 rounded-lg"></textarea>
-        </div>
-      </div>
+      )}
 
-      <div className="mt-5">
+      <div className="mt-5 w-[700px]">
         <h1 className="font-bold">Payment Method</h1>
         <div className="border border-secondary w-full h-[66px] rounded-lg px-20 flex gap-5 justify-between items-center">
           {paymentMethods.map((method) => (
@@ -198,21 +223,25 @@ export default function Form() {
           ))}
         </div>
       </div>
-      
-      <div className="mt-5">
+
+      <div className="mt-5 w-[700px]">
         <h1 className="font-bold">Discount</h1>
         <div className="border border-secondary w-full h-[100px] rounded-lg px-20 flex flex-wrap gap-1 justify-between items-center focus:ring-2 focus:ring-primary">
-          <select className="border border-secondary w-[870px] p-1 rounded-lg focus:ring-2 focus:ring-primary">
+          <select
+            onChange={(e) => setDiscountType(e.target.value)}
+            className="border border-secondary w-[600px] p-1 rounded-lg focus:ring-2 focus:ring-primary"
+          >
             <option value="">Select discount type</option>
             <option value="percentage">Percentage value discount</option>
             <option value="fixed">Fixed value discount</option>
           </select>
 
-          <div>
+          <div className="h-[100px]">
             <input
               type="number"
-              placeholder="Enter Percentage... eg. 20%"
-              className="border border-secondary w-[740px] p-1 rounded-lg"
+              placeholder="Enter discount"
+              onChange={(e) => handleDiscountChange(e)}
+              className="border border-secondary w-[550px] p-1 rounded-lg"
             />
           </div>
         </div>

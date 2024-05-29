@@ -4,8 +4,7 @@ import CartContainer from "./CartContainer";
 
 export default function OrderComponent() {
   return (
-    // <div className="flex gap-5 justify-between px-12">
-    <div>
+    <div className="flex gap-5 justify-between px-12">
       <FoodContainer />
       <CartContainer title="My orders" path="/order/payments" />
     </div>

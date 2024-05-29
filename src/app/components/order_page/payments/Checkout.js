@@ -12,6 +12,11 @@ import Link from "next/link";
 
 export default function Checkout({ title, path }) {
   const [loading, setLoading] = useState(true);
+  const discountObj = useSelector((state) => state.discount.value);
+  let discount = discountObj.discountValue;
+
+  console.log("dd", discount);
+
   const cartItems = useSelector((store) => store.cart.cartItems) || [];
   // console.log(cartItems);
 
@@ -20,6 +25,7 @@ export default function Checkout({ title, path }) {
   useEffect(() => {
     // dispatch(initializeCartFromCookies());
     setLoading(false);
+    console.log("Discount", discountObj);
   }, [dispatch]);
 
   if (loading) {
@@ -35,8 +41,14 @@ export default function Checkout({ title, path }) {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+
+  if (discountObj.discountType === "percentage") {
+    console.log("Perce", discountObj);
+    discount = subtotal * (discount / 100);
+  }
+
   //discount value
-  const discount = 1000;
+  // const discount = 1000;
   //calculating total amount
   const total = subtotal - discount;
 

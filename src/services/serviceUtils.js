@@ -13,7 +13,7 @@ if (typeof window !== "undefined") {
 }
 
 const apiUrls = {
-  baseUrl: "https://dinerpro-backend.onrender.com",
+  baseUrl: "https://dinerpro-backend-cdq6.onrender.com",
   inventoryUrl: "/products",
   procurementUrl: "/kitchen/procurement",
 };
@@ -80,11 +80,24 @@ const proccessReq = async (targetUrl, method, body) => {
 
     return responseFormat;
   } catch (error) {
-    console.log("E", error);
+    console.log("Et", error);
     const errorFormat = { error: {} };
     const errorResponse = error.response.data;
     errorResponse.status = error.response.status;
     errorFormat.error = errorResponse;
+    console.log("E response", errorResponse);
+    if (errorResponse.message === "jwt expired") {
+      console.log("Re login");
+      const login = await AuthService.login();
+
+      if (login.success) {
+        const newT = login.success;
+        console.log("Re suc", newT);
+        window.localStorage.setItem("auth_token", newT);
+        token = newT;
+      }
+      console.log("login", login);
+    }
     return errorFormat;
   }
 };

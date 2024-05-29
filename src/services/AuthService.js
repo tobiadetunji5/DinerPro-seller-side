@@ -3,7 +3,7 @@ const login = "/auth/login/seller";
 const AuthService = {};
 
 AuthService.login = async () => {
-  const fullUrl = "https://dinerpro-backend.onrender.com" + login;
+  const fullUrl = "https://dinerpro-backend-cdq6.onrender.com" + login;
   const headers = {
     headers: {
       "Content-Type": "application/json",
@@ -21,6 +21,7 @@ AuthService.login = async () => {
     const responseFormat = {};
 
     if (responseData.msg) {
+      console.log("EE");
       responseFormat.error = responseData.msg;
       return responseFormat;
     }
@@ -30,11 +31,12 @@ AuthService.login = async () => {
 
     return responseFormat;
   } catch (error) {
-    console.log("E", error);
+    console.log("Er", error);
     const errorFormat = { error: {} };
     const errorResponse = error.response.data;
     errorResponse.status = error.response.status;
     errorFormat.error = errorResponse;
+    console.log("E res", errorResponse);
     return errorFormat;
   }
 };

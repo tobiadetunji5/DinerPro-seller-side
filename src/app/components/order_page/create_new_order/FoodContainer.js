@@ -1,16 +1,66 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { foodArrays } from "../../../../../utils/cartData";
 import Card from "./Card";
 import { AiOutlineSetting } from "react-icons/ai";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import Link from "next/link";
 import { categories } from "../../../../../utils/categoriesData";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { store } from "@/redux/store";
+import { getCookie } from "../../../../../cookieService";
+import MenuService from "@/services/MenuService";
+import { addMenu } from "@/redux/features/addMenu/addMenuSlice";
 
 export default function FoodContainer() {
+  const dispatch = useDispatch();
   const addMenuItems = useSelector((store) => store.addMenu);
+
+  // useEffect(() => {
+  //   location.reload();
+  // }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (true) {
+        const menuDataFromCookies = getCookie("menuData");
+        let pCookie = [];
+
+        if (menuDataFromCookies) {
+          pCookie = JSON.parse(menuDataFromCookies);
+          console.log("Parsed", pCookie);
+          // try {
+          //   const parsedMenuData = JSON.parse(menuDataFromCookies);
+          //   Object.assign(state, parsedMenuData);
+          // } catch (error) {
+          //   console.log("Error  parsing menu date from cookies", error);
+          // }
+        }
+
+        // dispatch(resetState());
+
+        const data = await MenuService.menus();
+
+        if (data.success) {
+          console.log("New d", data);
+          const successData = data.success;
+
+          if (pCookie.length === successData.length) {
+            console.log("Dd", addMenuItems);
+          } else {
+            // setAddedItems(successData);
+            for (let i = 0; i < successData.length; i++) {
+              const element = successData[i];
+              dispatch(addMenu(element));
+            }
+          }
+        } else {
+          console.log("Error fetching data");
+        }
+      }
+    }
+    fetchData();
+  }, []);
 
   const slideLeft = () => {
     var slider = document.getElementById("slider");
@@ -30,7 +80,7 @@ export default function FoodContainer() {
     cat_slider.scrollLeft = cat_slider.scrollLeft + 500;
   };
   return (
-    <div className="relative pr-12 pl-12 flex flex-col  border border-secondary rounded-lg w-[900px] h-[829px]">
+    <div className="relative pr-12 pl-12 flex flex-col  border border-secondary rounded-lg w-[650px] h-[829px] overflow-auto">
       <div className="flex items-center justify-between p-8">
         <h1 className="text-lg font-semibold">My Menu</h1>
         <Link href="/menu/menu_settings">
@@ -73,7 +123,7 @@ export default function FoodContainer() {
 
       <div
         id="slider"
-        className="grid grid-rows-3 gap-x-6 gap-y-4 grid-flow-col overflow-x-auto scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+        className="flex flex-wrap gap-x-7 gap-y-6 grid-flow-col whitespace-nowrap scroll-smooth scrollbar-hide"
       >
         {/* {foodArrays.map((food, i) => (
           <Card key={i} food={food} />

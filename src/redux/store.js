@@ -7,6 +7,7 @@ import selectedItemReducer from "./features/selected_item/selectedItemSlice";
 import addMenuReducer, {
   initializeMenuFromCookies,
 } from "./features/addMenu/addMenuSlice";
+import discountReducer from "./features/discountSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     modal: modalReducer,
     selectedItem: selectedItemReducer,
     addMenu: addMenuReducer,
+    discount: discountReducer,
   },
 });
 

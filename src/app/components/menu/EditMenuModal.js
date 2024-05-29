@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import Image from "next/image";
+
 import { closeModal } from "@/redux/features/modal/modalSlice";
 
 export default function EditMenuModal({
@@ -14,6 +16,8 @@ export default function EditMenuModal({
   useEffect(() => {
     setEditedValues({ ...menuItem });
   }, [menuItem]);
+
+  console.log(editedValues);
 
   const categories = [
     "Snacks",
@@ -88,7 +92,7 @@ export default function EditMenuModal({
   return (
     <aside className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg w-[808px] h-[709px]">
-        <h2 className="text-xl font-semibold mb-4">edit Menu</h2>
+        <h2 className="text-xl font-semibold mb-4">Edit Menu</h2>
         <div>
           <div className="flex items-center p-3 gap-3">
             <div className="border-secondary border rounded-lg h-[178px] w-[228px]">
@@ -100,7 +104,16 @@ export default function EditMenuModal({
                     className="w-full h-full object-cover rounded-lg"
                   />
                 ) : (
-                  "No picture selected"
+                  <div className="text-center w-full flex justify-center items-center h-full">
+                    <Image
+                      className="m-auto"
+                      priority
+                      src="/images/icons/noUpload.png"
+                      alt="card icon"
+                      width="36"
+                      height="36"
+                    />
+                  </div>
                 )}
               </label>
               <input
@@ -111,13 +124,36 @@ export default function EditMenuModal({
                 className="hidden"
               />
             </div>
+            <div className="text-center flex justify-center items-center h-[178px] w-[228px] border rounded-lg">
+              <div>
+                <Image
+                  className="m-auto"
+                  priority
+                  src="/images/icons/upload.png"
+                  alt="card icon"
+                  width="36"
+                  height="36"
+                />
+                <p className="text-[15px] text-[#A3A3A3] mt-3">
+                  Png Jpg and Gif files allowed
+                </p>
+                <button
+                  onClick={() =>
+                    document.getElementById("pictureInput").click()
+                  }
+                  className="text-[13px] m-auto text-[#FFFFFF] bg-[#FFA902] mt-3 px-5 py-2 rounded-md w-[130px]"
+                >
+                  Change image
+                </button>
+              </div>
+            </div>
 
-            <button
+            {/* <button
               className="bg-primary text-white px-4 py-2 rounded-lg"
               onClick={() => document.getElementById("pictureInput").click()}
             >
               Change Image
-            </button>
+            </button> */}
           </div>
         </div>
         <div>
@@ -173,6 +209,25 @@ export default function EditMenuModal({
                       : "translateX(0)",
                   }}
                 ></div>
+              </div>
+            </div>
+            <div className="flex items-center mb-5">
+              <label>Source batch : </label>
+              <div className="gap-3 flex">
+                <input
+                  type="text"
+                  value={editedValues.batchid}
+                  disabled
+                  placeholder="Enter Source batch ID"
+                  className="border border-secondary rounded-lg p-2"
+                />
+                <input
+                  type="text"
+                  value={editedValues.procurementid}
+                  disabled
+                  placeholder="Enter Procurement ID"
+                  className="border border-secondary rounded-lg p-2"
+                />
               </div>
             </div>
             <div className="flex justify-end">

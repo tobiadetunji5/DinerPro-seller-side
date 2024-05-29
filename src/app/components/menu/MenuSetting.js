@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdFilterList } from "react-icons/md";
 import MenuCard from "./MenuCard";
 import { openModal } from "@/redux/features/modal/modalSlice";
@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import AddMenuModal from "./AddMenuModal";
 import { categories } from "../../../../utils/categoriesData";
 import FilterModal from "./FilterModal";
-import { addMenu } from "@/redux/features/addMenu/addMenuSlice";
+import { addMenu, resetState } from "@/redux/features/addMenu/addMenuSlice";
+import MenuService from "@/services/MenuService";
+import { getCookie, setCookie } from "../../../../cookieService";
 
 export default function MenuSetting() {
   const dispatch = useDispatch();
   const addMenuItems = useSelector((store) => store.addMenu);
-  // console.log(addMenuItems);
+  console.log("Nm", addMenuItems);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -21,6 +23,10 @@ export default function MenuSetting() {
   const [itemsPerPage] = useState(15);
   const gridRows = 3;
   const gridCols = 5;
+
+  // useEffect(() => {
+  //   location.reload();
+  // }, []);
 
   const generateMenuCards = () => {
     return addMenuItems.map((addedItems, i) => (
@@ -75,7 +81,7 @@ export default function MenuSetting() {
   const currentPageCount = Math.min(currentPage, pageCount);
 
   return (
-    <div className="flex flex-col border w-[1500px] h-[829px] border-secondary rounded-lg px-5">
+    <div className="flex flex-col border w-[1100px] h-[829px] border-secondary rounded-lg px-5">
       <div className="flex items-center justify-between">
         <div className="text-lg font-semibold p-2">My Menu items</div>
       </div>
@@ -92,17 +98,20 @@ export default function MenuSetting() {
           </div>
         </button>
       </div>
-      <div className="p-2 flex items-center">
-        {categories.map((category) => (
-          <div
-            key={category.id}
-            className="px-2 border border-primary rounded-lg mx-2 whitespace-nowrap shadow-md text-primary cursor-pointer"
-          >
-            {category.name}
-          </div>
-        ))}
+      <div className="p-2 flex justify-between items-center">
+        <div className="flex">
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              className="px-2 border border-primary rounded-lg mx-2 whitespace-nowrap shadow-md text-primary cursor-pointer"
+            >
+              {category.name}
+            </div>
+          ))}
+        </div>
+
         <button
-          className="ml-[200px] flex items-center gap-2 bg-primary p-[15px] rounded-lg border border-gray font-bold"
+          className="flex items-center gap-2 bg-primary p-[15px] rounded-lg border border-gray font-bold"
           onClick={handleOpenModal}
         >
           <span>+</span>
