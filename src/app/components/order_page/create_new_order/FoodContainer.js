@@ -47,6 +47,14 @@ export default function FoodContainer() {
 
           if (pCookie.length === successData.length) {
             console.log("Dd", addMenuItems);
+            if (addMenuItems[0]) {
+            } else {
+              console.log("Empty");
+              for (let i = 0; i < successData.length; i++) {
+                const element = successData[i];
+                dispatch(addMenu(element));
+              }
+            }
           } else {
             // setAddedItems(successData);
             for (let i = 0; i < successData.length; i++) {
@@ -80,7 +88,7 @@ export default function FoodContainer() {
     cat_slider.scrollLeft = cat_slider.scrollLeft + 500;
   };
   return (
-    <div className="relative pr-12 pl-12 flex flex-col  border border-secondary rounded-lg w-[650px] h-[829px] overflow-auto">
+    <div className="relative pr-12 pl-12 flex flex-col  border border-secondary rounded-lg w-[80%] h-[829px] overflow-auto">
       <div className="flex items-center justify-between p-8">
         <h1 className="text-lg font-semibold">My Menu</h1>
         <Link href="/menu/menu_settings">
