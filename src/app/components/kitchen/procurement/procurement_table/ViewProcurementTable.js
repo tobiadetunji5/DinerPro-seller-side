@@ -88,8 +88,8 @@ export default function ViewProcurementTable({ data }) {
   }, [isModalOpen]);
 
   return (
-    <div className="w-full mt-10">
-      <table className="min-w-full divide-y divide-gray-200">
+    <div className="w-full mt-10 overflow-scroll">
+      <table className="min-w-full divide-y divide-gray-200 overflow-scroll">
         <ProcurementTableHead />
         <tbody className="bg-white divide-y divide-gray-200">
           {data.map((item, index) => (

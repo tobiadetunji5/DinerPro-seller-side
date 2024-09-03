@@ -52,7 +52,7 @@ export default function CartContainer({ title, path, onClick }) {
   );
 
   return (
-    <div className="w-[400px] border border-primary rounded-lg h-[829px] p-5 overflow-y-auto flex flex-col">
+    <div className="w-[400px] border border-primary rounded-lg p-5 overflow-y-auto flex flex-col">
       <h1 className="text-[1.3rem] font-bold py-2">{title}</h1>
       <div className="w-[340px]">
         <ul className="flex items-center justify-between bg-gray-200">

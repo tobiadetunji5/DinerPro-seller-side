@@ -82,8 +82,8 @@ const HistoryTable = () => {
           <div className="flex items-center justify-around mt-10">
             <p className="text-sm">
               {" "}
-              You have no previous inventory changes <br />
-              create your first inventory item,
+              You have no previous changes <br />
+              create your first item,
               <br />
               just click the ' ' button to begin.
             </p>

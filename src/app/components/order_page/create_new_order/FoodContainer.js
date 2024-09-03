@@ -88,7 +88,7 @@ export default function FoodContainer() {
     cat_slider.scrollLeft = cat_slider.scrollLeft + 500;
   };
   return (
-    <div className="relative pr-12 pl-12 flex flex-col  border border-secondary rounded-lg w-[80%] h-[829px] overflow-auto">
+    <div className="relative pr-12 pl-12 flex flex-col  border border-secondary rounded-lg w-[80%] h-[100%] overflow-auto">
       <div className="flex items-center justify-between p-8">
         <h1 className="text-lg font-semibold">My Menu</h1>
         <Link href="/menu/menu_settings">

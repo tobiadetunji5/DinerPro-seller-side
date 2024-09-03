@@ -6,7 +6,7 @@ function CurrencyFormatter({ value }) {
     currency: "NGN",
   });
 
-  return <span>{formatter.format(value)}</span>;
+  return <span className="">{formatter.format(value)}</span>;
 }
 
 export default CurrencyFormatter;

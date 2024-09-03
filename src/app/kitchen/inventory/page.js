@@ -35,22 +35,22 @@ export default function Page() {
             bgColor="#FFFFFF"
             statColor="#049561"
             head="Total inventory"
-            number="20"
-            desc="+ increased by 20% since Dec 2022"
+            number="0"
+            desc="+ increased by 0% since Dec 2022"
           />
           <DataCard
             bgColor="#FFFFFF"
             statColor="#049561"
-            head="Total inventory"
-            number="20"
-            desc="+ increased by 20% since Dec 2022"
+            head="Minimum Inventory Alert"
+            number="0"
+            desc="+ increased by 0% since Dec 2022"
           />
           <DataCard
             bgColor="#FFFFFF"
             statColor="#AF290B"
             head="Available inventory"
-            number="10"
-            desc="- decreased by 20% since Dec 2022"
+            number="0"
+            desc="- decreased by 0% since Dec 2022"
           />
         </div>
 

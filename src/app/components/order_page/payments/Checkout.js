@@ -106,25 +106,31 @@ export default function Checkout({ title, path }) {
       ) : (
         <p>cart items loading...</p>
       )}
-      <div className="p-5">
+      <div className="p-5 w-full mr-[50px]">
         <hr className="border-[#ccc] mt-5" />
         <div className="flex justify-between mt-5">
-          <p>subtotal: </p>
-          <CurrencyFormatter value={subtotal} />
+          <p>Subtotal: </p>
+          <div className="mr-[25%]">
+            <CurrencyFormatter value={subtotal} />
+          </div>
         </div>
         <div className="flex justify-between">
-          <p>discount: </p>
-          <CurrencyFormatter value={discount} />
+          <p>Discount: </p>
+          <div className="mr-[25%]">
+            <CurrencyFormatter value={discount} />
+          </div>
         </div>
         <hr className="border-[#ccc] mt-5" />
         <div className="flex justify-between mt-5">
-          <p>total: </p>
-          <CurrencyFormatter value={total} />
+          <p>Total: </p>
+          <div className="mr-[25%]">
+            <CurrencyFormatter value={total} />
+          </div>
         </div>
       </div>
       <div className="flex justify-center">
-        <Link href={path}>
-          <button className="bg-primary p-5 w-[311px] rounded-lg">
+        <Link href={path} className="w-full">
+          <button className="bg-primary p-5 w-full rounded-lg">
             Print Invoice
           </button>
         </Link>

@@ -160,7 +160,7 @@ export default function Page() {
             <span>Your inventory has been added!</span>
           </div>
         )}
-        <section className="border-2 w-[80vw] h-[80vh] border-zinc-400 rounded-2xl mt-10 p-6 overflow:hidden">
+        <section className="border-2 w-[80vw] h-[80vh] border-zinc-400 rounded-2xl mt-10 p-6 overflow-scroll">
           <div className="flex items-center justify-between p-3">
             <ul className="border bg-primary bg-opacity-30 text-white p-2 rounded-full">
               <div className="flex justify-between space-x-2">
