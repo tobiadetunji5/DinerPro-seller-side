@@ -1,7 +1,7 @@
 "use client"
 
 // IMPORT MODULE.CSS
-import ClientMngModal from "@/app/components/client/ClientMngModal";
+import ClientMngModal from "@/components/client/ClientMngModal";
 import client_styles from "../../components/styles/client.module.css"
 import { useState } from "react";
 

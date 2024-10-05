@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import ViewClient from '@/app/components/client/ViewClientTable'
-import ClientDetails from '@/app/components/client/ClientDetails'
+import ViewClient from '@/components/client/ViewClientTable'
+import ClientDetails from '@/components/client/ClientDetails'
 import { inventoryData } from '../../../../../utils/Inventorydata'
 
 const Viewall = () => {

@@ -1,16 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import refreshIcon from "../../../../public/images/icons/refresh-icon.png";
+import refreshIcon from "/public/images/icons/refresh-icon.png";
 
-import pageMainStyles from "../../components/styles/pageMain.module.css";
+import pageMainStyles from "../../../components/styles/pageMain.module.css";
 import "../../globals.css";
 import "tailwindcss/tailwind.css";
 
-import OfflineOrders from "@/app/components/order_page/view_all_orders/offlineOrders";
-import SuccessfulOrders from "@/app/components/order_page/view_all_orders/successfulOrders";
-import OnlineOrders from "@/app/components/order_page/view_all_orders/onlineOrders";
-import AllOrders from "@/app/components/order_page/view_all_orders/allOrders";
+import OfflineOrders from "@/components/order_page/view_all_orders/offlineOrders";
+import SuccessfulOrders from "@/components/order_page/view_all_orders/successfulOrders";
+import OnlineOrders from "@/components/order_page/view_all_orders/onlineOrders";
+import AllOrders from "@/components/order_page/view_all_orders/allOrders";
 
 export default function Page() {
   const [orderRender, setOrderRender] = useState("all");

@@ -1,11 +1,11 @@
 "use client"
 import React, { useEffect, useContext, useState} from 'react';
-import StepIndicator from '../../../components/payments/StepIndicator';
-import InvoiceForm from '../../../components/payments/InvoiceForm';
-import Form from '@/app/components/order_page/payments/Form';
-import PayCart from '@/app/components/payments/PayCart';
+import StepIndicator from '../../../../components/payments/StepIndicator';
+import InvoiceForm from '../../../../components/payments/InvoiceForm';
+import Form from '@/components/order_page/payments/Form';
+import PayCart from '@/components/payments/PayCart';
 import { DataProvider } from '@/StepContex';
-import PayCheckout from '@/app/components/payments/PayCheckout';
+import PayCheckout from '@/components/payments/PayCheckout';
 
 
 const InvoicePage = () => {

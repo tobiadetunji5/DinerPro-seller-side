@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { inventoryData } from '../../../../../utils/Inventorydata';
-import ViewPayments from '@/app/components/inventory/ViewPaymentsTable';
+import ViewPayments from '@/components/inventory/ViewPaymentsTable';
 import { paymentData } from '../../../../../utils/Paymentdata';
 
 export default function Page() {

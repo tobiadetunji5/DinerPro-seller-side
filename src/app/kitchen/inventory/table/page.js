@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { inventoryData } from "../../../../../utils/Inventorydata";
-import ViewInventory from "@/app/components/inventory/ViewInventoryTable";
+import ViewInventory from "@/components/inventory/ViewInventoryTable";
 
 export default function Page() {
   // const [records, setRecords] = useState(jsonData);

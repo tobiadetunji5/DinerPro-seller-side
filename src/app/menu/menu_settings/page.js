@@ -1,5 +1,4 @@
-import MenuSetting from "@/app/components/menu/MenuSetting";
-import React from "react";
+import MenuSetting from "@/components/menu/MenuSetting";
 
 export default function Page() {
   return (

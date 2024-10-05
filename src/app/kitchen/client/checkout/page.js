@@ -1,9 +1,9 @@
 'use client'
-import ItemAmount from '@/app/components/client/ItemAmount'
-import ItemDetails from '@/app/components/client/ItemDetails'
+import ItemAmount from '@/components/client/ItemAmount'
+import ItemDetails from '@/components/client/ItemDetails'
 import React, { useEffect, useState } from 'react'
 import CurrencyFormatter from '../../../../../utils/formatCurrency';
-import ClientForm from '@/app/components/client/ClientForm';
+import ClientForm from '@/components/client/ClientForm';
 
 
 const page = () => {

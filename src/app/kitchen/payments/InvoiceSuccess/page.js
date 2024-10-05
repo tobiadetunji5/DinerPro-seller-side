@@ -1,5 +1,5 @@
 import React from 'react'
-import OrderSuccess from "@/app/components/order_page/payments/OrderSuccess";
+import OrderSuccess from "@/components/order_page/payments/OrderSuccess";
 
 const page = () => {
   return (

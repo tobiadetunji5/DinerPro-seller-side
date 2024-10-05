@@ -1,5 +1,5 @@
-import ClientBody from '@/app/components/client/ClientBody';
-import ClientDetails from '@/app/components/client/ClientDetails';
+import ClientBody from '@/components/client/ClientBody';
+import ClientDetails from '@/components/client/ClientDetails';
 import React from 'react'
 
 const ViewDetails = () => {

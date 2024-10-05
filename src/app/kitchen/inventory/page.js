@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import DataCard from "@/app/components/card/DataCard";
-import HistoryTable from "@/app/components/inventory/HistoryTable";
+import DataCard from "@/components/card/DataCard";
+import HistoryTable from "@/components/inventory/HistoryTable";
 import Modalform from "./modalform";
-import InventoryManagerModal from "@/app/components/inventory/InventoryManagerModal";
+import InventoryManagerModal from "@/components/inventory/InventoryManagerModal";
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);

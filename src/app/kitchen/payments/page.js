@@ -1,9 +1,9 @@
 'use client'; 
 import React from 'react';
 import { useState, useEffect } from 'react';
-import DataCard from '@/app/components/card/DataCard';
-import PaymentsTable from '@/app/components/inventory/PaymentsHistory';
-import PayManagerModal from '@/app/components/payments/PayManagerModal';
+import DataCard from '@/components/card/DataCard';
+import PaymentsTable from '@/components/inventory/PaymentsHistory';
+import PayManagerModal from '@/components/payments/PayManagerModal';
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
