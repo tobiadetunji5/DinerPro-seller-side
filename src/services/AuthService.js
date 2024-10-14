@@ -1,43 +1,38 @@
-const axios = require("axios");
+import { delay } from "@/lib/Delay";
+import apiClient from "./AxiosApiClient";
+
+
 const login = "/auth/login/seller";
+const register = "/auth/register/seller";
 const AuthService = {};
 
-AuthService.login = async () => {
-  const fullUrl = "https://dinerpro-backend-cdq6.onrender.com" + login;
+AuthService.login = async (loginData) => {
   const headers = {
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  const stringifyBody = {
-    email: "test@gmail.com",
-    password: "qwertyuiop",
+  try {
+    const res = await apiClient.post(login, loginData, headers);
+    return res.data;
+  } catch (error) {
+    throw error
+  }
+};
+
+AuthService.register = async (sellerData) => {
+  const headers = {
+    headers: {
+      "Content-Type": "application/json",
+    },
   };
 
   try {
-    const res = await axios.post(fullUrl, stringifyBody, headers);
-    const responseData = res.data;
-    const responseFormat = {};
-
-    if (responseData.msg) {
-      console.log("EE");
-      responseFormat.error = responseData.msg;
-      return responseFormat;
-    }
-    const newData = responseData.accessToken;
-    // const [theData] = newData;
-    responseFormat.success = newData;
-
-    return responseFormat;
+    const res = await apiClient.post(register, sellerData, headers);
+    return res.data;
   } catch (error) {
-    console.log("Er", error);
-    const errorFormat = { error: {} };
-    const errorResponse = error.response.data;
-    errorResponse.status = error.response.status;
-    errorFormat.error = errorResponse;
-    console.log("E res", errorResponse);
-    return errorFormat;
+    throw error;
   }
 };
 

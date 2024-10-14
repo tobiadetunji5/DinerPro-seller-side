@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 const axios = require("axios");
 require("dotenv").config();
 import AuthService from "./AuthService";
