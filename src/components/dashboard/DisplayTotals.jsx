@@ -19,6 +19,7 @@ export default function DisplayTotals() {
                 totalDisplay.map((total,i)=>{
                     return(
                   <div
+                  key={i}
                   className="w-1/4 h-[100px] shadow-lg rounded-md p-2 flex gap-2"
                   >
                     <CircularDisplay

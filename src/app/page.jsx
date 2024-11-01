@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from "next/navigation";
-import { BiLoader } from "react-icons/bi";
 import { useEffect } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export default function Home() {
   const router = useRouter()
@@ -17,7 +17,7 @@ export default function Home() {
   },[router])
   return(
     <div className=" w-screen h-screen flex justify-center items-center">
-      <BiLoader className="animate-spin" size={40}/>
+      <AiOutlineLoading className="animate-spin" size={40}/>
     </div>
   )
 }

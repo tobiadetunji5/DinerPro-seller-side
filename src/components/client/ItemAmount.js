@@ -1,5 +1,5 @@
 import React from 'react'
-import CurrencyFormatter from '../../../utils/formatCurrency'
+import CurrencyFormatter from '../../utils/formatCurrency'
 
 const ItemAmount = ({fakeData}) => {
   return (

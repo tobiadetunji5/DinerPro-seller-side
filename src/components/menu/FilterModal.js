@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { categories } from "../../../utils/categoriesData";
+import { categories } from "../../utils/categoriesData";
 import { closeModal } from "@/redux/features/modal/modalSlice";
 
 export default function FilterModal({ handleCloseModalFilter }) {

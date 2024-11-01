@@ -4,7 +4,7 @@ import StepIndicator from '../../../../../components/payments/StepIndicator';
 import InvoiceForm from '../../../../../components/payments/InvoiceForm';
 import Form from '@/components/order_page/payments/Form';
 import PayCart from '@/components/payments/PayCart';
-import { DataProvider } from '@/StepContex';
+import { DataProvider } from '@/context/StepContex';
 import PayCheckout from '@/components/payments/PayCheckout';
 
 

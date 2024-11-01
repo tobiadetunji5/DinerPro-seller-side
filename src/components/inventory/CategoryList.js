@@ -1,5 +1,6 @@
 import React from "react";
-import { categories } from "../../../../utils/categoriesData";
+import { categories } from "../../utils/categoriesData";
+// import { categories } from "../../../../utils/categoriesData";
 
 const CategoryList = (props) => {
   //   const categories = props.categories;

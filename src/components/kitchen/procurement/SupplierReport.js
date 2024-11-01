@@ -1,5 +1,5 @@
 import React from "react";
-import { supplierReport } from "../../../../utils/supplierReportData";
+import { supplierReport } from "../../../utils/supplierReportData";
 
 export default function SupplierReport() {
   return (

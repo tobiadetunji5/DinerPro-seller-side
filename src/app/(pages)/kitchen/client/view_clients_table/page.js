@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { inventoryData } from "../../../../../../utils/Inventorydata";
+import { inventoryData } from "../../../../../utils/Inventorydata";
 import ViewClient from "@/components/client/ViewClientTable";
 
 export default function Page() {

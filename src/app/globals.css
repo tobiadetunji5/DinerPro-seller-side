@@ -18,3 +18,8 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.responsiveImage {
+  width: 100%;
+  height: auto;
+}

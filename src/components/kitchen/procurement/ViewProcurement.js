@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { procurementTable } from "../../../../utils/procurementTable";
+import { procurementTable } from "../../../utils/procurementTable";
 import ViewProcurementTable from "./procurement_table/ViewProcurementTable";
 
 export default function ViewProcurement() {

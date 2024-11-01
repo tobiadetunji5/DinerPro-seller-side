@@ -2,7 +2,7 @@
 import React from 'react'
 import ViewClient from '@/components/client/ViewClientTable'
 import ClientDetails from '@/components/client/ClientDetails'
-import { inventoryData } from '../../../../../../utils/Inventorydata'
+import { inventoryData } from '../../../../../utils/Inventorydata'
 
 const Viewall = () => {
   return (

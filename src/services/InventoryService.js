@@ -2,25 +2,36 @@ import utils from "./serviceUtils";
 
 const { apiUrls, proccessReq } = utils;
 
-const allInventorories = "/products";
 const InventoryService = {};
 
 InventoryService.inventories = async () => {
-  const getInventories = await proccessReq(allInventorories, "GET");
-  return getInventories;
+  try{
+    const getInventories = await proccessReq(apiUrls.inventoryUrl, "GET");
+    return getInventories;
+  }catch(error){
+    throw error
+  }
 };
 
 InventoryService.createInventory = async (body) => {
-  const createInventory = await proccessReq(allInventorories, "POST", body);
+  try{
+    const createInventory = await proccessReq(apiUrls.inventoryUrl, "POST", body);
   return createInventory;
+  }catch(error){
+    throw error
+  }
 };
 
 InventoryService.updateInventory = async (id, body) => {
-  const updateInventory = await proccessReq(
-    `${allInventorories}/${id}`,
-    "PATCH",
-    body
-  );
-  return updateInventory;
+  try{
+    const updateInventory = await proccessReq(
+      `${apiUrls.inventoryUrl}/${id}`,
+      "PATCH",
+      body
+    );
+    return updateInventory;
+  }catch(error){
+    throw error
+  }
 };
 export default InventoryService;

@@ -1,8 +1,8 @@
 import React from 'react'
 import InvoiceTableModal from './InvoiceTableModal';
 import { useState } from 'react';
-import CurrencyFormatter from '../../../utils/formatCurrency';
-import { useData } from '@/StepContex';
+import CurrencyFormatter from '../../utils/formatCurrency';
+import { useData } from '@/context/StepContex';
 
 const InvoiceForm = () => {
 

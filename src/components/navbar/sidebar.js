@@ -39,7 +39,7 @@ const Sidebar = () => {
   }
 
   return (
-    <nav className="bg-primary w-[333px] rounded-tr-[30px] pl-10 pt-16 relative">
+    <nav className="bg-primary w-[333px] min-h-screen rounded-tr-[30px] pl-10 pt-16 flex flex-col relative">
       <ul>
         <Link
           href="/dashboard"
@@ -253,7 +253,7 @@ const Sidebar = () => {
       </ul>
       <ul
       onClick={handleLogout}
-       className="absolute bottom-6 left-10 w-full">
+       className="w-full justify-self-end">
         <li className="text-gray cursor-pointer gap-x-4 items-center flex p-5 hover:bg-white hover:rounded-tl-[30px] mt-2 hover:duration-300 font-bold">Logout</li>
       </ul>
     </nav>

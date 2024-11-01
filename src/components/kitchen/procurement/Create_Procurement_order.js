@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { procurementTable } from "../../../../utils/procurementTable";
+import { procurementTable } from "../../../utils/procurementTable";
 // import { closeModal } from "@/redux/features/modal/modalSlice";
 // import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";

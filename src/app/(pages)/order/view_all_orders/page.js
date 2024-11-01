@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import refreshIcon from "/public/images/icons/refresh-icon.png";
 
-import pageMainStyles from "../../../components/styles/pageMain.module.css";
-import "../../globals.css";
+import pageMainStyles from "@/components/styles/pageMain.module.css";
+// import "../../globals.css";
 import "tailwindcss/tailwind.css";
 
 import OfflineOrders from "@/components/order_page/view_all_orders/offlineOrders";

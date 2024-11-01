@@ -4,14 +4,13 @@ import chat from "/public/images/icons/chat.svg";
 import gift from "/public/images/icons/gift.svg";
 import Notification from "../topbar/Notification";
 
-export default function Topbar() {
+export default function Topbar({data}) {
   return (
     <div className="h-[10%] flex justify-between mx-20 items-center">
-      <div>
+      <div className="my-2">
         <Image
           src={logo}
           alt="dinerPro_logo"
-          // fill
           style={{ objectFit: "cover" }}
           // placeholder="blur"
           width={100}
@@ -42,9 +41,9 @@ export default function Topbar() {
       <div className="flex gap-3 ">
         <div>
           <h5>Good Morning</h5>
-          <h4>John Doe</h4>
+          <h4>{data.firstName}</h4>
         </div>
-        <div>profile image</div>
+        <div className="w-[50px] h-[50px] rounded-full border text-center flex items-center text-xs">profile image</div>
       </div>
     </div>
   );

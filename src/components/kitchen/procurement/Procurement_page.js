@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import Procurement_manager_modal from "./Procurement_manager_modal";
 import Image from "next/image";
 import ProcurementImage from "/public/images/icons/Image_one.svg";
-import { procurementTable } from "../../../../utils/procurementTable";
+import { procurementTable } from "../../../utils/procurementTable";
 import Link from "next/link";
 
 export default function Procurement_page() {
@@ -32,32 +32,32 @@ export default function Procurement_page() {
   ).length;
 
   return (
-    <div className="px-10 relative">
+    <div className="px-10 relative m-2">
       <button
-        className="absolute top-0 right-[48px] p-3 bg-primary text-white rounded-lg w-[25%]"
+        className="absolute top-0 right-[48px] p-2 bg-primary text-white rounded-lg w-[27%]"
         onClick={handleOpenModal}
       >
-        <h1 className="text-[20px]">Procurement Manager</h1>
+        <h1 className="">Procurement Manager</h1>
       </button>
       {isModalOpen && (
         <Procurement_manager_modal handleCloseModal={handleCloseModal} />
       )}
 
       <div className="pt-16">
-        <section className="flex justify-between space-x-2">
-          <div className="border border-secondary h-[200px] rounded-lg px-8 py-5 bg-primary text-white">
+        <section className="flex justify-between gap-[0.07rem] space-x-2">
+          <div className="border border-secondary p-3 w-full rounded-lg hover:bg-primary hover:text-white">
             <h1 className="font-medium">Total Procurement notices</h1>
             <h1 className="font-bold text-[36px] mt-5">{countAll}</h1>
             <p className="mt-5">+ increased by 20% since December 2022</p>
           </div>
-          <div className="border border-secondary w-[400px] h-[200px] rounded-lg px-8 py-5">
+          <div className="border border-secondary w-full hover:bg-primary p-3 hover:text-white rounded-lg hover: ">
             <h1 className="font-medium">Pending Procurement notices</h1>
             <h1 className="font-bold text-[36px] mt-5">{countPending}</h1>
             <p className="mt-5 text-green-600">
               + increased by 20% since December 2022
             </p>
           </div>
-          <div className="border border-secondary w-[400px] h-[200px] rounded-lg  px-8 py-5">
+          <div className="border border-secondary w-full hover:bg-primary p-3 hover:text-white rounded-lg  hover: ">
             <h1 className="font-medium">Delivered Procurement</h1>
             <h1 className="font-bold text-[36px] mt-5">{countDelivered}</h1>
             <p className="mt-5 text-red-600">
@@ -68,13 +68,13 @@ export default function Procurement_page() {
       </div>
 
       <Link
-        className="absolute top-[280px] right-[48px] p-3 border border-primary bg-white text-primary rounded-lg w-[272px] cursor-pointer text-center"
+        className="absolute top-[250px] right-[48px] p-2 border border-primary bg-white text-primary rounded-lg w-[27%] cursor-pointer text-center"
         href="/kitchen/procurement/procurement_view_inventory"
       >
-        <h1 className="text-[20px]">View Custom report</h1>
+            <p>View Custom report</p>
       </Link>
 
-      <div className="border border-secondary w-[93%] h-[440px] absolute top-[350px] rounded-lg">
+      <div className="border border-secondary w-[93%] h-[50vh] absolute top-[350px] rounded-lg">
         <div className="flex justify-between p-6 text-[24px]">
           <h1>History</h1>
           <h1 className="underline underline-offset-4 text-primary">
@@ -96,7 +96,7 @@ export default function Procurement_page() {
           <div className="mt-5">
             <Image
               src={ProcurementImage}
-              style={{ objectFit: "contain", width: "299px", height: "316px" }}
+              style={{ objectFit: "contain", width: "199px", height: "216px" }}
               alt="no previous inventory"
             />
           </div>

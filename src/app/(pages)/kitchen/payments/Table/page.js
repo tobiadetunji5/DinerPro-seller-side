@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { inventoryData } from '../../../../../../utils/Inventorydata';
+import { inventoryData } from '../../../../../utils/Inventorydata';
 import ViewPayments from '@/components/inventory/ViewPaymentsTable';
-import { paymentData } from '../../../../../../utils/Paymentdata';
+import { paymentData } from '../../../../../utils/Paymentdata';
 
 export default function Page() {
   // const [records, setRecords] = useState(jsonData);

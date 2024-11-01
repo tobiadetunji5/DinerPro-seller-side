@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import CurrencyFormatter from "../../../utils/formatCurrency";
+import CurrencyFormatter from "../../utils/formatCurrency";
 import EditMenuModal from "./EditMenuModal";
 import { useDispatch } from "react-redux";
 import image from "/public/images/brand_logo/logo1.png";

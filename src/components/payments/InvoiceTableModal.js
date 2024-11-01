@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Image from 'next/image';
-import CurrencyFormatter from '../../../utils/formatCurrency';
+import CurrencyFormatter from '../../utils/formatCurrency';
 
 const InvoiceTableModal = ({info, setInfo}) => {
     const [isEdit, setIsEdit] = useState(false);

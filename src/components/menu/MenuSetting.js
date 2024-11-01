@@ -5,7 +5,7 @@ import MenuCard from "./MenuCard";
 import { openModal } from "@/redux/features/modal/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AddMenuModal from "./AddMenuModal";
-import { categories } from "../../../utils/categoriesData";
+import { categories } from "../../utils/categoriesData";
 import FilterModal from "./FilterModal";
 import { addMenu, resetState } from "@/redux/features/addMenu/addMenuSlice";
 import MenuService from "@/services/MenuService";
@@ -115,7 +115,7 @@ export default function MenuSetting() {
           onClick={handleOpenModal}
         >
           <span>+</span>
-          <span className="text-sm">Add Menu modal</span>
+          <span className="text-sm">Add Menu</span>
         </button>
       </div>
       <div

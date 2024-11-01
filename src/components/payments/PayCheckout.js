@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CurrencyFormatter from "../../../utils/formatCurrency";
+import CurrencyFormatter from "../../utils/formatCurrency";
 import Image from "next/image";
 // import {
 //   initializeCartFromCookies,
@@ -9,7 +9,7 @@ import Image from "next/image";
 // } from "@/redux/features/cart/cartSlice";
 import { MdDelete } from "react-icons/md";
 import Link from "next/link";
-import { useData } from "@/StepContex";
+import { useData } from "@/context/StepContex";
 
 export default function PayCheckout({title, path}) {
     const {formData, setFormData} = useData();

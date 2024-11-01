@@ -32,6 +32,7 @@ export default function page() {
             toast.success(`Welcome ${data.data.firstName}`)
             localStorage.setItem('auth_token', data?.accessToken)
             localStorage.setItem('refresh_token', data?.refreshToken)
+            localStorage.setItem('my-data', JSON.stringify(data?.data))
             router.push('/dashboard')
         },
     })

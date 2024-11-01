@@ -1,16 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { inventoryData } from "../../../../../../utils/Inventorydata";
-<<<<<<< HEAD
-import ViewInventory from "@/app/components/inventory/ViewInventoryTable";
-import CategoryList from "@/app/components/inventory/CategoryList";
-import { useSearchParams } from "next/navigation";
-import Filter from "@/app/components/inventory/Filter";
-import InventoryService from "@/services/InventoryService";
-=======
 import ViewInventory from "@/components/inventory/ViewInventoryTable";
->>>>>>> Adedoyin
+import { useSearchParams } from "next/navigation";
+import Filter from "@/components/inventory/Filter";
+import { inventoryData } from "../../../../../utils/Inventorydata";
+import InventoryService from "@/services/InventoryService";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -48,7 +43,7 @@ export default function Page() {
     async function fetchData() {
       if (true) {
         console.log(inventoryData);
-        const data = await InventoryService.inventories();
+        const data = await InventoryService?.inventories();
 
         if (data.success) {
           console.log("Data", data);

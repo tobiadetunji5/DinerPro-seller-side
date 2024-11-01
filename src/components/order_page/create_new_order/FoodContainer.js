@@ -5,7 +5,7 @@ import Card from "./Card";
 import { AiOutlineSetting } from "react-icons/ai";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import Link from "next/link";
-import { categories } from "../../../../utils/categoriesData";
+import { categories } from "../../../utils/categoriesData";
 import { useSelector } from "react-redux";
 import { store } from "@/redux/store";
 

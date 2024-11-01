@@ -2,7 +2,7 @@
 import ItemAmount from '@/components/client/ItemAmount'
 import ItemDetails from '@/components/client/ItemDetails'
 import React, { useEffect, useState } from 'react'
-import CurrencyFormatter from '../../../../../../utils/formatCurrency';
+import CurrencyFormatter from '../../../../../utils/formatCurrency';
 import ClientForm from '@/components/client/ClientForm';
 
 

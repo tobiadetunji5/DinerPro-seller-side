@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CurrencyFormatter from "../../../../utils/formatCurrency";
+import CurrencyFormatter from "../../../utils/formatCurrency";
 import Image from "next/image";
 import shoppingCart from "/public/images/shoppingCart.png";
 import {

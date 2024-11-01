@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { AiFillHeart } from "react-icons/ai";
-import CurrencyFormatter from "../../../../utils/formatCurrency";
+import CurrencyFormatter from "../../../utils/formatCurrency";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart as addToCartAction } from "@/redux/features/cart/cartSlice";
 import image from "/public/images/brand_logo/logo1.png";
